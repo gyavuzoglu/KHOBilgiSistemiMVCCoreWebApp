@@ -1,0 +1,49 @@
+﻿@using EntityLayer.Concrete
+@model List<BirimlerTbl>
+@{
+    ViewData["Title"] = "BirimlerListeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="mb-3" style="max-width: 50rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <div class="col-lg">
+                <h3 class="card-title">Birimler Düzenleme</h3>
+            </div>
+            <br />
+            <div class="col-6 text-end">
+                <a asp-controller="Birimler" asp-action="BirimAdd" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Birim Yarat</a>
+
+            </div>
+        </div>
+        <br />
+        <div style="width:70%;margin:auto;">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col" class="text-left" width="10%">Id</th>
+                        <th scope="col" class="text-left" width="80%">Birim Adı</th>
+                        <th scope="col" class="text-center" width="5%">Düzenle</th>
+                        <th scope="col" class="text-center" width="5%">Sil</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-light">
+                        <td scope="row" class="text-left text-primary">@item.BirimID</td>
+                        <td scope="row" class="text-left text-primary">@item.BirimAdi</td>
+                        <td scope="row" class="text-center"><a href="#" ><i class="fa-solid fa-list text-primary"></i></a></td>
+                        <td scope="row" class="text-center"><a href="/Birimler/BirimDelete/@item.BirimID"><i class="fa-solid fa-trash text-primary"></i></a></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+

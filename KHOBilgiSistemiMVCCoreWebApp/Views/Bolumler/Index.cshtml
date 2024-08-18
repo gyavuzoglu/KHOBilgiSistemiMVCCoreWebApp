@@ -1,0 +1,35 @@
+﻿@using EntityLayer.Concrete
+@model List<BolumTbl>
+@{
+    ViewData["Title"] = "Bolum Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <div class="ibox">
+            <div class="ibox-head">
+                Bölüm Listesi
+            </div>
+            <div class="ibox-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Bolum Adı</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.BolumID</td>
+                                <td>@item.BolumAdi</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
