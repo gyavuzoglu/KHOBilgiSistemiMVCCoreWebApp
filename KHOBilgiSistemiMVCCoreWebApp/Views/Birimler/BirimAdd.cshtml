@@ -16,7 +16,7 @@
             <br />
 
             <div style="width:70%;margin:auto;">
-                @using (Html.BeginForm("BirimAdd", "Birimler", FormMethod.Post))
+                @using(Html.BeginForm("BirimAdd", "Birimler", FormMethod.Post))
                 {
                     <label style="display:none;">Birim ID</label>
                     @Html.TextBoxFor(x => x.BirimID, new { style = "display:none;", @class = "form-control" })
@@ -26,7 +26,7 @@
                     <br />
                     <button type="submit" class="btn btn-primary">Ekle</button>
 
-                }
+               }
             </div>
         </div>
     </div>
