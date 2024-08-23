@@ -12,18 +12,19 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
     public class BirimlerController : Controller
     {
         BirimlerManager birimlersm = new BirimlerManager(new EfBirimlerRepository());
-        [HttpGet]
-        public IActionResult BirimAdd()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public IActionResult Index()
         {
             var values = birimlersm.GetListAll();
             return View(values);
         }
-        
+
+        [HttpGet]
+        public IActionResult BirimAdd()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult BirimAdd(BirimlerTbl p)
         {

@@ -14,7 +14,7 @@
             </div>
             <br />
             <div class="col-6 text-end">
-                <a asp-controller="Birimler" asp-action="BirimAdd" class="btn btn-primary" ><i class="fa-solid fa-plus"></i>&nbsp;Yeni Birim Yarat</a>
+                <a href="/Birimler/BirimAdd.cshtml" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Birim Yarat</a>
 
             </div>
         </div>
@@ -36,7 +36,7 @@
                         <td scope="row" class="text-left text-primary">@item.BirimID</td>
                         <td scope="row" class="text-left text-primary">@item.BirimAdi</td>
                         <td scope="row" class="text-center">
-                            <a href="/Birimler/BirimGetir/@item.BirimID">
+                            <a href="/Birimler/BirimGet/@item.BirimID">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </a>
 
