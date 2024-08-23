@@ -14,7 +14,7 @@
             </div>
             <br />
             <div class="col-6 text-end">
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BirimEkle"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Birim Yarat</a>
+                <a asp-controller="Birimler" asp-action="BirimAdd" class="btn btn-primary" ><i class="fa-solid fa-plus"></i>&nbsp;Yeni Birim Yarat</a>
 
             </div>
         </div>
@@ -36,36 +36,10 @@
                         <td scope="row" class="text-left text-primary">@item.BirimID</td>
                         <td scope="row" class="text-left text-primary">@item.BirimAdi</td>
                         <td scope="row" class="text-center">
-                            <a data-bs-toggle="modal" data-bs-target="#Guncelle_@item.BirimID">
-                                <i class="fa-solid fa-list text-primary"></i>
+                            <a href="/Birimler/BirimGetir/@item.BirimID">
+                                <i class="fa-solid fa-pen-to-square text-primary"></i>
                             </a>
-                            @* Modal Birim Güncelleme *@
-                            <div class="modal fade" id="Guncelle_@item.BirimID" tabindex="-1" role="dialog" aria-labelledby="GuncelleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="GuncelleModalLongTitle">Birim Güncelleme</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
 
-                                        <form method="post">
-                                            <div class="modal-body">
-                                                <label class="form-label">Birim Adı</label>
-                                                <input type="text" class="form-control" name="BirimAdi" value="@item.BirimAdi" />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" type="submit" asp-controller="Birimler" asp-action="BirimUpdate">
-                                                    Güncelle
-                                                </button>
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                         <td scope="row" class="text-center">
                             <a data-bs-toggle="modal" data-bs-target="#Sil_@item.BirimID">
@@ -99,31 +73,9 @@
     </div>
 </div>
 
-@* Modal Birim Ekle *@
-<div class="modal fade" id="BirimEkle" tabindex="-1" role="dialog" aria-labelledby="EkleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EkleModalLongTitle">Birim Ekleme</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post">
-                <div class="modal-body">
-                    <label class="form-label">Birim Adı</label>
-                    <input type="text" class="form-control" name="BirimAdi" placeholder="Birim adını giriniz..." />
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" asp-controller="Birimler" asp-action="BirimAdd" class="btn btn-primary">
-                        Ekle
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+
+
 
 
 

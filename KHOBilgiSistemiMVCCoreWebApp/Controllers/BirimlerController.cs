@@ -53,18 +53,17 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             return RedirectToAction("Index","Birimler");
         }
         [HttpGet]
-        public IActionResult BirimUpdate(int id)
+        public IActionResult BirimGet(int id)
         {
             var birimvalue = birimlersm.TGetByID(id);
-
             return View(birimvalue);
         }
         [HttpPost]
         public IActionResult BirimUpdate(BirimlerTbl p)
         {
             birimlersm.BirimUpdate(p);
-
             return RedirectToAction("Index", "Birimler");
         }
+
     }
 }
