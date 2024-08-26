@@ -11,7 +11,7 @@ namespace EntityLayer.Concrete
     {
         [Key]
         [StringLength(8)]
-        public string DersKodu { get; set; }
+        public string? DersKodu { get; set; }
 
         public int EOYiliID { get; set; }
         public int BolumID { get; set; }

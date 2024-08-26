@@ -13,9 +13,9 @@ namespace EntityLayer.Concrete
         public int SinifID { get; set; }
 
         [StringLength(20)]
-        public string SinifUzun { get; set; }
+        public string? SinifUzun { get; set; }
 
         [StringLength(10)]
-        public string SinifKisa { get; set; }
+        public string? SinifKisa { get; set; }
     }
 }

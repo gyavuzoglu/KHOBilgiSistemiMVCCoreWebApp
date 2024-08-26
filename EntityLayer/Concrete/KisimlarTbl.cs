@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
         public long KisimID { get; set; }
 
         [StringLength(5)]
-        public string KisimAdi  { get; set; }
+        public string? KisimAdi  { get; set; }
         public int Sinif { get; set; }
         public int BolumID { get; set; }
     }

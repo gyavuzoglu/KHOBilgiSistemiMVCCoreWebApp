@@ -13,9 +13,9 @@ namespace EntityLayer.Concrete
         public int RutbeID { get; set; }
 
         [StringLength(20)]
-        public string RutbeUzun { get; set; }
+        public string? RutbeUzun { get; set; }
 
         [StringLength(10)]
-        public string RutbeKisa { get; set; }
+        public string? RutbeKisa { get; set; }
     }
 }

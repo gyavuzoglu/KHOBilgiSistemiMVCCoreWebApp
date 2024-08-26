@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
         public long UserTC { get; set; }
 
         [StringLength(50)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public int ProfilID { get; set; }
         public DateTime SifreGuncellemeTarihi { get; set; }
         public DateTime YaratilmaTarihi { get; set; }

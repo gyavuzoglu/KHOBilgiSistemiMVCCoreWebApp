@@ -13,9 +13,9 @@ namespace EntityLayer.Concrete
         public int UnvanID { get; set; }
 
         [StringLength(30)]
-        public string UnvanUzun { get; set; }
+        public string? UnvanUzun { get; set; }
 
         [StringLength(20)]
-        public string UnvanKisa { get; set;}
+        public string? UnvanKisa { get; set;}
     }
 }

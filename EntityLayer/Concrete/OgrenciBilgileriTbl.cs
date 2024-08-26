@@ -16,23 +16,23 @@ namespace EntityLayer.Concrete
         public DateTime OkulaGirisTarihi { get; set; }
 
         [StringLength(50)]
-        public string AnneAdi { get; set; }
+        public string? AnneAdi { get; set; }
 
         [StringLength(50)]
-        public string BabaAdi { get; set; }
+        public string? BabaAdi { get; set; }
 
         [StringLength(50)]
-        public string DogumYeri { get; set; }
+        public string? DogumYeri { get; set; }
         public DateTime DogumTarihi { get; set; }
 
         [StringLength(20)]
-        public string AnneBabaMedeniDurum { get; set; }
+        public string? AnneBabaMedeniDurum { get; set; }
         
         [StringLength(50)]
-        public string AnneEgitim { get; set; }
+        public string? AnneEgitim { get; set; }
 
         [StringLength(50)]
-        public string BabaEgitim { get; set; }
+        public string? BabaEgitim { get; set; }
 
         public int AnneGelir { get; set; }
         public int BabaGelir { get; set; }

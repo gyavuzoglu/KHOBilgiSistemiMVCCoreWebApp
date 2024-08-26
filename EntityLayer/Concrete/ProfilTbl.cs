@@ -13,6 +13,6 @@ namespace EntityLayer.Concrete
         public int ProfilID { get; set; }
 
         [StringLength(20)]
-        public string ProfilAdi { get; set; }
+        public string? ProfilAdi { get; set; }
     }
 }

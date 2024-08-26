@@ -13,10 +13,10 @@ namespace EntityLayer.Concrete
         public long PersonelTC { get; set; }
 
         [StringLength(50)]
-        public string Adi { get; set; }
+        public string? Adi { get; set; }
 
         [StringLength(50)]
-        public string Soyadi { get; set; }
+        public string? Soyadi { get; set; }
 
         public int SinifID { get; set; }
         public int RutbeID { get; set; }
@@ -27,19 +27,19 @@ namespace EntityLayer.Concrete
         public bool MisafirPersonel { get; set; }
 
         [StringLength(150)]
-        public string MisafirGorevYeri { get; set; }
+        public string? MisafirGorevYeri { get; set; }
 
         [StringLength(200)]
-        public string MisafirEvAdresi { get; set; }
+        public string? MisafirEvAdresi { get; set; }
 
         [StringLength(100)]
-        public string OkulEPosta { get; set; }
+        public string? OkulEPosta { get; set; }
 
         [StringLength(100)]
-        public string DigerEPosta { get; set; }
+        public string? DigerEPosta { get; set; }
 
         [StringLength(10)]
-        public string CepTelefonu { get; set; }
+        public string? CepTelefonu { get; set; }
         public int DahiliTelefonu { get; set; }
         public DateTime KayitTarihi { get; set; }
 
