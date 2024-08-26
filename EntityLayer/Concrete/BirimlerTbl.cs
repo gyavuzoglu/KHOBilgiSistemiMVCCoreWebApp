@@ -13,6 +13,6 @@ namespace EntityLayer.Concrete
         public int BirimID { get; set; }
 
         [StringLength(150)]
-        public string BirimAdi { get; set; }
+        public string? BirimAdi { get; set; }
     }
 }
