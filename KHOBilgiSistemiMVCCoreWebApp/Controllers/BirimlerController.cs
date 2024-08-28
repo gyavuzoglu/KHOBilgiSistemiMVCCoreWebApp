@@ -26,6 +26,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BirimAdd(BirimlerTbl p)
         {
             BirimValidator validationRules = new BirimValidator();
@@ -60,6 +61,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             return View(birimvalue);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BirimUpdate(BirimlerTbl p)
         {
             birimlersm.BirimUpdate(p);
