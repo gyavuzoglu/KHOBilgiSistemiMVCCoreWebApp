@@ -27,11 +27,12 @@ namespace DataAccessLayer.Concrete
         public DbSet<OgrenciBilgileriTbl> OgrenciBilgileriTbl { get; set; }
         public DbSet<OgrencilerTbl> OgrencilerTbl { get; set; }
         public DbSet<PersonelTbl> PersonelTbl { get; set; }
-        public DbSet<ProfilTbl> ProfilTbl { get; set; }
+        public DbSet<RolesTbl> RolesTbl { get; set; }
         public DbSet<RutbeTbl> RutbeTbl { get; set; }
         public DbSet<UnvanTbl> UnvanTbl { get; set; }
-        public DbSet<UsersTbl> UsersTbl { get; set; }
+        public DbSet<UserTbl> UserTbl { get; set; }
         public DbSet<UyrukTbl> UyrukTbl { get; set; }
+        public DbSet<UserRolesTbl> UserRolesTbl { get; set; }
 
 
 

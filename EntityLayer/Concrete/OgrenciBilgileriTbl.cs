@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace EntityLayer.Concrete
     public class OgrenciBilgileriTbl
     {
         [Key]
+        [ForeignKey("OgrencilerTbl")]
         public long OgrenciTC { get; set; }
         public DateTime KayitTarihi { get; set; }
         public DateTime OkulaGirisTarihi { get; set; }
@@ -48,6 +50,8 @@ namespace EntityLayer.Concrete
         public float OSYMPuani { get; set; } //decimal(6,3)
 
         public float DisiplinPuani { get; set; } //decimal(4,1)
+
+        public virtual OgrencilerTbl OgrencilerTbl { get; set; }
 
     }
 }

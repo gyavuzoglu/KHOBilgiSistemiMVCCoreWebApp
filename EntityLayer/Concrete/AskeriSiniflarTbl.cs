@@ -17,5 +17,6 @@ namespace EntityLayer.Concrete
 
         [StringLength(10)]
         public string? SinifKisa { get; set; }
+        public virtual PersonelTbl PersonelTbl { get; set; }
     }
 }

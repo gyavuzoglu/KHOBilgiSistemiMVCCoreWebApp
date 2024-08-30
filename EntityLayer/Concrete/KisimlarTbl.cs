@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,13 @@ namespace EntityLayer.Concrete
     public class KisimlarTbl
     {
         [Key]
-        public long KisimID { get; set; }
-
         [StringLength(5)]
-        public string? KisimAdi  { get; set; }
+        public string KisimAdi  { get; set; }
         public int Sinif { get; set; }
+
+        [ForeignKey("BolumTbl")]
         public int BolumID { get; set; }
+        public virtual OgrencilerTbl OgrencilerTbl { get; set; }
+        public List<BolumTbl> BolumTbl { get; set; }
     }
 }

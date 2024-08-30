@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class ProfilTbl
+    public class RolesTbl
     {
         [Key]
-        public int ProfilID { get; set; }
+        public int RoleID { get; set; }
 
         [StringLength(20)]
-        public string? ProfilAdi { get; set; }
+        public string? RoleName { get; set; }
+
+        public virtual UserRolesTbl UserRolesTbl { get; set; }
     }
 }

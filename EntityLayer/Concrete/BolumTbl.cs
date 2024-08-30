@@ -14,5 +14,9 @@ namespace EntityLayer.Concrete
 
         [StringLength(50)]
         public string? BolumAdi { get; set; }
+
+        public virtual OgrencilerTbl OgrencilerTbl { get; set; }
+        public virtual DerslerTbl DerslerTbl { get; set; }
+        public virtual KisimlarTbl KisimlarTbl { get; set; }
     }
 }

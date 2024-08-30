@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IProfilDAL:IGenericDAL<ProfilTbl>
+    public interface IProfilDAL:IGenericDAL<RolesTbl>
     {
         
     }

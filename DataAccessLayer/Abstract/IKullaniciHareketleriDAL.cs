@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IUsersDAL:IGenericDAL<UserTbl>
+    public interface IKullaniciHareketleriDAL : IGenericDAL<KullaniciHareketleriTbl>
     {
-   
+       
     }
 }

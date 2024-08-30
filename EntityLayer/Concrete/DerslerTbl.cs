@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,10 @@ namespace EntityLayer.Concrete
         [StringLength(8)]
         public string? DersKodu { get; set; }
 
+        [ForeignKey("EOYiliTbl")]
         public int EOYiliID { get; set; }
+
+        [ForeignKey("BolumTbl")]
         public int BolumID { get; set; }
 
         [StringLength(300)]
@@ -23,8 +27,8 @@ namespace EntityLayer.Concrete
         public int AKTS { get;  set;}
         public DateTime YaratilmaTarihi { get; set; }
         public DateTime GuncellenmeTarihi { get; set; }
-
-
+        public List<EOYiliTbl> EOYiliTbl { get; set; }
+        public List<BolumTbl> BolumTbl { get; set; }
 
     }
 }

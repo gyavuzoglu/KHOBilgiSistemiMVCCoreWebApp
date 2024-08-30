@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace EntityLayer.Concrete
     public class PersonelTbl
     {
         [Key]
+        [ForeignKey("UserTbl")]
         public long PersonelTC { get; set; }
 
         [StringLength(50)]
@@ -18,11 +20,21 @@ namespace EntityLayer.Concrete
         [StringLength(50)]
         public string? Soyadi { get; set; }
 
+        [ForeignKey("AskeriSiniflarTbl")]
+
         public int SinifID { get; set; }
+
+        [ForeignKey("RutbeTbl")]
         public int RutbeID { get; set; }
+
+        [ForeignKey("UnvanTbl")]
         public int UnvanID { get; set; }
+
+        [ForeignKey("GorevlerTbl")]
         public int GorevID { get; set; }
         public int BolumID { get; set; }
+
+        [ForeignKey("BirimlerTbl")]
         public int BirimID { get; set; }
         public bool MisafirPersonel { get; set; }
 
@@ -43,7 +55,12 @@ namespace EntityLayer.Concrete
         public int DahiliTelefonu { get; set; }
         public DateTime KayitTarihi { get; set; }
 
-
+        public virtual UserTbl UserTbl { get; set; }
+        public List<GorevlerTbl> GorevlerTbl { get; set; }
+        public List<BirimlerTbl> BirimlerTbl { get; set; }
+        public List<RutbeTbl> RutbeTbl { get; set; }
+        public List<UnvanTbl> UnvanTbl { get; set; }
+        public List<AskeriSiniflarTbl> AskeriSiniflarTbl { get; set; }
 
 
 

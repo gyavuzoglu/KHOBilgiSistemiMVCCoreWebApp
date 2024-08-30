@@ -14,5 +14,6 @@ namespace EntityLayer.Concrete
 
         [StringLength(50)]
         public string? Uyruk { get; set; }
+        public OgrencilerTbl OgrencilerTbl { get; set; }
     }
 }

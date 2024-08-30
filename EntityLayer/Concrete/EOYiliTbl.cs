@@ -14,5 +14,6 @@ namespace EntityLayer.Concrete
 
         [StringLength(10)]
         public string? EOYili { get;set; }
+        public virtual DerslerTbl DerslerTbl { get; set; }
     }
 }

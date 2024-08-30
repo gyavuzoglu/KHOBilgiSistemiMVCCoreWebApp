@@ -19,30 +19,30 @@ namespace BusinessLayer.Concrete
             _usersDAL = usersDAL;
         }
 
-        public UsersTbl TGetByID(int id)
+        public UserTbl TGetByID(int id)
         {
             return _usersDAL.GetByID(id);
         }
-        public UsersTbl GetByID(int id)
+        public UserTbl GetByID(int id)
         {
             return _usersDAL.GetByID(id);
         }
-        public List<UsersTbl> GetListAll()
+        public List<UserTbl> GetListAll()
         {
             return _usersDAL.GetListAll();
         }
 
-        public void UserAdd(UsersTbl usersTbl)
+        public void UserAdd(UserTbl usersTbl)
         {
             _usersDAL.Insert(usersTbl);
         }
 
-        public void UserDelete(UsersTbl usersTbl)
+        public void UserDelete(UserTbl usersTbl)
         {
             _usersDAL.Delete(usersTbl);
         }
 
-        public void UserUpdate(UsersTbl usersTbl)
+        public void UserUpdate(UserTbl usersTbl)
         {
             _usersDAL.Update(usersTbl);
         }

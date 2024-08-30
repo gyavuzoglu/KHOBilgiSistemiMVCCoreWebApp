@@ -18,31 +18,31 @@ namespace BusinessLayer.Concrete
             _profilDAL = profilDAL;
         }
 
-        public ProfilTbl TGetByID(int id)
+        public RolesTbl TGetByID(int id)
         {
             return _profilDAL.GetByID(id);
         }
 
-        public List<ProfilTbl> GetListAll()
+        public List<RolesTbl> GetListAll()
         {
             return _profilDAL.GetListAll();
         }
 
-        public void ProfilAdd(ProfilTbl profilTbl)
+        public void ProfilAdd(RolesTbl profilTbl)
         {
             _profilDAL.Insert(profilTbl);
         }
 
-        public void ProfilDelete(ProfilTbl profilTbl)
+        public void ProfilDelete(RolesTbl profilTbl)
         {
             _profilDAL.Delete(profilTbl);
         }
 
-        public void ProfilUpdate(ProfilTbl profilTbl)
+        public void ProfilUpdate(RolesTbl profilTbl)
         {
             _profilDAL.Update(profilTbl);
         }
-        public ProfilTbl GetByID(int id)
+        public RolesTbl GetByID(int id)
         {
             return _profilDAL.GetByID(id);
         }

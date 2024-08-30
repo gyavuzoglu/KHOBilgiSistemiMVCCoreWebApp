@@ -9,10 +9,10 @@ namespace BusinessLayer.Abstract
 {
     public interface IProfilService
     {
-        void ProfilAdd(ProfilTbl profilTbl);
-        void ProfilDelete(ProfilTbl profilTbl);
-        void ProfilUpdate(ProfilTbl profilTbl);
-        List<ProfilTbl> GetListAll();
-        ProfilTbl GetByID(int id);
+        void ProfilAdd(RolesTbl profilTbl);
+        void ProfilDelete(RolesTbl profilTbl);
+        void ProfilUpdate(RolesTbl profilTbl);
+        List<RolesTbl> GetListAll();
+        RolesTbl GetByID(int id);
     }
 }
