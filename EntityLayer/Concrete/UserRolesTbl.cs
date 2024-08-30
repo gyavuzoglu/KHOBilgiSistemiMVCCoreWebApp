@@ -21,4 +21,5 @@ namespace EntityLayer.Concrete
 
         public virtual UserTbl? UserTbl { get; set; }
         public virtual RolesTbl? RolesTbl { get; set; }
+    }
 }

@@ -2,36 +2,46 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
     public class KullanicilarController : Controller
     {
-        Context c=new Context();
+        Context c = new Context();
         public IActionResult Index()
         {
             return View();
         }
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
-        public IActionResult Login(UserTbl p)
+        public async Task<IActionResult> Login(UserTbl p)
         {
-            if (p.PersonelTC == null)
+            Context c = new Context();
+            var datavalue=c.UserTbl.FirstOrDefault(x=>x.UserTC==p.UserTC && x.Password==p.Password);
+            if (datavalue != null)
             {
-                
-                var bilgiler = c.UserTbl.FirstOrDefault(x => x.OgrenciTC == p.OgrenciTC && x.Password == p.Password);
-            }
-            else
-            {
-                var bilgiler = c.UserTbl.FirstOrDefault(x => x.PersonelTC == p.PersonelTC && x.Password == p.Password);
-            }
-            
-            if(bilgiler!=null) {
-            {
+                var claims = new List<Claim> 
+                //Claim oturum açan kullanıcı hakkında rollerin dışında kullanıcı hakkında bilgi tutmamızı ve bu bilgilere göre yetkilendirme yapmamızı sağlayan yapılardır.
+                {
+                    new Claim(ClaimTypes.Name,p.UserTC)
+                };
+                var useridentity=new ClaimsIdentity(claims,"a"); //a ne işe yarıyor?
+                ClaimsPrincipal principal=new ClaimsPrincipal(useridentity);
+                await HttpContext.SignInAsync(principal);
 
+                return RedirectToAction("Index", "Birimler");
             }
-            return View();
+            else { 
+                return View(); 
+            }
+
         }
     }
 }

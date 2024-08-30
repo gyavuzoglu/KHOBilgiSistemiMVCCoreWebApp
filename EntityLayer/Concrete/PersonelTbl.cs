@@ -11,7 +11,6 @@ namespace EntityLayer.Concrete
     public class PersonelTbl
     {
         [Key]
-        [ForeignKey("UserTbl")]
         public long PersonelTC { get; set; }
 
         [StringLength(50)]
@@ -55,7 +54,6 @@ namespace EntityLayer.Concrete
         public int DahiliTelefonu { get; set; }
         public DateTime KayitTarihi { get; set; }
 
-        public virtual UserTbl? UserTbl { get; set; }
         public virtual GorevlerTbl? GorevlerTbl { get; set; }
         public virtual BirimlerTbl? BirimlerTbl { get; set; }
         public virtual RutbeTbl? RutbeTbl { get; set; }
