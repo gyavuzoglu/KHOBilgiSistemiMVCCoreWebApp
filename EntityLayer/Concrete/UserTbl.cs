@@ -11,8 +11,7 @@ namespace EntityLayer.Concrete
     public class UserTbl
     {
         [Key]
-        [StringLength(11)]
-        public string UserTC { get; set; }
+        public long UserTC { get; set; }
 
         [StringLength(50)]
         public string? Password { get; set; }

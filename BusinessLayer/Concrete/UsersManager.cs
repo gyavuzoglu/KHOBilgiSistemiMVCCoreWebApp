@@ -46,5 +46,6 @@ namespace BusinessLayer.Concrete
         {
             _usersDAL.Update(usersTbl);
         }
+
     }
 }

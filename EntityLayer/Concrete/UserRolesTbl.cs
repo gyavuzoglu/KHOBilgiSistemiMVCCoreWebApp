@@ -14,8 +14,7 @@ namespace EntityLayer.Concrete
         public long Id { get; set; }
 
         [ForeignKey("UserTbl")]
-        [StringLength(11)]
-        public string? UserTC { get; set; }
+        public long UserTC { get; set; }
 
         [ForeignKey("RolesTbl")]
         public int RoleID { get; set; }

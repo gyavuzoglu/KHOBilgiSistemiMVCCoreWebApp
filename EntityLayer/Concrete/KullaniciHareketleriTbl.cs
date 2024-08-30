@@ -14,8 +14,7 @@ namespace EntityLayer.Concrete
         public long Id { get; set; }
 
         [ForeignKey("UserTbl")]
-        [StringLength(11)]
-        public string? UserTC { get; set; }
+        public long UserTC { get; set; }
         public string? Aciklama { get; set; }
         public DateTime Tarih { get; set; }
         public virtual UserTbl? UserTbl { get; set; }
