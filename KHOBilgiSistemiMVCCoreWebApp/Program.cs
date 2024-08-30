@@ -1,5 +1,8 @@
 using DataAccessLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +20,19 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+builder.Services.AddSession(); //***
 
+builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
+{
+    var policy=new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+} );
+//***
+
+builder.Services.AddMvc();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+    x.LoginPath = "/Kullanicilar/Login" //auth. olmadýysa Nereye gidilirse gidilsin login ekraný gelir.
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,7 +45,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession(); //***
 app.UseRouting();
 
 app.UseAuthorization();

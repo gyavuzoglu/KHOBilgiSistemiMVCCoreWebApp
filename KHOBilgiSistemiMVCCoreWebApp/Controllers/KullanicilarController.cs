@@ -3,6 +3,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -15,15 +16,20 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
         {
             return View();
         }
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
 
+        [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserTbl p)
         {
             Context c = new Context();
+            UsersManager usersm = new UsersManager(new EfUserRepository());
+            var deneme=usersm.GetByID(1);
             var datavalue=c.UserTbl.FirstOrDefault(x=>x.UserTC==p.UserTC && x.Password==p.Password);
             if (datavalue != null)
             {

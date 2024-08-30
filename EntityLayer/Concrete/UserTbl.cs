@@ -11,7 +11,8 @@ namespace EntityLayer.Concrete
     public class UserTbl
     {
         [Key]
-        public long UserTC { get; set; }
+        [StringLength(11)]
+        public string UserTC { get; set; }
 
         [StringLength(50)]
         public string? Password { get; set; }
@@ -19,7 +20,7 @@ namespace EntityLayer.Concrete
         public DateTime YaratilmaTarihi { get; set; }
         public bool Personelmi { get; set; }
         public bool Ogrencimi { get; set; }
-        public bool Pasif { get; set; } //Pasifse 1 olacak
+        public bool AktifPasif { get; set; } //Pasifse 1 olacak
 
         public virtual KullaniciHareketleriTbl? KullaniciHareketleriTbl { get; set; }
         public virtual UserRolesTbl? UserRolesTbl { get; set; } //
