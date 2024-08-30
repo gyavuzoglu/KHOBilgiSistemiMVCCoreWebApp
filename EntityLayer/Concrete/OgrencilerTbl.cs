@@ -47,11 +47,11 @@ namespace EntityLayer.Concrete
 
         [StringLength(150)]
         public string? FotografAdresi { get; set; }
-        public virtual UserTbl UserTbl { get; set; }
-        public virtual OgrenciBilgileriTbl OgrenciBilgileriTbl { get; set; }
-        public List<UyrukTbl> UyrukTbl { get; set; }
-        public List<KisimlarTbl> KisimlarTbl { get; set; }
-        public List<BolumTbl> BolumTbl { get; set; }
+        public virtual UserTbl? UserTbl { get; set; }
+        public virtual OgrenciBilgileriTbl? OgrenciBilgileriTbl { get; set; }
+        public virtual UyrukTbl? UyrukTbl { get; set; }
+        public virtual KisimlarTbl? KisimlarTbl { get; set; }
+        public virtual BolumTbl? BolumTbl { get; set; }
 
     }
 }

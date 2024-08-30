@@ -15,6 +15,6 @@ namespace EntityLayer.Concrete
         [StringLength(20)]
         public string? RoleName { get; set; }
 
-        public virtual UserRolesTbl UserRolesTbl { get; set; }
+        public List<UserRolesTbl>? UserRolesTbl { get; set; }
     }
 }

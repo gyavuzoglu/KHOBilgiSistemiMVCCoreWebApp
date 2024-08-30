@@ -55,12 +55,12 @@ namespace EntityLayer.Concrete
         public int DahiliTelefonu { get; set; }
         public DateTime KayitTarihi { get; set; }
 
-        public virtual UserTbl UserTbl { get; set; }
-        public List<GorevlerTbl> GorevlerTbl { get; set; }
-        public List<BirimlerTbl> BirimlerTbl { get; set; }
-        public List<RutbeTbl> RutbeTbl { get; set; }
-        public List<UnvanTbl> UnvanTbl { get; set; }
-        public List<AskeriSiniflarTbl> AskeriSiniflarTbl { get; set; }
+        public virtual UserTbl? UserTbl { get; set; }
+        public virtual GorevlerTbl? GorevlerTbl { get; set; }
+        public virtual BirimlerTbl? BirimlerTbl { get; set; }
+        public virtual RutbeTbl? RutbeTbl { get; set; }
+        public virtual UnvanTbl? UnvanTbl { get; set; }
+        public virtual AskeriSiniflarTbl? AskeriSiniflarTbl { get; set; }
 
 
 

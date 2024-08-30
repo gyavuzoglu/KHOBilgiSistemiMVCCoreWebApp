@@ -17,6 +17,6 @@ namespace EntityLayer.Concrete
 
         [StringLength(10)]
         public string? RutbeKisa { get; set; }
-        public virtual PersonelTbl PersonelTbl { get; set; }
+        public List<PersonelTbl>? PersonelTbl { get; set; }
     }
 }

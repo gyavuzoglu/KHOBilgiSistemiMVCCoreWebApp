@@ -19,7 +19,6 @@ namespace EntityLayer.Concrete
         [ForeignKey("RolesTbl")]
         public int RoleID { get; set; }
 
-        public List<UserTbl> UserTbl { get; set; }
-        public List<RolesTbl> RolesTbl { get; set; }
-    }
+        public virtual UserTbl? UserTbl { get; set; }
+        public virtual RolesTbl? RolesTbl { get; set; }
 }

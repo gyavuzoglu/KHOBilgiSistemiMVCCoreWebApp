@@ -27,8 +27,9 @@ namespace EntityLayer.Concrete
         public int AKTS { get;  set;}
         public DateTime YaratilmaTarihi { get; set; }
         public DateTime GuncellenmeTarihi { get; set; }
-        public List<EOYiliTbl> EOYiliTbl { get; set; }
-        public List<BolumTbl> BolumTbl { get; set; }
+        public List<EOYiliTbl>? EOYiliTbl { get; set; }
+        public List<BolumTbl>? BolumTbl { get; set; }
+      
 
     }
 }

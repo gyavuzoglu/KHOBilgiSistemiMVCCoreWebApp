@@ -51,7 +51,7 @@ namespace EntityLayer.Concrete
 
         public float DisiplinPuani { get; set; } //decimal(4,1)
 
-        public virtual OgrencilerTbl OgrencilerTbl { get; set; }
+        public virtual OgrencilerTbl? OgrencilerTbl { get; set; }
 
     }
 }

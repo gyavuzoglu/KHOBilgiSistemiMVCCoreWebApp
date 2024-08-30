@@ -17,7 +17,7 @@ namespace EntityLayer.Concrete
 
         [ForeignKey("BolumTbl")]
         public int BolumID { get; set; }
-        public virtual OgrencilerTbl OgrencilerTbl { get; set; }
-        public List<BolumTbl> BolumTbl { get; set; }
+        public List<OgrencilerTbl>? OgrencilerTbl { get; set; }
+        public List<BolumTbl>? BolumTbl { get; set; }
     }
 }

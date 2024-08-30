@@ -17,6 +17,6 @@ namespace EntityLayer.Concrete
 
         [StringLength(20)]
         public string? UnvanKisa { get; set;}
-        public virtual PersonelTbl PersonelTbl { get; set; }
+        public List<PersonelTbl>? PersonelTbl { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace EntityLayer.Concrete
         public long UserTC { get; set; }
         public string Aciklama { get; set; }
         public DateTime Tarih { get; set; }
-        public List<UserTbl> UserTbl { get; set; }
+        public virtual UserTbl? UserTbl { get; set; }
 
     }
 }
