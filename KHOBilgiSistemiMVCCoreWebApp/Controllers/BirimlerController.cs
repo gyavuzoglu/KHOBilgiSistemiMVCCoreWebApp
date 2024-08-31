@@ -1,7 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
-using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -10,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
+   
     public class BirimlerController : Controller
     {
         BirimlerManager birimlersm = new BirimlerManager(new EfBirimlerRepository());
-
-        [AllowAnonymous]
+               
         [HttpGet]
         public IActionResult Index()
         {

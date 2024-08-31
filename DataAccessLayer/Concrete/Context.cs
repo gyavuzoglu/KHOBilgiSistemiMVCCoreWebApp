@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-1T546DD\\SQLEXPRESS;database=KHODBSdb;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer("server=DESKTOP-1T546DD\\SQLEXPRESS;database=KHOBilSisDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<AskeriSiniflarTbl> AskeriSiniflarTbl { get; set; }

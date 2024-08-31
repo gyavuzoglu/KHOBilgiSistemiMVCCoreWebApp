@@ -3,11 +3,13 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
+ 
     public class AskeriSiniflarController : Controller
     {
         AskeriSiniflarManager asm=new AskeriSiniflarManager(new EfAskeriSiniflarRepository());

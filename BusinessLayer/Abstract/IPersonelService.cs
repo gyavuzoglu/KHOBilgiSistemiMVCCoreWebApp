@@ -14,5 +14,6 @@ namespace BusinessLayer.Abstract
         void PersonelUpdate(PersonelTbl personelTbl );
         List<PersonelTbl> GetListAll();
         PersonelTbl GetByID(int id);
+        List<PersonelTbl> GetPersonelListWithBirimler();
     }
 }

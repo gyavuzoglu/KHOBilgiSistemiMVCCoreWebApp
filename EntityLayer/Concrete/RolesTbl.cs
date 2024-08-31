@@ -12,7 +12,7 @@ namespace EntityLayer.Concrete
         [Key]
         public int RoleID { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         public string? RoleName { get; set; }
 
         public List<UserRolesTbl>? UserRolesTbl { get; set; }

@@ -9,6 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IPersonelDAL:IGenericDAL<PersonelTbl>
     {
-       
+        List<PersonelTbl> GetPersonelListWithBirimler(); //Birimlerle beraber listeyi getir.
     }
 }

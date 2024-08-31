@@ -47,5 +47,10 @@ namespace BusinessLayer.Concrete
         {
             return _personelDAL.GetByID(id);
         }
+
+        public List<PersonelTbl> GetPersonelListWithBirimler()
+        {
+            return _personelDAL.GetPersonelListWithBirimler();
+        }
     }
 }

@@ -13,6 +13,6 @@ namespace BusinessLayer.Abstract
         void UserDelete(UserTbl usersTbl);
         void UserUpdate(UserTbl usersTbl);
         List<UserTbl> GetListAll();
-        UserTbl GetByID(int id);
+        UserTbl TGetByID(int id);
     }
 }

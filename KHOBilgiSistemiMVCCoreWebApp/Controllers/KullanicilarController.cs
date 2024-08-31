@@ -11,7 +11,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
     public class KullanicilarController : Controller
     {
-        Context c = new Context();
+        //Context c = new Context();
         UsersManager usersm = new UsersManager(new EfUserRepository());
 
         [AllowAnonymous]
@@ -35,21 +35,20 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
         public async Task<IActionResult> Login(UserTbl p)
         {
             Context c = new Context();
-            var pusertc=p.UserTC.ToString();
-
+            
             var datavalue=c.UserTbl.FirstOrDefault(x => x.UserTC == p.UserTC && x.Password == p.Password);
             if (datavalue != null)
             {
                 var claims = new List<Claim> 
                 //Claim oturum açan kullanıcı hakkında rollerin dışında kullanıcı hakkında bilgi tutmamızı ve bu bilgilere göre yetkilendirme yapmamızı sağlayan yapılardır.
                 {
-                    new Claim(ClaimTypes.Name,pusertc)
+                    new Claim(ClaimTypes.Name,p.UserTC.ToString())
                 };
                 var useridentity=new ClaimsIdentity(claims,"a"); //a ne işe yarıyor?
                 ClaimsPrincipal principal=new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
 
-                return RedirectToAction("Index", "Birimler");
+                return RedirectToAction("Index", "Home");
             }
             else { 
                 return View(); 

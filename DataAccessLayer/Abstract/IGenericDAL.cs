@@ -12,7 +12,9 @@ namespace DataAccessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetListAll();
-        T GetByID(int id);
+        T? GetByID(int id);
 
+        //Yeni metodları buraya tanımlayacağız. Diğer Dal lar buradan alacak.
+        //dal lara birşey eklememize gerek kalmayacak.
     }
 }

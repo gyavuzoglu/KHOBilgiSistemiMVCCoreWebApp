@@ -21,14 +21,14 @@ namespace EntityLayer.Concrete
         public int BolumID { get; set; }
 
         [StringLength(300)]
-        public string DersAdi { get; set; }
+        public string? DersAdi { get; set; }
         public int HaftalikDS { get; set; }
         public float Kredi {  get; set; }
         public int AKTS { get;  set;}
         public DateTime YaratilmaTarihi { get; set; }
         public DateTime GuncellenmeTarihi { get; set; }
-        public List<EOYiliTbl>? EOYiliTbl { get; set; }
-        public List<BolumTbl>? BolumTbl { get; set; }
+        public virtual EOYiliTbl? EOYiliTbl { get; set; }
+        public virtual BolumTbl? BolumTbl { get; set; }
       
 
     }

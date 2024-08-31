@@ -21,8 +21,8 @@ namespace EntityLayer.Concrete
         public bool Ogrencimi { get; set; }
         public bool AktifPasif { get; set; } //Pasifse 1 olacak
 
-        public virtual KullaniciHareketleriTbl? KullaniciHareketleriTbl { get; set; }
-        public virtual UserRolesTbl? UserRolesTbl { get; set; } //
+        public List<KullaniciHareketleriTbl>? KullaniciHareketleriTbl { get; set; }
+        public List<UserRolesTbl>? UserRolesTbl { get; set; } //
         
          
 
