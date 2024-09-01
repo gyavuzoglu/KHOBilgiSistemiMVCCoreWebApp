@@ -20,13 +20,14 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+
 builder.Services.AddSession(); //***
 
 builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
 {
     var policy=new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
-} );
+});
 //***
 
 builder.Services.AddMvc();
