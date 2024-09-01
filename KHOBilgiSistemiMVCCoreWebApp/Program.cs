@@ -21,7 +21,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 
-builder.Services.AddSession(); //***
+//builder.Services.AddSession(); //***
 
 builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
 {
@@ -30,7 +30,7 @@ builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
 });
 //***
 
-builder.Services.AddMvc();
+//builder.Services.AddMvc();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
     x.LoginPath = "/Kullanicilar/Login" //auth. olmadýysa Nereye gidilirse gidilsin login ekraný gelir.
 );
@@ -46,7 +46,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseSession(); //***
+/*app.UseSession();*/ //***
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

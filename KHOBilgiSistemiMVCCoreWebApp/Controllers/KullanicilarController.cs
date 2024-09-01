@@ -55,5 +55,10 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             }
 
         }
+        public IActionResult Logout()
+        {
+            
+            return View("/Kullanicilar/Login");
+        }
     }
 }

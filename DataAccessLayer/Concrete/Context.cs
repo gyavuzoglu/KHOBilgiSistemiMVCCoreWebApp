@@ -16,6 +16,7 @@ namespace DataAccessLayer.Concrete
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-1T546DD\\SQLEXPRESS;database=KHOBilSisDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
             base.OnConfiguring(optionsBuilder);
+         
         }
         public DbSet<AskeriSiniflarTbl> AskeriSiniflarTbl { get; set; }
         public DbSet<BolumTbl> BolumlerTbl { get; set; }
