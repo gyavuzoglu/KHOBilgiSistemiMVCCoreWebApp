@@ -12,11 +12,11 @@ namespace EntityLayer.Concrete
     {
         [Key]
         [StringLength(5)]
-        public string KisimAdi  { get; set; }
-        public int Sinif { get; set; }
+        public string? KisimAdi  { get; set; }
+        public int? Sinif { get; set; }
 
         [ForeignKey("BolumTbl")]
-        public int BolumID { get; set; }
+        public int? BolumID { get; set; }
         public List<OgrencilerTbl>? OgrencilerTbl { get; set; }
         public virtual BolumTbl? BolumTbl { get; set; }
     }

@@ -1,0 +1,49 @@
+﻿@model UserSignUpViewModel
+@{
+    ViewData["Title"] = "UserRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="mb-3" style="max-width: 50rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+
+            <h3 class="card-title">Kullanıcı Kayıt</h3>
+
+            <br /><br /><br />
+            <div style="width:70%;margin:auto;">
+                <form method="post" class="m-t" role="form" asp-controller="User" asp-action="UserRegister">
+                    <div class="form-group">
+
+                        <input type="text" class="mb-3 form-control" asp-for="@Model.Adi" placeholder="Adı" required="" />
+                        <span asp-validation-for="@Model.Adi" class="text-danger"></span>
+
+                        <input type="text" class="mb-3 form-control" asp-for="@Model.Soyadi" placeholder="Soyadı" required="" />
+                        <span asp-validation-for="@Model.Soyadi" class="text-danger"></span>
+
+                        <input type="text" class="mb-3 form-control" asp-for="@Model.UserName" placeholder="TC Kimlik numarası" required="" />
+                        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+
+                        <input type="password" class="mb-3 form-control" asp-for="@Model.Password" placeholder="*****" required="" />
+                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
+                        <input type="password" class="mb-3 form-control" asp-for="@Model.ConfirmPassword" placeholder="*****" required="" />
+                        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+
+                        <input type="email" class="mb-3 form-control" asp-for="@Model.Email" placeholder="E-Posta adresi" required="" />
+                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
+                    </div>
+                    <br />
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <br />
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    <br />
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

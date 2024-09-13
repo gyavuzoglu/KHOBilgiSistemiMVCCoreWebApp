@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDB : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,8 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -43,7 +44,12 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Adi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Soyadi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Personelmi = table.Column<bool>(type: "bit", nullable: false),
+                    Ogrencimi = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -117,19 +123,6 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RolesTbl",
-                columns: table => new
-                {
-                    RoleID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolesTbl", x => x.RoleID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RutbeTbl",
                 columns: table => new
                 {
@@ -158,24 +151,6 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserTbl",
-                columns: table => new
-                {
-                    UserTC = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    SifreGuncellemeTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    YaratilmaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Personelmi = table.Column<bool>(type: "bit", nullable: false),
-                    Ogrencimi = table.Column<bool>(type: "bit", nullable: false),
-                    AktifPasif = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserTbl", x => x.UserTC);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UyrukTbl",
                 columns: table => new
                 {
@@ -194,7 +169,7 @@ namespace DataAccessLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -215,7 +190,7 @@ namespace DataAccessLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -237,7 +212,7 @@ namespace DataAccessLayer.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -254,8 +229,8 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -278,7 +253,7 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -352,20 +327,20 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Adi = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Soyadi = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    SinifID = table.Column<int>(type: "int", nullable: false),
-                    RutbeID = table.Column<int>(type: "int", nullable: false),
-                    UnvanID = table.Column<int>(type: "int", nullable: false),
-                    GorevID = table.Column<int>(type: "int", nullable: false),
-                    BolumID = table.Column<int>(type: "int", nullable: false),
-                    BirimID = table.Column<int>(type: "int", nullable: false),
-                    MisafirPersonel = table.Column<bool>(type: "bit", nullable: false),
+                    SinifID = table.Column<int>(type: "int", nullable: true),
+                    RutbeID = table.Column<int>(type: "int", nullable: true),
+                    UnvanID = table.Column<int>(type: "int", nullable: true),
+                    GorevID = table.Column<int>(type: "int", nullable: true),
+                    BolumID = table.Column<int>(type: "int", nullable: true),
+                    BirimID = table.Column<int>(type: "int", nullable: true),
+                    MisafirPersonel = table.Column<bool>(type: "bit", nullable: true),
                     MisafirGorevYeri = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     MisafirEvAdresi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     OkulEPosta = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     DigerEPosta = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CepTelefonu = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    DahiliTelefonu = table.Column<int>(type: "int", nullable: false),
-                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DahiliTelefonu = table.Column<int>(type: "int", nullable: true),
+                    KayitTarihi = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -374,79 +349,27 @@ namespace DataAccessLayer.Migrations
                         name: "FK_PersonelTbl_AskeriSiniflarTbl_SinifID",
                         column: x => x.SinifID,
                         principalTable: "AskeriSiniflarTbl",
-                        principalColumn: "SinifID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SinifID");
                     table.ForeignKey(
                         name: "FK_PersonelTbl_BirimlerTbl_BirimID",
                         column: x => x.BirimID,
                         principalTable: "BirimlerTbl",
-                        principalColumn: "BirimID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BirimID");
                     table.ForeignKey(
                         name: "FK_PersonelTbl_GorevlerTbl_GorevID",
                         column: x => x.GorevID,
                         principalTable: "GorevlerTbl",
-                        principalColumn: "GorevID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "GorevID");
                     table.ForeignKey(
                         name: "FK_PersonelTbl_RutbeTbl_RutbeID",
                         column: x => x.RutbeID,
                         principalTable: "RutbeTbl",
-                        principalColumn: "RutbeID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RutbeID");
                     table.ForeignKey(
                         name: "FK_PersonelTbl_UnvanTbl_UnvanID",
                         column: x => x.UnvanID,
                         principalTable: "UnvanTbl",
-                        principalColumn: "UnvanID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "KullaniciHareketleriTbl",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserTC = table.Column<long>(type: "bigint", nullable: false),
-                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tarih = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_KullaniciHareketleriTbl", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_KullaniciHareketleriTbl_UserTbl_UserTC",
-                        column: x => x.UserTC,
-                        principalTable: "UserTbl",
-                        principalColumn: "UserTC",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserRolesTbl",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserTC = table.Column<long>(type: "bigint", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRolesTbl", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserRolesTbl_RolesTbl_RoleID",
-                        column: x => x.RoleID,
-                        principalTable: "RolesTbl",
-                        principalColumn: "RoleID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserRolesTbl_UserTbl_UserTC",
-                        column: x => x.UserTC,
-                        principalTable: "UserTbl",
-                        principalColumn: "UserTC",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UnvanID");
                 });
 
             migrationBuilder.CreateTable(
@@ -584,11 +507,6 @@ namespace DataAccessLayer.Migrations
                 column: "BolumID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KullaniciHareketleriTbl_UserTC",
-                table: "KullaniciHareketleriTbl",
-                column: "UserTC");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OgrencilerTbl_BolumID",
                 table: "OgrencilerTbl",
                 column: "BolumID");
@@ -627,16 +545,6 @@ namespace DataAccessLayer.Migrations
                 name: "IX_PersonelTbl_UnvanID",
                 table: "PersonelTbl",
                 column: "UnvanID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRolesTbl_RoleID",
-                table: "UserRolesTbl",
-                column: "RoleID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRolesTbl_UserTC",
-                table: "UserRolesTbl",
-                column: "UserTC");
         }
 
         /// <inheritdoc />
@@ -661,16 +569,10 @@ namespace DataAccessLayer.Migrations
                 name: "DerslerTbl");
 
             migrationBuilder.DropTable(
-                name: "KullaniciHareketleriTbl");
-
-            migrationBuilder.DropTable(
                 name: "OgrenciBilgileriTbl");
 
             migrationBuilder.DropTable(
                 name: "PersonelTbl");
-
-            migrationBuilder.DropTable(
-                name: "UserRolesTbl");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -698,12 +600,6 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "UnvanTbl");
-
-            migrationBuilder.DropTable(
-                name: "RolesTbl");
-
-            migrationBuilder.DropTable(
-                name: "UserTbl");
 
             migrationBuilder.DropTable(
                 name: "KisimlarTbl");

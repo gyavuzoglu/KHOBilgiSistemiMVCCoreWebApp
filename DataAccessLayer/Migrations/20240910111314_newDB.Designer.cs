@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240831195958_CreateDB")]
-    partial class CreateDB
+    [Migration("20240910111314_newDB")]
+    partial class newDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,116 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EntityLayer.Concrete.AppRolesTbl", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.AppUserTbl", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("Ogrencimi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Personelmi")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Soyadi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
 
             modelBuilder.Entity("EntityLayer.Concrete.AskeriSiniflarTbl", b =>
                 {
@@ -171,30 +281,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("BolumID");
 
                     b.ToTable("KisimlarTbl");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.KullaniciHareketleriTbl", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Tarih")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("UserTC")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserTC");
-
-                    b.ToTable("KullaniciHareketleriTbl");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.OgrenciBilgileriTbl", b =>
@@ -352,27 +438,27 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("BirimID")
+                    b.Property<int?>("BirimID")
                         .HasColumnType("int");
 
-                    b.Property<int>("BolumID")
+                    b.Property<int?>("BolumID")
                         .HasColumnType("int");
 
                     b.Property<string>("CepTelefonu")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("DahiliTelefonu")
+                    b.Property<int?>("DahiliTelefonu")
                         .HasColumnType("int");
 
                     b.Property<string>("DigerEPosta")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("GorevID")
+                    b.Property<int?>("GorevID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("KayitTarihi")
+                    b.Property<DateTime?>("KayitTarihi")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("MisafirEvAdresi")
@@ -383,24 +469,24 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<bool>("MisafirPersonel")
+                    b.Property<bool?>("MisafirPersonel")
                         .HasColumnType("bit");
 
                     b.Property<string>("OkulEPosta")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("RutbeID")
+                    b.Property<int?>("RutbeID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SinifID")
+                    b.Property<int?>("SinifID")
                         .HasColumnType("int");
 
                     b.Property<string>("Soyadi")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UnvanID")
+                    b.Property<int?>("UnvanID")
                         .HasColumnType("int");
 
                     b.HasKey("PersonelTC");
@@ -416,23 +502,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("UnvanID");
 
                     b.ToTable("PersonelTbl");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.RolesTbl", b =>
-                {
-                    b.Property<int>("RoleID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
-
-                    b.Property<string>("RoleName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("RoleID");
-
-                    b.ToTable("RolesTbl");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.RutbeTbl", b =>
@@ -477,61 +546,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("UnvanTbl");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.UserRolesTbl", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<long>("UserTC")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleID");
-
-                    b.HasIndex("UserTC");
-
-                    b.ToTable("UserRolesTbl");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.UserTbl", b =>
-                {
-                    b.Property<long>("UserTC")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserTC"));
-
-                    b.Property<bool>("AktifPasif")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Ogrencimi")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("Personelmi")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("SifreGuncellemeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("YaratilmaTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserTC");
-
-                    b.ToTable("UserTbl");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.UyrukTbl", b =>
                 {
                     b.Property<int>("UyrukID")
@@ -549,34 +563,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("UyrukTbl");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -590,9 +577,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -601,72 +587,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -680,9 +601,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -691,7 +611,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -702,9 +622,8 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -713,13 +632,13 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -728,10 +647,10 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -777,17 +696,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("BolumTbl");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.KullaniciHareketleriTbl", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.UserTbl", "UserTbl")
-                        .WithMany("KullaniciHareketleriTbl")
-                        .HasForeignKey("UserTC")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("UserTbl");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.OgrenciBilgileriTbl", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.OgrencilerTbl", "OgrencilerTbl")
@@ -828,33 +736,23 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.BirimlerTbl", "BirimlerTbl")
                         .WithMany("PersonelTbl")
-                        .HasForeignKey("BirimID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BirimID");
 
                     b.HasOne("EntityLayer.Concrete.GorevlerTbl", "GorevlerTbl")
                         .WithMany("PersonelTbl")
-                        .HasForeignKey("GorevID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GorevID");
 
                     b.HasOne("EntityLayer.Concrete.RutbeTbl", "RutbeTbl")
                         .WithMany("PersonelTbl")
-                        .HasForeignKey("RutbeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RutbeID");
 
                     b.HasOne("EntityLayer.Concrete.AskeriSiniflarTbl", "AskeriSiniflarTbl")
                         .WithMany("PersonelTbl")
-                        .HasForeignKey("SinifID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SinifID");
 
                     b.HasOne("EntityLayer.Concrete.UnvanTbl", "UnvanTbl")
                         .WithMany("PersonelTbl")
-                        .HasForeignKey("UnvanID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UnvanID");
 
                     b.Navigation("AskeriSiniflarTbl");
 
@@ -867,70 +765,51 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("UnvanTbl");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.UserRolesTbl", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.RolesTbl", "RolesTbl")
-                        .WithMany("UserRolesTbl")
-                        .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntityLayer.Concrete.UserTbl", "UserTbl")
-                        .WithMany("UserRolesTbl")
-                        .HasForeignKey("UserTC")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RolesTbl");
-
-                    b.Navigation("UserTbl");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("EntityLayer.Concrete.AppRolesTbl", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("EntityLayer.Concrete.AppUserTbl", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("EntityLayer.Concrete.AppUserTbl", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("EntityLayer.Concrete.AppRolesTbl", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("EntityLayer.Concrete.AppUserTbl", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("EntityLayer.Concrete.AppUserTbl", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -976,11 +855,6 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("OgrenciBilgileriTbl");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.RolesTbl", b =>
-                {
-                    b.Navigation("UserRolesTbl");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.RutbeTbl", b =>
                 {
                     b.Navigation("PersonelTbl");
@@ -989,13 +863,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.UnvanTbl", b =>
                 {
                     b.Navigation("PersonelTbl");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.UserTbl", b =>
-                {
-                    b.Navigation("KullaniciHareketleriTbl");
-
-                    b.Navigation("UserRolesTbl");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.UyrukTbl", b =>

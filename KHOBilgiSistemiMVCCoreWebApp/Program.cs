@@ -1,4 +1,5 @@
 using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,15 +14,18 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.SignIn.RequireConfirmedAccount = false; //email onaylayacak mýyýz Hayýr
     options.User.RequireUniqueEmail = true; // benzersiz email adresi olsun
     options.Password.RequireUppercase = false; //þifre de büyük harf þart deðil
+    options.Password.RequireNonAlphanumeric=false;//þifre de alfanümeraik zorunlu deðil
     options.Password.RequireLowercase = false; //þifre de küçük harf þart deðil
     options.Password.RequireDigit = false; //þifre de rakam þart deðil
-    options.Password.RequiredLength = 6; //þifre uzunluðu 6 karakter olsun
+    options.Password.RequiredLength = 6; //þifre uzunluðu en az 6 karakter olsun
 
 
 });
 
 
 //builder.Services.AddSession(); //***
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUserTbl, AppRolesTbl>().AddEntityFrameworkStores<Context>();
 
 builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
 {
