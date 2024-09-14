@@ -3,6 +3,8 @@ using KHOBilgiSistemiMVCCoreWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 using System.Diagnostics;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
@@ -13,35 +15,49 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 
         private readonly SignInManager<AppUserTbl> _signInManager;
         private readonly UserManager<AppUserTbl> _userManager;
+        private readonly RoleManager<AppRolesTbl> _roleManager;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(SignInManager<AppUserTbl> signInManager, UserManager<AppUserTbl> userManager, ILogger<HomeController> logger)
+        public HomeController(SignInManager<AppUserTbl> signInManager, UserManager<AppUserTbl> userManager, RoleManager<AppRolesTbl> roleManager, ILogger<HomeController> logger)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
+
+
         public IActionResult Index()
         {
+            ViewBag.rolelist = new SelectList(_roleManager.Roles.ToList(), "Id", "Name");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(UserSignInViewModel p)
         {
-            
+            ViewBag.rolelist = new SelectList(_roleManager.Roles.ToList(), "Id", "Name");
+
             if (ModelState.IsValid)
             {
                 AppUserTbl user=await _userManager.FindByNameAsync(p.UserName);
                 if (user != null)
                 {
-                    await _signInManager.SignOutAsync();
-                    Microsoft.AspNetCore.Identity.SignInResult result =await _signInManager.PasswordSignInAsync(user,p.Password, false,true);
-                    if (result.Succeeded)
+                    var role = await _roleManager.FindByIdAsync(p.RoleID);
+                    if (await _userManager.IsInRoleAsync(user, role.Name))
                     {
-                        return RedirectToAction("Index", "Birimler"); //Sonra deðiþtirilecek
+                        await _signInManager.SignOutAsync();
+                        Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, p.Password, false, true);
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Birimler"); //Sonra deðiþtirilecek
 
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Rolhatasi = "Bu rol ile giriþ yetkisine sahip deðilsiniz.";
                     }
                 }
                 else
@@ -50,7 +66,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
                     ModelState.AddModelError("NotUser2", "E-posta veya þifre yanlýþ.");
                 }
             }
-            return View(p);
+            return View();
             
         }
         public async Task<IActionResult> Logout()

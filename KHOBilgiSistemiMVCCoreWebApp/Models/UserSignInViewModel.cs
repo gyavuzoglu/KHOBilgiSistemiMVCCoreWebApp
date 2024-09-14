@@ -13,5 +13,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Models
         [DataType(DataType.Password)]
         [Display(Name ="Şifreniz")]
         public string Password { get; set; }
+
+        public string RoleID { get; set; }
+     
+
     }
 }
