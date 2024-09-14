@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFrameWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
+    [Authorize(Roles = "Yönetici")]
     public class PersonelController : Controller
     {
         PersonelManager pm=new PersonelManager(new EfPersonelRepository());

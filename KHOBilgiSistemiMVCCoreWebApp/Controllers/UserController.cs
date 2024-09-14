@@ -11,8 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
-    [AllowAnonymous]
-    //Bu sadece Admin olacak
+    [Authorize(Roles = "Yönetici")]
     public class UserController : Controller
     {
 

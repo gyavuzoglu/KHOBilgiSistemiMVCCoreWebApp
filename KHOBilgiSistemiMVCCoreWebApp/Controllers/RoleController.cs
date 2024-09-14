@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
-    [AllowAnonymous]
-    //Bu sadece Admin olacak
+    [Authorize(Roles = "Yönetici")]
     public class RoleController : Controller
     {
         private readonly RoleManager<AppRolesTbl> _roleManager;

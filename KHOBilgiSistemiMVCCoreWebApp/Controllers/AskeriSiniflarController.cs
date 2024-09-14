@@ -9,7 +9,8 @@ using Newtonsoft.Json.Linq;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
- 
+
+    [Authorize(Roles = "Yönetici")]
     public class AskeriSiniflarController : Controller
     {
         AskeriSiniflarManager asm=new AskeriSiniflarManager(new EfAskeriSiniflarRepository());

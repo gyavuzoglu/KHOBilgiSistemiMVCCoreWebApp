@@ -27,7 +27,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUserTbl, AppRolesTbl>().AddEntityFrameworkStores<Context>();
 
-builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
+builder.Services.AddMvc(config => //***Bütün projeyi authorizeye açma
 {
     var policy=new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     config.Filters.Add(new AuthorizeFilter(policy));
@@ -36,7 +36,7 @@ builder.Services.AddMvc(config => //***Bütün projeyi authoizeye açma
 
 //builder.Services.AddMvc();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
-    x.LoginPath = "/Kullanicilar/Login" //auth. olmadýysa Nereye gidilirse gidilsin login ekraný gelir.
+    x.LoginPath = "/Home/Index" //auth. olmadýysa Nereye gidilirse gidilsin login ekraný gelir.
 );
 var app = builder.Build();
 

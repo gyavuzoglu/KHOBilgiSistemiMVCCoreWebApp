@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
+    [Authorize(Roles = "Yönetici")]
     public class BolumlerController : Controller
     {
         BolumlerManager bolumlersm = new BolumlerManager(new EfBolumlerRepository());

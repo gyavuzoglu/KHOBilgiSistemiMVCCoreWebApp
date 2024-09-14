@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Yönetici")]
     public class BirimlerController : Controller
     {
         BirimlerManager birimlersm = new BirimlerManager(new EfBirimlerRepository());
