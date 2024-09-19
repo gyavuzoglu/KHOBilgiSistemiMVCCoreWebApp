@@ -18,8 +18,25 @@
 </head>
 <body style="background-color:#e5e7e9">
     <div><img src="~/img/dbstasarim.jpg" alt="" width="1500" height="100"></div>
+    @if(@ViewBag.RoleName==null)
+    {
+        @await Html.PartialAsync("LoginProfileNavBar")
+    }
+    else
+    {
+        @if (@ViewBag.RoleName == "Öğrenci")
+        {
+            @await Html.PartialAsync("OgrenciProfileNavBar")
+        }
 
-    @await Html.PartialAsync("LoginProfileNavBar")    
+        @if (@ViewBag.RoleName == "Yönetici")
+        {
+           
+            @await Html.PartialAsync("YoneticiProfileNavBar")
+        }
+        //diğerleri de buraya yazılacak
+    }
+
     @* Burada oturum açmaya göre farklı partial-navbar gelecek if ve session kontrolü olacak. *@
     @RenderBody()
 

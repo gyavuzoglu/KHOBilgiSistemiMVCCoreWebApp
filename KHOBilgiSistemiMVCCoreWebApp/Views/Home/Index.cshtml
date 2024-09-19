@@ -3,7 +3,7 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@* Login Index Sayfası *@
+@* Login Home/Index Sayfası *@
 
 <div style="background-color: #e5e7e9;" class="container py-4">
 
@@ -12,7 +12,7 @@
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                <form method="post">
+                <form method="post" asp-action="Index" asp-controller="Home">
 
                     <div class="card-body p-4 text-center">
 
@@ -35,17 +35,6 @@
                             @Html.DropDownListFor(x=>x.RoleID,new SelectList(ViewBag.rolelist,"Value","Text"),"Giriş Türü Seçiniz",new{ @class="dropdown form-control"})
                         </div>
 
-                        <div class="text-danger">
-                        </div>
-                        @if(ViewBag.Rolhatasi!=null)
-                        {
-                            <div class="text-danger">
-                                @ViewBag.Rolhatasi
-                            </div>
-                        }
-                        <div class="text-danger" asp-validation-summary="ModelOnly">
-                        </div>
-
                         <div class="d-flex justify-content-end mb-4">
                             <a class="py-1" href="#" for="form1Example3"> Şifremi Unuttum</a>
                         </div>
@@ -57,10 +46,12 @@
 
                     </div>
                 </form>
+                <div class="text-center text-danger" asp-validation-summary="ModelOnly">
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="~/js/site.js"></script>
+
 

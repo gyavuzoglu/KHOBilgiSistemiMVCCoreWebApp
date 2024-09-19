@@ -1,9 +1,11 @@
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using KHOBilgiSistemiMVCCoreWebApp.AutoMappers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,11 +21,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireDigit = false; //þifre de rakam þart deðil
     options.Password.RequiredLength = 6; //þifre uzunluðu en az 6 karakter olsun
 
-
 });
 
+//AutoMapper daki her profil böyle Eklendi.
+builder.Services.AddAutoMapper(typeof(PersonelProfile));
 
-//builder.Services.AddSession(); //***
+
+builder.Services.AddSession(); //***
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUserTbl, AppRolesTbl>().AddEntityFrameworkStores<Context>();
 
@@ -50,10 +54,36 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-/*app.UseSession();*/ //***
+app.UseSession(); //***
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+//app.MapControllerRoute(
+//    name: "Areas",
+//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+//Genel Area Path Tanýmý böyle ama biz ayrý ayrý path tanýmý yapýyoruz. 
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+      name: "Yonetim",
+      areaName:"YonetimArea",
+      pattern: "admin/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+      name: "Ogrenci",
+      areaName: "OgrenciArea",
+      pattern: "ogrenci/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+//Yukarýdaki area tanýmlarý her yeni area eklendikçe oluþturulacak.
+
 
 app.MapControllerRoute(
     name: "default",

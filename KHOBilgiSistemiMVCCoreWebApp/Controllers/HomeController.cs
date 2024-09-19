@@ -1,8 +1,10 @@
 using EntityLayer.Concrete;
 using KHOBilgiSistemiMVCCoreWebApp.Models;
+using KHOBilgiSistemiMVCCoreWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
 using System.Diagnostics;
@@ -33,7 +35,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             ViewBag.rolelist = new SelectList(_roleManager.Roles.ToList(), "Id", "Name");
             return View();
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Index(UserSignInViewModel p)
         {
@@ -41,33 +43,61 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                AppUserTbl user=await _userManager.FindByNameAsync(p.UserName);
+
+                AppUserTbl user = await _userManager.FindByNameAsync(p.UserName);
                 if (user != null)
                 {
-                    var role = await _roleManager.FindByIdAsync(p.RoleID);
-                    if (await _userManager.IsInRoleAsync(user, role.Name))
+                    if (user.UserName == p.UserName)
                     {
-                        await _signInManager.SignOutAsync();
-                        Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, p.Password, false, true);
-                        if (result.Succeeded)
+                        
+                        var pk=_userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, p.Password);
+                        if (pk==PasswordVerificationResult.Success)
                         {
-                            return RedirectToAction("Index", "Birimler"); //Sonra deðiþtirilecek
+                            var role = await _roleManager.FindByIdAsync(p.RoleID);
+                            if (await _userManager.IsInRoleAsync(user, role.Name))
+                            {
+                                await _signInManager.SignOutAsync();
+                                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, p.Password, false, true);
+                                if (result.Succeeded)
+                                {
 
+                                    HttpContext.Session.SetString("UserName", user.Adi + " " + user.Soyadi);
+                                    HttpContext.Session.SetString("RoleName", role.Name);
+                                    if (p.RoleID=="1")  //Öðrenci rolü ise
+                                    {
+                                        return RedirectToAction("Index", "Ogrenci");
+                                    }
+                                    if (p.RoleID == "15")  //Yonetici rolü ise
+                                    {
+                                        return RedirectToAction("Index", "Yonetici");
+                                    }
+
+                                    //Profile göre Menüsü ve Ýlk Ekraný gelecek
+                                }
+                            }
+                            else
+                            {
+
+                                ModelState.AddModelError("", "Bu rol ile giriþ yetkisine sahip deðilsiniz.");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Þifrenizi yanlýþ girdiniz.");
                         }
                     }
-                    else
-                    {
-                        ViewBag.Rolhatasi = "Bu rol ile giriþ yetkisine sahip deðilsiniz.";
-                    }
+
                 }
                 else
                 {
-                    ModelState.AddModelError("NotUser", "Böyle bir kullanýcý bulunmamaktadýr.");
-                    ModelState.AddModelError("NotUser2", "E-posta veya þifre yanlýþ.");
+                    ModelState.AddModelError("", "Böyle bir kullanýcý bulunmamaktadýr.");
                 }
+
             }
+
             return View();
-            
+
+
         }
         public async Task<IActionResult> Logout()
         {
