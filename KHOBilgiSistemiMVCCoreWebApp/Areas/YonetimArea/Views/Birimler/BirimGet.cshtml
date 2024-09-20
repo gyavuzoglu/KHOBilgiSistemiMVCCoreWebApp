@@ -23,6 +23,8 @@
                     <label>Birim Adı</label>
                     @Html.TextBoxFor(x => x.BirimAdi, new { @class = "form-control" })
                     <br/>
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <br/>
                     <button class="btn btn-primary">Güncelle</button>
 
                 }

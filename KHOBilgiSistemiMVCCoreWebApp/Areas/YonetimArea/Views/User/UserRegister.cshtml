@@ -14,36 +14,48 @@
 
             <br /><br /><br />
             <div style="width:70%;margin:auto;">
-                <form method="post" class="m-t" role="form" asp-controller="User" asp-action="UserRegister">
+                
+                @using (Html.BeginForm("UserRegister", "User", FormMethod.Post))
+                {
                     <div class="form-group">
-
-                        <input type="text" class="mb-3 form-control" asp-for="@Model.Adi" placeholder="Adı" required="" />
-                        <span asp-validation-for="@Model.Adi" class="text-danger"></span>
-
-                        <input type="text" class="mb-3 form-control" asp-for="@Model.Soyadi" placeholder="Soyadı" required="" />
-                        <span asp-validation-for="@Model.Soyadi" class="text-danger"></span>
-
-                        <input type="text" class="mb-3 form-control" asp-for="@Model.UserName" placeholder="TC Kimlik numarası" required="" />
-                        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
-
-                        <input type="password" class="mb-3 form-control" asp-for="@Model.Password" placeholder="*****" required="" />
-                        <span asp-validation-for="@Model.Password" class="text-danger"></span>
-
-                        <input type="password" class="mb-3 form-control" asp-for="@Model.ConfirmPassword" placeholder="*****" required="" />
-                        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
-
-                        <input type="email" class="mb-3 form-control" asp-for="@Model.Email" placeholder="E-Posta adresi" required="" />
-                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
-
+                        <div class="m-3">
+                            @Html.TextBoxFor(x => x.Adi, new { @class = "form-control", @placeholder = "Personelin Adı" })
+                            @Html.ValidationMessageFor(x => x.Adi, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="m-3">
+                            @Html.TextBoxFor(x => x.Soyadi, new { @class = "form-control", @placeholder = "Personelin Soyadı" })
+                            @Html.ValidationMessageFor(x => x.Soyadi, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="m-3">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "email", @placeholder = "E-Mail Adresi" })
+                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="m-3">
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "Kullanıcı Adı" })
+                            @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="m-3">
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Şifresi" })
+                            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="m-3">
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Tekrar Şifresi" })
+                        </div>
+                        <div class="m-3">
+                            @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        
                     </div>
                     <br />
-                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger"})
+                    
                     <br />
                     <button type="submit" class="btn btn-primary">Kaydet</button>
                     <br />
 
-                    
-                </form>
+                }
+                
             </div>
         </div>
     </div>

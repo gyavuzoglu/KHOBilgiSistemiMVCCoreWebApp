@@ -1,8 +1,9 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.UserVM
 @model RoleViewModel
+
 @{
-    ViewData["Title"] = "RoleRegister";
-    Layout = "~/Views/Shared/_Layout.cshtml"; //Admin layout olacak
+    ViewData["Title"] = "Rol Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -14,20 +15,23 @@
 
             <br /><br /><br />
             <div style="width:70%;margin:auto;">
-                <form method="post" class="m-t" role="form" asp-controller="Role" asp-action="RoleRegister">
-                    <div class="form-group">
 
-                        <input type="text" class="mb-3 form-control" asp-for="@Model.Name" placeholder="Rol Adı" required="" />
-                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
-
-                    </div>
+                @using (Html.BeginForm("RoleRegister", "Role", FormMethod.Post))
+                {
+                    <label style="display:none;">Rol ID</label>
+                    @Html.TextBoxFor(x => x.Id, new { style = "display:none;", @class = "form-control" })
+                    <label>Rol Adı</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
                     <br />
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
+
                     <br />
 
-                    <div class="text-danger" asp-validation-summary="ModelOnly">
-                    </div>
-                </form>
+                    <br />
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+
+                }
+
             </div>
         </div>
     </div>

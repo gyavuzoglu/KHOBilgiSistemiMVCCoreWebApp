@@ -42,8 +42,8 @@
                     @* <label>Yeni Şifre</label>
                     <input type="password" class="mb-3 form-control" asp-for="@Model.PasswordHash" required="" />
                     <span asp-validation-for="@Model.PasswordHash" class="text-danger"></span> *@
-                   
-                    <div asp-validation-summary="All" class="text-danger"> </div>
+
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <br />
                     <button type="submit" class="btn btn-primary">Güncelle</button>
 

@@ -15,7 +15,7 @@
             <br />
 
             <div class="col-6 text-end">
-                <a href="/Role/RoleRegister" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Rol Yarat</a>
+                <a href="@Url.Action("RoleRegister","Role", new {area ="YonetimArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Rol Yarat</a>
 
             </div>
         </div>
@@ -46,7 +46,8 @@
                            
 
                             <td scope="row" class="text-center">
-                                <a href="/Role/RoleEdit/@item.Id">
+
+                                <a href="@Url.Action("RoleEdit","Role", new {id = @item.Id, area ="YonetimArea"})">
                                     <i class="fa-solid fa-pen-to-square text-primary"></i>
                                 </a>
 
@@ -69,7 +70,7 @@
                                                 <h5>Bu rolü silmek istediğinize emin misiniz ? </h5>
                                             </div>
                                             <div class="modal-footer">
-                                                @Html.ActionLink("Sil", "RoleDelete", new { id = @item.Id }, new { @class = "btn btn-danger" })
+                                                @Html.ActionLink("Sil", "RoleDelete", new { id = @item.Id, area = "YonetimArea" }, new { @class = "btn btn-danger" })
                                                 <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
                                             </div>
                                         </div>

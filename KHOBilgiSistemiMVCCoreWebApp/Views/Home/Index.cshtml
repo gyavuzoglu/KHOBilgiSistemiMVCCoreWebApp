@@ -46,7 +46,7 @@
 
                     </div>
                 </form>
-                <div class="text-center text-danger" asp-validation-summary="ModelOnly">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

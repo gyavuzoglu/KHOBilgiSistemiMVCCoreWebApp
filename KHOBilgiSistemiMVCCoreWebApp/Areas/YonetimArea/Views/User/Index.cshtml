@@ -15,8 +15,7 @@
             <br />
 
             <div class="col-6 text-end">
-                <a href="/User/UserRegister" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Kullanıcı Yarat</a>
-
+               <a href="@Url.Action("UserRegister","User", new {area ="YonetimArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Kullanıcı Yarat</a>
             </div>
         </div>
         <br />
@@ -48,7 +47,7 @@
                             <td scope="col" class="text-left" width="25%">@item.Email</td>
                             
                             <td scope="row" class="text-center">
-                                <a href="/User/UserGet/@item.Id">
+                                <a href="@Url.Action("UserGet","User", new {id = @item.Id, area ="YonetimArea"})">
                                     <i class="fa-solid fa-pen-to-square text-primary"></i>
                                 </a>
 
@@ -71,7 +70,7 @@
                                                 <h5>Bu kullanıcıyı silmek istediğinize emin misiniz ? </h5>
                                             </div>
                                             <div class="modal-footer">
-                                                @Html.ActionLink("Sil", "UserDelete", new { id = @item.Id }, new { @class = "btn btn-danger" })
+                                                @Html.ActionLink("Sil", "UserDelete", new { id = @item.Id, area = "YonetimArea" }, new { @class = "btn btn-danger" })
                                                 <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
                                             </div>
                                         </div>
@@ -80,7 +79,7 @@
                             </td>
 
                             <td scope="row" class="text-center">
-                                <a href="/User/EditRolesInUsers/@item.Id">
+                                <a href="@Url.Action("EditRolesInUsers","User", new {id = @item.Id, area ="YonetimArea"})">
                                     <i class="fa-solid fa-key text-primary"></i>
                                 </a>
 

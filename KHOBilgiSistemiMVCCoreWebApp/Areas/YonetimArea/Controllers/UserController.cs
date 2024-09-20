@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.UserVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -32,12 +34,21 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
         [HttpGet]
         public IActionResult UserRegister()
         {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> UserRegister(UserSignUpViewModel p)
         {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
             if (ModelState.IsValid)
             {
                 AppUserTbl user = new AppUserTbl()
@@ -54,9 +65,10 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
                 }
                 else
                 {
+                     
                     foreach (var item in result.Errors)
                     {
-                        ModelState.AddModelError("", item.Description);
+                        ModelState.AddModelError(nameof(item), item.Description);
                     }
                 }
             }
@@ -77,6 +89,10 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
         [HttpGet]
         public async Task<IActionResult> UserGet(string id)
         {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
             var user = await _userManager.FindByIdAsync(id);
             return View(user);
         }
@@ -178,6 +194,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRolesInUsers(string id)
         {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
             ViewBag.Userid = id;
 
             var user = await _userManager.FindByIdAsync(id);
@@ -225,6 +246,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
             }
             for (int i = 0; i < model.Count; i++)
             {
+                
                 var role = await _roleManager.FindByIdAsync(model[i].RoleID);
                 IdentityResult result = null;
                 if (model[i].IsSelected && !await _userManager.IsInRoleAsync(user, role.Name))

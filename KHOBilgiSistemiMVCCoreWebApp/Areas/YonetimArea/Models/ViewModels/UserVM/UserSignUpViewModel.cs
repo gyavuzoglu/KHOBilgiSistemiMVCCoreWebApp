@@ -32,9 +32,5 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.UserV
         [Display(Name = "E-mail")]
         public string? Email { get; set; }
 
-        //[Display(Name = "Kullanıcı Türü")]
-        //[Required(ErrorMessage = "Lütfen kullanıcı türünü seçiniz.")]
-        //public string? RoleName { get; set; }
-
     }
 }
