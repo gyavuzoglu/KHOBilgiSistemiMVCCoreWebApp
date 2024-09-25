@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Models.ViewModels
 {
@@ -14,7 +15,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Models.ViewModels
         [Display(Name = "Şifreniz")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage="Lütfen bir giriş rolü seçiniz.")]
         public string RoleID { get; set; }
+
 
 
     }

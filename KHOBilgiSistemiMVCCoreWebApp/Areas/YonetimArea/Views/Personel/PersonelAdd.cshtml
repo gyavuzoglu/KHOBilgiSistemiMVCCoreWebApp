@@ -1,0 +1,114 @@
+﻿@using EntityLayer.Concrete
+@model PersonelTbl
+
+@{
+    ViewData["Title"] = "Personel Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="mb-3" style="max-width: 50rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+
+            <h3 class="text-primary">Personel Ekleme</h3>
+
+            <br /><br /><br />
+            <div style="width:70%;margin:auto;">
+                @using (Html.BeginForm("PersonelAdd", "Personel", FormMethod.Post))
+                {
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label>TC Kimlik Numarası</label>
+                        @Html.TextBoxFor(x => x.PersonelTC, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.PersonelTC, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Adı</label>
+                        @Html.TextBoxFor(x => x.Adi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Adi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Soyadı</label>
+                        @Html.TextBoxFor(x => x.Soyadi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Soyadi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.DropDownListFor(x => x.SinifID, new SelectList(ViewBag.SinifList, "Value", "Text"), "Askeri Sınıf Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.SinifID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.DropDownListFor(x => x.RutbeID, new SelectList(ViewBag.RutbeList, "Value", "Text"), "Rütbe Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.RutbeID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.DropDownListFor(x => x.UnvanID, new SelectList(ViewBag.UnvanList, "Value", "Text"), "Unvan Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.UnvanID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.DropDownListFor(x => x.GorevID, new SelectList(ViewBag.GorevList, "Value", "Text"), "Görev Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.GorevID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.DropDownListFor(x => x.BolumID, new SelectList(ViewBag.BolumList, "Value", "Text"), "Bölüm Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.BolumID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        @Html.CheckBoxFor(x => x.MisafirPersonel, "Misafir Personel", new { @class = "form-check-input" })
+
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Misafir Personel ise Görev Yeri</label>
+                        @Html.TextBoxFor(x => x.MisafirGorevYeri, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MisafirGorevYeri, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Misafir Personel ise Ev Adresi</label>
+                        @Html.TextBoxFor(x => x.MisafirEvAdresi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.MisafirEvAdresi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Okul E-Posta Adresi </label>
+                        @Html.TextBoxFor(x => x.OkulEPosta, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.OkulEPosta, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Diğer E-Posta Adresi </label>
+                        @Html.TextBoxFor(x => x.DigerEPosta, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.DigerEPosta, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Cep Telefonu Numarası </label>
+                        @Html.TextBoxFor(x => x.CepTelefonu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.CepTelefonu, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-check m-1">
+                        <label>Dahili Telefonu Numarası </label>
+                        @Html.TextBoxFor(x => x.DahiliTelefonu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.DahiliTelefonu, "", new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <br />
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

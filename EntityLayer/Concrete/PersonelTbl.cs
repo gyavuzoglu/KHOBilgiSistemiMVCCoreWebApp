@@ -11,7 +11,8 @@ namespace EntityLayer.Concrete
     public class PersonelTbl
     {
         [Key]
-        public long PersonelTC { get; set; }
+        [StringLength(11)]
+        public string PersonelTC { get; set; }
 
         [StringLength(50)]
         public string? Adi { get; set; }

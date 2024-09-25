@@ -2,7 +2,7 @@
 @model BirimlerTbl
 
 @{
-    ViewData["Title"] = "BirimEkleme";
+    ViewData["Title"] = "Birim Ekleme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,8 +15,8 @@
 
             <br /><br /><br />
             <div style="width:70%;margin:auto;">
-                @using(Html.BeginForm("BirimAdd", "Birimler", FormMethod.Post))
-                {
+               @using(Html.BeginForm("BirimAdd", "Birimler", FormMethod.Post))
+               {
                     <label style="display:none;">Birim ID</label>
                     @Html.TextBoxFor(x => x.BirimID, new { style = "display:none;", @class = "form-control" })
                     <label>Birim Adı</label>

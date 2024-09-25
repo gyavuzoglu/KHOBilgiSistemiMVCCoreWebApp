@@ -68,7 +68,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
                      
                     foreach (var item in result.Errors)
                     {
-                        ModelState.AddModelError(nameof(item), item.Description);
+                        ModelState.AddModelError(nameof(IdentityErrorDescriber.DuplicateUserName), "Bu kullanıcı adı kullanılmaktadır.");
                     }
                 }
             }

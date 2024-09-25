@@ -19,36 +19,41 @@
                 {
                     <div class="form-group">
                         <div class="m-3">
-                            @Html.TextBoxFor(x => x.Adi, new { @class = "form-control", @placeholder = "Personelin Adı" })
+                            @Html.Label("Adı : ")
+                            @Html.TextBoxFor(x => x.Adi, new { @class = "form-control", @placeholder = "Adı" })
                             @Html.ValidationMessageFor(x => x.Adi, "", new { @class = "text-danger" })
                         </div>
                         <div class="m-3">
-                            @Html.TextBoxFor(x => x.Soyadi, new { @class = "form-control", @placeholder = "Personelin Soyadı" })
+                            @Html.Label("Soyadı : ")
+                            @Html.TextBoxFor(x => x.Soyadi, new { @class = "form-control", @placeholder = "Soyadı" })
                             @Html.ValidationMessageFor(x => x.Soyadi, "", new { @class = "text-danger" })
                         </div>
                         <div class="m-3">
+                            @Html.Label("E-Mail Adresi : ")
                             @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "email", @placeholder = "E-Mail Adresi" })
                             @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="m-3">
+                            @Html.Label("Kullanıcı Adı : ")
                             @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "Kullanıcı Adı" })
                             @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
                         </div>
                         <div class="m-3">
-                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Şifresi" })
+                            @Html.Label("Şifre : ")
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Şifre" })
                             @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
                         </div>
                         <div class="m-3">
-                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Tekrar Şifresi" })
+                            @Html.Label("Tekrar Şifre : ")
+                            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Tekrar Şifre" })
                         </div>
                         <div class="m-3">
                             @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
                         </div>
                         
                     </div>
-                    <br />
-                    
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger"})
+                                        
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger", @summary="ModelOnly"})
                     
                     <br />
                     <button type="submit" class="btn btn-primary">Kaydet</button>
