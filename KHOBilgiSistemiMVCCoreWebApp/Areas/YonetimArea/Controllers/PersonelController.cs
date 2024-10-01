@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
 {
@@ -50,13 +51,47 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
-            ViewBag.SinifList = new SelectList(AskeriSinifMng.GetListAll().ToList(), "SinifID", "SinifKisa");
-            ViewBag.RutbeList = new SelectList(RutbeMng.GetListAll().ToList(), "RutbeID", "RutbeKisa");
-            ViewBag.UnvanList = new SelectList(UnvanMng.GetListAll().ToList(), "UnvanID", "UnvanKisa");
-            ViewBag.GorevList = new SelectList(GorevMng.GetListAll().ToList(), "GorevID", "GorevAdi");
-            ViewBag.BolumList = new SelectList(BolumMng.GetListAll().ToList(), "BolumID", "BolumAdi");
-            ViewBag.BirimList = new SelectList(BirimMng.GetListAll().ToList(), "BirimID", "BirimAdi");
-            
+            List<SelectListItem> Siniflar = new List<SelectListItem>();
+            foreach (var item in AskeriSinifMng.GetListAll().ToList())
+            {   
+                Siniflar.Add(new SelectListItem { Text = item.SinifKisa, Value = item.SinifID.ToString() });
+            }
+            ViewBag.SinifList=Siniflar;
+
+            List<SelectListItem> Rutbeler = new List<SelectListItem>();
+            foreach (var item in RutbeMng.GetListAll().ToList())
+            {
+                Rutbeler.Add(new SelectListItem { Text = item.RutbeKisa, Value = item.RutbeID.ToString() });
+            }
+            ViewBag.RutbeList = Rutbeler;
+
+            List<SelectListItem> Unvanlar = new List<SelectListItem>();
+            foreach (var item in UnvanMng.GetListAll().ToList())
+            {
+                Unvanlar.Add(new SelectListItem { Text = item.UnvanKisa, Value = item.UnvanID.ToString() });
+            }
+            ViewBag.UnvanList = Unvanlar;
+
+            List<SelectListItem> Gorevler = new List<SelectListItem>();
+            foreach (var item in GorevMng.GetListAll().ToList())
+            {
+                Gorevler.Add(new SelectListItem { Text = item.GorevAdi, Value = item.GorevID.ToString() });
+            }
+            ViewBag.GorevList = Gorevler;
+
+            List<SelectListItem> Bolumler = new List<SelectListItem>();
+            foreach (var item in BolumMng.GetListAll().ToList())
+            {
+                Bolumler.Add(new SelectListItem { Text = item.BolumAdi, Value = item.BolumID.ToString() });
+            }
+            ViewBag.BolumList = Bolumler;
+
+            List<SelectListItem> Birimler = new List<SelectListItem>();
+            foreach (var item in BirimMng.GetListAll().ToList())
+            {
+                Birimler.Add(new SelectListItem { Text = item.BirimAdi, Value = item.BirimID.ToString() });
+            }
+            ViewBag.BirimList = Birimler;
 
             return View();
         }
@@ -64,14 +99,22 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult PersonelAdd(PersonelAddVM p)
         {
-            //PersonelValidator validationRules = new PersonelValidator();
-            //ValidationResult validationResult = validationRules.Validate(p);
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
             var Personellist = pm.GetListAll().ToList();
 
-            //if (validationResult.IsValid)
-
-            if(ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
+                if (p.SinifID == null) p.SinifID = 1;
+                if (p.RutbeID == null) p.RutbeID = 1;
+                if (p.UnvanID == null) p.UnvanID = 1;
+                if (p.GorevID == null) p.GorevID = 1;
+                if (p.BolumID == null) p.BolumID = 1;
+                if (p.BirimID == null) p.BirimID = 1;
+
                 PersonelTbl per = new PersonelTbl()
                 {
                     PersonelTC = p.PersonelTC,
@@ -91,21 +134,66 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
                     CepTelefonu = p.CepTelefonu,
                     DahiliTelefonu = p.DahiliTelefonu,
                     KayitTarihi = p.KayitTarihi
+
                 };
-                
-                if (!Personellist.Any(x=>x.PersonelTC == p.PersonelTC))
+
+                if (!Personellist.Any(x => x.PersonelTC == p.PersonelTC))
                 {
                     pm.PersonelAdd(per);
                     return RedirectToAction("Index", "Personel");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Bu TC numarası kullanılmaktadır.");
-
+                    ModelState.AddModelError("PersonelTC", "Bu T.C. kimlik numarası kullanılmaktadır.");
                 }
+
             }
 
-            return View();
+            List<SelectListItem> Siniflar = new List<SelectListItem>();
+            foreach (var item in AskeriSinifMng.GetListAll().ToList())
+            {
+                Siniflar.Add(new SelectListItem { Text = item.SinifKisa, Value = item.SinifID.ToString() });
+            }
+            ViewBag.SinifList = Siniflar;
+
+            List<SelectListItem> Rutbeler = new List<SelectListItem>();
+            foreach (var item in RutbeMng.GetListAll().ToList())
+            {
+                Rutbeler.Add(new SelectListItem { Text = item.RutbeKisa, Value = item.RutbeID.ToString() });
+            }
+            ViewBag.RutbeList = Rutbeler;
+
+            List<SelectListItem> Unvanlar = new List<SelectListItem>();
+            foreach (var item in UnvanMng.GetListAll().ToList())
+            {
+                Unvanlar.Add(new SelectListItem { Text = item.UnvanKisa, Value = item.UnvanID.ToString() });
+            }
+            ViewBag.UnvanList = Unvanlar;
+
+            List<SelectListItem> Gorevler = new List<SelectListItem>();
+            foreach (var item in GorevMng.GetListAll().ToList())
+            {
+                Gorevler.Add(new SelectListItem { Text = item.GorevAdi, Value = item.GorevID.ToString() });
+            }
+            ViewBag.GorevList = Gorevler;
+
+            List<SelectListItem> Bolumler = new List<SelectListItem>();
+            foreach (var item in BolumMng.GetListAll().ToList())
+            {
+                Bolumler.Add(new SelectListItem { Text = item.BolumAdi, Value = item.BolumID.ToString() });
+            }
+            ViewBag.BolumList = Bolumler;
+
+            List<SelectListItem> Birimler = new List<SelectListItem>();
+            foreach (var item in BirimMng.GetListAll().ToList())
+            {
+                Birimler.Add(new SelectListItem { Text = item.BirimAdi, Value = item.BirimID.ToString() });
+            }
+            ViewBag.BirimList = Birimler;
+
+            //return den önce dropdown listeleri varsa yeniden oluşturuluyor.
+
+            return View(p);
         }
 
         public IActionResult PersonelDelete(int id)

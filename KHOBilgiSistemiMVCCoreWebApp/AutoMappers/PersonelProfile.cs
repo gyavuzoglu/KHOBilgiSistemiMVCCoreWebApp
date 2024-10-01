@@ -8,8 +8,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.AutoMappers
     {
         public PersonelProfile() 
         { 
-            CreateMap<PersonelTbl,PersonelCreateVM> ();
-            CreateMap<PersonelCreateVM,PersonelTbl> ();
+            CreateMap<PersonelTbl,PersonelAddVM> ();
+            CreateMap<PersonelAddVM,PersonelTbl> ();
+
         }
     }
 }

@@ -22,7 +22,6 @@ namespace EntityLayer.Concrete
         public string Soyadi { get; set; }
 
         [ForeignKey("AskeriSiniflarTbl")]
-
         public int? SinifID { get; set; } = 1;
 
         [ForeignKey("RutbeTbl")]
@@ -33,6 +32,8 @@ namespace EntityLayer.Concrete
 
         [ForeignKey("GorevlerTbl")]
         public int? GorevID { get; set; } = 1;
+
+        [ForeignKey("BolumTbl")]
         public int? BolumID { get; set; } = 1;
 
         [ForeignKey("BirimlerTbl")]
@@ -40,8 +41,6 @@ namespace EntityLayer.Concrete
 
         [DisplayName("Misafir Personel")]
         public bool MisafirPersonel { get; set; } =false;
-
-
 
         [StringLength(150)]
         public string? MisafirGorevYeri { get; set; }
@@ -60,6 +59,7 @@ namespace EntityLayer.Concrete
         public int? DahiliTelefonu { get; set; }
         public DateTime? KayitTarihi { get; set; }=DateTime.Now;
 
+        public virtual BolumTbl? BolumTbl { get; set; }
         public virtual GorevlerTbl? GorevlerTbl { get; set; }
         public virtual BirimlerTbl? BirimlerTbl { get; set; }
         public virtual RutbeTbl? RutbeTbl { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using EntityLayer.Concrete;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.PersonelVM
 {
@@ -16,27 +17,27 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.Perso
         [StringLength(50)]
         public string Soyadi { get; set; }
 
-        [ForeignKey("AskeriSiniflarTbl")]
+        //[ForeignKey("AskeriSiniflarTbl")]
 
         public int? SinifID { get; set; } = 1;
 
-        [ForeignKey("RutbeTbl")]
+        //[ForeignKey("RutbeTbl")]
         public int? RutbeID { get; set; } = 1;
 
-        [ForeignKey("UnvanTbl")]
+        //[ForeignKey("UnvanTbl")]
         public int? UnvanID { get; set; } = 1;
 
-        [ForeignKey("GorevlerTbl")]
+        //[ForeignKey("GorevlerTbl")]
         public int? GorevID { get; set; } = 1;
+        
+        //[ForeignKey("BolumTbl")]
         public int? BolumID { get; set; } = 1;
 
-        [ForeignKey("BirimlerTbl")]
+        //[ForeignKey("BirimlerTbl")]
         public int? BirimID { get; set; } = 1;
 
         [DisplayName("Misafir Personel")]
         public bool MisafirPersonel { get; set; } = false;
-
-
 
         [StringLength(150)]
         public string? MisafirGorevYeri { get; set; }
@@ -54,5 +55,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.Perso
         public string? CepTelefonu { get; set; }
         public int? DahiliTelefonu { get; set; }
         public DateTime? KayitTarihi { get; set; } = DateTime.Now;
+
+
     }
 }

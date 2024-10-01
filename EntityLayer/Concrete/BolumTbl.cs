@@ -18,5 +18,6 @@ namespace EntityLayer.Concrete
         public List<OgrencilerTbl>? OgrencilerTbl { get; set; }
         public List<DerslerTbl>? DerslerTbl { get; set; }
         public List<KisimlarTbl>? KisimlarTbl { get; set; }
+        public List<PersonelTbl>? PersonelTbl { get; set; }
     }
 }
