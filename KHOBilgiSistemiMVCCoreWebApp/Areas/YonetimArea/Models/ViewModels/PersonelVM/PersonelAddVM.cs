@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace EntityLayer.Concrete
+namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.PersonelVM
 {
-    public class PersonelTbl
+    public class PersonelAddVM
     {
         [Key]
         [StringLength(11)]
@@ -39,7 +34,7 @@ namespace EntityLayer.Concrete
         public int? BirimID { get; set; } = 1;
 
         [DisplayName("Misafir Personel")]
-        public bool MisafirPersonel { get; set; } =false;
+        public bool MisafirPersonel { get; set; } = false;
 
 
 
@@ -58,15 +53,6 @@ namespace EntityLayer.Concrete
         [StringLength(10)]
         public string? CepTelefonu { get; set; }
         public int? DahiliTelefonu { get; set; }
-        public DateTime? KayitTarihi { get; set; }=DateTime.Now;
-
-        public virtual GorevlerTbl? GorevlerTbl { get; set; }
-        public virtual BirimlerTbl? BirimlerTbl { get; set; }
-        public virtual RutbeTbl? RutbeTbl { get; set; }
-        public virtual UnvanTbl? UnvanTbl { get; set; }
-        public virtual AskeriSiniflarTbl? AskeriSiniflarTbl { get; set; }
-
-
-
+        public DateTime? KayitTarihi { get; set; } = DateTime.Now;
     }
 }

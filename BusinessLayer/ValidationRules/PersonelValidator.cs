@@ -24,11 +24,7 @@ namespace BusinessLayer.ValidationRules
             RuleFor(x => x.Soyadi).MinimumLength(3).WithMessage("Soyadı 11 karakterden az olmamalıdır.");
             RuleFor(x => x.Soyadi).MaximumLength(50).WithMessage("Soyadı 50 karakterden fazla olmamalıdır.");
 
-            RuleFor(x => x.MisafirPersonel).NotEmpty().WithMessage("Misafir Personel Durumu boş geçilemez.");
             
-            RuleFor(x => x.OkulEPosta).NotEmpty().WithMessage("Okul E-posta adresi boş geçilemez.");
-            RuleFor(x => x.OkulEPosta).EmailAddress().WithMessage("Geçerli bir E-posta adresi olmalıdır.");
-
         }
     }
 }

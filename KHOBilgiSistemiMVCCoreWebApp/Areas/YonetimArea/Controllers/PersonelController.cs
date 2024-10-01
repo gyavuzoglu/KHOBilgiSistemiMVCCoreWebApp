@@ -4,6 +4,7 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.PersonelVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -49,35 +50,61 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
-            ViewBag.SinifList = new SelectList(AskeriSinifMng.GetListAll(), "SinifId", "SinifKisa");
-            ViewBag.RutbeList = new SelectList(RutbeMng.GetListAll(), "RutbeID", "RutbeKisa");
-            ViewBag.UnvanList = new SelectList(UnvanMng.GetListAll(), "UnvanID", "UnvanKisa");
-            ViewBag.GorevList = new SelectList(GorevMng.GetListAll(), "GorevID", "GorevAdi");
-            ViewBag.BolumList = new SelectList(BolumMng.GetListAll(), "BolumID", "BolumAdi");
-            ViewBag.BirimList = new SelectList(BirimMng.GetListAll(), "BirimID", "BirimAdi");
+            ViewBag.SinifList = new SelectList(AskeriSinifMng.GetListAll().ToList(), "SinifID", "SinifKisa");
+            ViewBag.RutbeList = new SelectList(RutbeMng.GetListAll().ToList(), "RutbeID", "RutbeKisa");
+            ViewBag.UnvanList = new SelectList(UnvanMng.GetListAll().ToList(), "UnvanID", "UnvanKisa");
+            ViewBag.GorevList = new SelectList(GorevMng.GetListAll().ToList(), "GorevID", "GorevAdi");
+            ViewBag.BolumList = new SelectList(BolumMng.GetListAll().ToList(), "BolumID", "BolumAdi");
+            ViewBag.BirimList = new SelectList(BirimMng.GetListAll().ToList(), "BirimID", "BirimAdi");
+            
 
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult PersonelAdd(PersonelTbl p)
+        public IActionResult PersonelAdd(PersonelAddVM p)
         {
-            PersonelValidator validationRules = new PersonelValidator();
-            ValidationResult validationResult = validationRules.Validate(p);
-            if (validationResult.IsValid)
-            {
-                pm.PersonelAdd(p);
-                return RedirectToAction("Index", "Personel");
+            //PersonelValidator validationRules = new PersonelValidator();
+            //ValidationResult validationResult = validationRules.Validate(p);
+            var Personellist = pm.GetListAll().ToList();
 
-            }
-            else
+            //if (validationResult.IsValid)
+
+            if(ModelState.IsValid) 
             {
-                foreach (var item in validationResult.Errors)
+                PersonelTbl per = new PersonelTbl()
                 {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                    PersonelTC = p.PersonelTC,
+                    Adi = p.Adi,
+                    Soyadi = p.Soyadi,
+                    SinifID = p.SinifID,
+                    RutbeID = p.RutbeID,
+                    UnvanID = p.UnvanID,
+                    GorevID = p.GorevID,
+                    BolumID = p.BolumID,
+                    BirimID = p.BirimID,
+                    MisafirPersonel = p.MisafirPersonel,
+                    MisafirGorevYeri = p.MisafirGorevYeri,
+                    MisafirEvAdresi = p.MisafirEvAdresi,
+                    OkulEPosta = p.OkulEPosta,
+                    DigerEPosta = p.DigerEPosta,
+                    CepTelefonu = p.CepTelefonu,
+                    DahiliTelefonu = p.DahiliTelefonu,
+                    KayitTarihi = p.KayitTarihi
+                };
+                
+                if (!Personellist.Any(x=>x.PersonelTC == p.PersonelTC))
+                {
+                    pm.PersonelAdd(per);
+                    return RedirectToAction("Index", "Personel");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Bu TC numarası kullanılmaktadır.");
 
+                }
             }
+
             return View();
         }
 

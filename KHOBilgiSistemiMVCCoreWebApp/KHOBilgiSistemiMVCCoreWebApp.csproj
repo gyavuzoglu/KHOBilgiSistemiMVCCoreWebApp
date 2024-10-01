@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\YonetimArea\Views\Personel\PersonelAdd.cshtml" />
     <Content Remove="C:\Users\gyavuzoglu\.nuget\packages\bootstrap\5.3.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.css" />
     <Content Remove="C:\Users\gyavuzoglu\.nuget\packages\bootstrap\5.3.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.css.map" />
     <Content Remove="C:\Users\gyavuzoglu\.nuget\packages\bootstrap\5.3.3\contentFiles\any\any\wwwroot\css\bootstrap-grid.min.css" />
@@ -52,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\YonetimArea\Views\Personel\PersonelAdd.cshtml" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\jquery-3.7.1.min.js" />
     <None Include="wwwroot\js\site.js" />
@@ -210,11 +208,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Areas\YonetimArea\Views\Bolumler\BolumAdd.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\YonetimArea\Views\Personel\PersonelAdd.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\YonetimArea\Views\Personel\PersonelAdd.cshtml" />
   </ItemGroup>
 
 </Project>

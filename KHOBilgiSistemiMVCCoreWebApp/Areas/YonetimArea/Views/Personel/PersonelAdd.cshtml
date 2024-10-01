@@ -1,5 +1,5 @@
-﻿@using EntityLayer.Concrete
-@model PersonelTbl
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.PersonelVM
+@model PersonelAddVM
 
 @{
     ViewData["Title"] = "Personel Ekleme";
@@ -11,7 +11,7 @@
     <div class="col-md-12">
         <div class="row pt-4">
 
-            <h3 class="text-primary">Personel Ekleme</h3>
+            <h3 class="text-primary">Personelin Bilgileri</h3>
 
             <br /><br /><br />
             <div style="width:70%;margin:auto;">
@@ -36,73 +36,86 @@
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Askeri Sınıfı</label>
                         @Html.DropDownListFor(x => x.SinifID, new SelectList(ViewBag.SinifList, "Value", "Text"), "Askeri Sınıf Seçiniz", new { @class = "dropdown form-control" })
                         @Html.ValidationMessageFor(x => x.SinifID, "", new { @class = "text-danger" })
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Rütbesi</label>
                         @Html.DropDownListFor(x => x.RutbeID, new SelectList(ViewBag.RutbeList, "Value", "Text"), "Rütbe Seçiniz", new { @class = "dropdown form-control" })
                         @Html.ValidationMessageFor(x => x.RutbeID, "", new { @class = "text-danger" })
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Unvanı</label>
                         @Html.DropDownListFor(x => x.UnvanID, new SelectList(ViewBag.UnvanList, "Value", "Text"), "Unvan Seçiniz", new { @class = "dropdown form-control" })
                         @Html.ValidationMessageFor(x => x.UnvanID, "", new { @class = "text-danger" })
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Görevi</label>
                         @Html.DropDownListFor(x => x.GorevID, new SelectList(ViewBag.GorevList, "Value", "Text"), "Görev Seçiniz", new { @class = "dropdown form-control" })
                         @Html.ValidationMessageFor(x => x.GorevID, "", new { @class = "text-danger" })
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Bölümü</label>
                         @Html.DropDownListFor(x => x.BolumID, new SelectList(ViewBag.BolumList, "Value", "Text"), "Bölüm Seçiniz", new { @class = "dropdown form-control" })
                         @Html.ValidationMessageFor(x => x.BolumID, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
-                        @Html.CheckBoxFor(x => x.MisafirPersonel, "Misafir Personel", new { @class = "form-check-input" })
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label>Birimi</label>
+                        @Html.DropDownListFor(x => x.BirimID, new SelectList(ViewBag.BirimList, "Value", "Text"), "Birim Seçiniz", new { @class = "dropdown form-control" })
+                        @Html.ValidationMessageFor(x => x.BirimID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div data-mdb-input-init class="form-check form-outline mb-4">
+                        
+                        @Html.CheckBoxFor(x => x.MisafirPersonel, new { @class = "form-check-input" })
+                        @Html.LabelFor(x => x.MisafirPersonel)
 
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Misafir Personel ise Görev Yeri</label>
                         @Html.TextBoxFor(x => x.MisafirGorevYeri, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.MisafirGorevYeri, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Misafir Personel ise Ev Adresi</label>
                         @Html.TextBoxFor(x => x.MisafirEvAdresi, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.MisafirEvAdresi, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Okul E-Posta Adresi </label>
                         @Html.TextBoxFor(x => x.OkulEPosta, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.OkulEPosta, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Diğer E-Posta Adresi </label>
                         @Html.TextBoxFor(x => x.DigerEPosta, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.DigerEPosta, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Cep Telefonu Numarası </label>
                         @Html.TextBoxFor(x => x.CepTelefonu, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.CepTelefonu, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-check m-1">
+                    <div data-mdb-input-init class="form-outline mb-4">
                         <label>Dahili Telefonu Numarası </label>
                         @Html.TextBoxFor(x => x.DahiliTelefonu, new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.DahiliTelefonu, "", new { @class = "text-danger" })
                     </div>
-
+                    
                     <br />
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger", @summary = "ModelOnly" })
                     <br />
                     <button type="submit" class="btn btn-primary">Ekle</button>
                 }
@@ -110,5 +123,3 @@
         </div>
     </div>
 </div>
-
-
