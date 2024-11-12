@@ -12,6 +12,8 @@ namespace EntityLayer.Concrete
     public class PersonelTbl
     {
         [Key]
+        public int PerId { get; set; }
+       
         [StringLength(11)]
         public string PersonelTC { get; set; }
 

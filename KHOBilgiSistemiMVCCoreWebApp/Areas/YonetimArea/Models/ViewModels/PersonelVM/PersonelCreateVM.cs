@@ -4,7 +4,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.Perso
 {
     public class PersonelCreateVM
     {
-        public int MyProperty { get; set; }
+    
         [StringLength(50)]
         public string? Adi { get; set; }
 

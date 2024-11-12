@@ -82,6 +82,24 @@ app.UseEndpoints(endpoints =>
     );
 });
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+      name: "AkademikDanisman",
+      areaName: "AkademikDanismanArea",
+      pattern: "akademikdanisman/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+      name: "YoklamaKayit",
+      areaName: "YoklamaKayitArea",
+      pattern: "yoklamakayit/{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
 //Yukarýdaki area tanýmlarý her yeni area eklendikçe oluþturulacak.
 
 

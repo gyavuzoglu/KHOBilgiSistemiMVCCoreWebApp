@@ -22,7 +22,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
         {
             Mapper = mapper;
         }
-
+     
 
         PersonelManager pm = new PersonelManager(new EfPersonelRepository());
         AskeriSiniflarManager AskeriSinifMng = new AskeriSiniflarManager(new EfAskeriSiniflarRepository());
@@ -203,20 +203,106 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Controllers
             pm.PersonelDelete(personelvalue);
             return RedirectToAction("Index", "Personel");
         }
-        [HttpGet]
+   
         public IActionResult PersonelGet(int id)
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
-            var personelvalue = pm.TGetByID(id);
+
+            List<SelectListItem> Siniflar = new List<SelectListItem>();
+            foreach (var item in AskeriSinifMng.GetListAll().ToList())
+            {
+                Siniflar.Add(new SelectListItem { Text = item.SinifKisa, Value = item.SinifID.ToString() });
+            }
+            ViewBag.SinifList = Siniflar;
+
+            List<SelectListItem> Rutbeler = new List<SelectListItem>();
+            foreach (var item in RutbeMng.GetListAll().ToList())
+            {
+                Rutbeler.Add(new SelectListItem { Text = item.RutbeKisa, Value = item.RutbeID.ToString() });
+            }
+            ViewBag.RutbeList = Rutbeler;
+
+            List<SelectListItem> Unvanlar = new List<SelectListItem>();
+            foreach (var item in UnvanMng.GetListAll().ToList())
+            {
+                Unvanlar.Add(new SelectListItem { Text = item.UnvanKisa, Value = item.UnvanID.ToString() });
+            }
+            ViewBag.UnvanList = Unvanlar;
+
+            List<SelectListItem> Gorevler = new List<SelectListItem>();
+            foreach (var item in GorevMng.GetListAll().ToList())
+            {
+                Gorevler.Add(new SelectListItem { Text = item.GorevAdi, Value = item.GorevID.ToString() });
+            }
+            ViewBag.GorevList = Gorevler;
+
+            List<SelectListItem> Bolumler = new List<SelectListItem>();
+            foreach (var item in BolumMng.GetListAll().ToList())
+            {
+                Bolumler.Add(new SelectListItem { Text = item.BolumAdi, Value = item.BolumID.ToString() });
+            }
+            ViewBag.BolumList = Bolumler;
+
+            List<SelectListItem> Birimler = new List<SelectListItem>();
+            foreach (var item in BirimMng.GetListAll().ToList())
+            {
+                Birimler.Add(new SelectListItem { Text = item.BirimAdi, Value = item.BirimID.ToString() });
+            }
+            ViewBag.BirimList = Birimler;
+         
+            var personelvalue = pm.GetByID(id);
             return View(personelvalue);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult PersonelUpdate(PersonelTbl p)
         {
+
+            List<SelectListItem> Siniflar = new List<SelectListItem>();
+            foreach (var item in AskeriSinifMng.GetListAll().ToList())
+            {
+                Siniflar.Add(new SelectListItem { Text = item.SinifKisa, Value = item.SinifID.ToString() });
+            }
+            ViewBag.SinifList = Siniflar;
+
+            List<SelectListItem> Rutbeler = new List<SelectListItem>();
+            foreach (var item in RutbeMng.GetListAll().ToList())
+            {
+                Rutbeler.Add(new SelectListItem { Text = item.RutbeKisa, Value = item.RutbeID.ToString() });
+            }
+            ViewBag.RutbeList = Rutbeler;
+
+            List<SelectListItem> Unvanlar = new List<SelectListItem>();
+            foreach (var item in UnvanMng.GetListAll().ToList())
+            {
+                Unvanlar.Add(new SelectListItem { Text = item.UnvanKisa, Value = item.UnvanID.ToString() });
+            }
+            ViewBag.UnvanList = Unvanlar;
+
+            List<SelectListItem> Gorevler = new List<SelectListItem>();
+            foreach (var item in GorevMng.GetListAll().ToList())
+            {
+                Gorevler.Add(new SelectListItem { Text = item.GorevAdi, Value = item.GorevID.ToString() });
+            }
+            ViewBag.GorevList = Gorevler;
+
+            List<SelectListItem> Bolumler = new List<SelectListItem>();
+            foreach (var item in BolumMng.GetListAll().ToList())
+            {
+                Bolumler.Add(new SelectListItem { Text = item.BolumAdi, Value = item.BolumID.ToString() });
+            }
+            ViewBag.BolumList = Bolumler;
+
+            List<SelectListItem> Birimler = new List<SelectListItem>();
+            foreach (var item in BirimMng.GetListAll().ToList())
+            {
+                Birimler.Add(new SelectListItem { Text = item.BirimAdi, Value = item.BirimID.ToString() });
+            }
+            ViewBag.BirimList = Birimler;
+
             pm.PersonelUpdate(p);
             return RedirectToAction("Index", "Personel");
         }

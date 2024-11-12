@@ -8,6 +8,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.YonetimArea.Models.ViewModels.Perso
     public class PersonelAddVM
     {
         [Key]
+        public int PerID { get; set; }
+
         [StringLength(11)]
         public string PersonelTC { get; set; }
 

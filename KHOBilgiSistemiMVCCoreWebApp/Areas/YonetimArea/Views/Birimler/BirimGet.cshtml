@@ -26,6 +26,8 @@
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <br/>
                     <button class="btn btn-primary">Güncelle</button>
+                    @:&nbsp;&nbsp;
+                    @Html.ActionLink("Vazgeç", "Index", "Birimler", new { area = "YonetimArea" }, new { @class = "btn btn-secondary" })
 
                 }
             </div>

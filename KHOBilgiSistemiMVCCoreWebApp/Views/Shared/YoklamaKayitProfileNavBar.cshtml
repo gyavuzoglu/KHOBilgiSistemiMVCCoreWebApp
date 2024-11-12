@@ -1,0 +1,89 @@
+﻿@* YoklamaKayitProfileNavBar *@
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#">
+            <img src="~/img/msu_kho_brove.png" alt="" width="20" height="25">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Ana Sayfa
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Kayıt İşlemleri</a>
+                    <div class="dropdown-menu bg-primary" data-bs-theme="light">
+                        <a class="dropdown-item" asp-action="Index" asp-controller="YoklamaKayit" asp-area="YoklamaKayitArea">Yoklama Kayıt</a>
+                        @* <a class="dropdown-item" asp-action="Index" asp-controller="Birimler" asp-area="YonetimArea">Birim Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Bolumler" asp-area="YonetimArea">Bölüm Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Role" asp-area="YonetimArea">Rol Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="User" asp-area="YonetimArea">Kullanıcı Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Personel" asp-area="YonetimArea">Personel Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="EOYillari" asp-area="YonetimArea">Eğitim-Öğretim Yılı Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Gorevler" asp-area="YonetimArea">Görev Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Kisimlar" asp-area="YonetimArea">Kısım Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Ogrenci" asp-area="YonetimArea">Öğrenci Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Rutbeler" asp-area="YonetimArea">Rütbe Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Unvanlar" asp-area="YonetimArea">Unvan Tanımlama</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Uyruklar" asp-area="YonetimArea">Uyruk Tanımlama</a> *@
+
+                    </div>
+
+                </li>
+
+
+                @* <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Diğer İşlemler</a>
+                    <div class="dropdown-menu bg-primary" data-bs-theme="light">
+                        <a class="dropdown-item" asp-action="Index" asp-controller="KisiselBilgi" asp-area="YonetimArea">Kişisel Bilgilerim</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="LisansProgramlari" asp-area="YonetimArea">Lisans Programları</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Dersler" asp-area="YonetimArea">Dersler</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="DersKitaplari" asp-area="YonetimArea">Ders Kitapları</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="DersProgrami" asp-area="YonetimArea">Ders Programı</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="SinavNotlari" asp-area="YonetimArea">Sınav Notları</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="AkademikDanismanlik" asp-area="YonetimArea">Akademik Danışmanlık</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="Devamsizlik" asp-area="YonetimArea">Ders Devamsızlıkları</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="SecmeliDers" asp-area="YonetimArea">Seçmeli Ders İşlemleri</a>
+                        <a class="dropdown-item" asp-action="Index" asp-controller="RdmRandevu" asp-area="YonetimArea">RDM Randevuları</a>
+
+
+                    </div> *@
+
+                </li>
+                <li class="nav-item"><a class="nav-link" style="color:lightblue" href="#">Mesajlarım</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" style="color:red">
+                        <i class="fa-solid fa-key"></i>&nbsp; @ViewBag.RoleName
+                    </a>
+                </li>
+                &nbsp;
+                <li class="nav-item">
+                    <a class="nav-link" style="color:darkturquoise">
+                        <i class="fa-solid fa-user"></i>&nbsp; @ViewBag.UserName
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" style="color:lawngreen" asp-action="Logout" asp-controller="Home" asp-route-returnUrl="/Home/Index">
+                        <i class="fa-solid fa-right-from-bracket"></i>&nbsp; Çıkış yap
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+

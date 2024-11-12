@@ -28,7 +28,8 @@
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <br />
                     <button type="submit" class="btn btn-primary">Ekle</button>
-
+                    @:&nbsp;&nbsp;
+                    @Html.ActionLink("Vazgeç", "Index", "Bolumler", new { area = "YonetimArea" }, new { @class = "btn btn-secondary" })
                 }
             </div>
         </div>

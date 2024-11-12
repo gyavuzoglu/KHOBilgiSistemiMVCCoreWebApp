@@ -33,6 +33,12 @@
            
             @await Html.PartialAsync("YoneticiProfileNavBar")
         }
+
+        @if (@ViewBag.RoleName == "Yoklama Kayıt")
+        {
+
+            @await Html.PartialAsync("YoklamaKayitProfileNavBar")
+        }
         //diğerleri de buraya yazılacak
     }
 

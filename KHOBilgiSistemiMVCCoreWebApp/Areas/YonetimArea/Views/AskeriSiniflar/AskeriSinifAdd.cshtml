@@ -18,6 +18,8 @@
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             <div class="mt-3">
                 <button type="submit" class="btn btn-primary">Kaydet</button>
+                &nbsp;&nbsp;
+                @Html.ActionLink("Vazgeç", "Index", "AskeriSiniflar", new { area = "YonetimArea" }, new { @class = "btn btn-secondary" })
             </div>
         </form>
     </div>

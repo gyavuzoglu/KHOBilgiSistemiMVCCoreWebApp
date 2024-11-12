@@ -185,7 +185,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -195,10 +195,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\AkademikDanismanArea\Controllers\" />
+    <Folder Include="Areas\AkademikDanismanArea\Data\" />
+    <Folder Include="Areas\AkademikDanismanArea\Models\" />
+    <Folder Include="Areas\AkademikDanismanArea\Views\" />
     <Folder Include="Areas\OgrenciArea\Controllers\" />
     <Folder Include="Areas\OgrenciArea\Data\" />
     <Folder Include="Areas\OgrenciArea\Models\" />
     <Folder Include="Areas\OgrenciArea\Views\" />
+    <Folder Include="Areas\YoklamaKayitArea\Controllers\" />
+    <Folder Include="Areas\YoklamaKayitArea\Data\" />
+    <Folder Include="Areas\YoklamaKayitArea\Models\" />
+    <Folder Include="Areas\YoklamaKayitArea\Views\" />
     <Folder Include="Areas\YonetimArea\Data\" />
   </ItemGroup>
 

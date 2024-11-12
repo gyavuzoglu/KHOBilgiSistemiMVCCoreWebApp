@@ -71,6 +71,14 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
                                     {
                                         return RedirectToAction("Index", "Yonetici");
                                     }
+                                    if (p.RoleID == "7")  //Akademik Danýþman rolü ise
+                                    {
+                                        return RedirectToAction("Index", "AkademikDanisman");
+                                    }
+                                    if (p.RoleID == "18")  //Yoklama Kayýt rolü ise
+                                    {
+                                        return RedirectToAction("Index", "YoklamaKayit");
+                                    }
 
                                     //Profile göre Menüsü ve Ýlk Ekraný gelecek
                                 }

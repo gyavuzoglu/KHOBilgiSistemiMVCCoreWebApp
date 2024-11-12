@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
 {
-    [Authorize(Roles = "Öğrenci")]
-    public class OgrenciController : Controller
+    [Authorize(Roles = "Yoklama Kayıt")]
+    public class YoklamaKayitController : Controller
     {
         private readonly SignInManager<AppUserTbl> _signInManager;
 
-        public OgrenciController(SignInManager<AppUserTbl> signInManager)
+        public YoklamaKayitController(SignInManager<AppUserTbl> signInManager)
         {
             _signInManager = signInManager;
         }
@@ -21,8 +21,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
             return View();
-
+          
         }
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

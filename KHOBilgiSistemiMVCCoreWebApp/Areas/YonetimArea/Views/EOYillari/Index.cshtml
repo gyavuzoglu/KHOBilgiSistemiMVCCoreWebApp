@@ -1,0 +1,95 @@
+﻿@using EntityLayer.Concrete
+@model List<EOYiliTbl>
+
+@{
+    ViewData["Title"] = "Eğitim-Öğretim Yılları Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="mb-3" style="max-width: 60rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <div class="col-lg">
+                <h3 class="text-primary">Eğitim-Öğretim Yılı Düzenleme</h3>
+            </div>
+            <br />
+
+            <div class="col-6 text-end">
+                <a href="@Url.Action("EOYiliAdd","EOYillari", new {area ="YonetimArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Yeni Eğitim-Öğretim Yılı Yarat</a>
+
+            </div>
+        </div>
+        <br />
+        <div style="width:70%;margin:auto;">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col" class="text-left" width="10%">Id</th>
+                        <th scope="col" class="text-left" width="80%">Eğt.-Öğt.Yılı</th>
+                        <th scope="col" class="text-center" width="5%">Düzenle</th>
+                        <th scope="col" class="text-center" width="5%">Sil</th>
+
+                    </tr>
+                </thead>
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-light">
+                            <td scope="row" class="text-left text-primary">@item.EOYiliID</td>
+                            <td scope="row" class="text-left text-primary">@item.EOYili</td>
+                            <td scope="row" class="text-center">
+                                <a href="@Url.Action("EOYiliGet","EOYillari", new {id = @item.EOYiliID, area ="YonetimArea"})">
+                                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                                </a>
+
+                            </td>
+                            <td scope="row" class="text-center">
+                                <a data-bs-toggle="modal" data-bs-target="#Sil_@item.EOYiliID">
+                                    <i class="fa-solid fa-trash text-primary"></i>
+                                </a>
+                                @* Modal Sil *@
+                                <div class="modal fade" id="Sil_@item.EOYiliID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="SilModalLongTitle">Eğitim-Öğretim Yılı Silme</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>Bu Eğitim-Öğretim yılını silmek istediğinize emin misiniz ? </h5>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                @Html.ActionLink("Sil", "EOYiliDelete", new { id = @item.EOYiliID, area = "YonetimArea" }, new { @class = "btn btn-danger" })
+                                                <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td class="text-center text-danger" colspan="4">Herhangi bir kayıt bulunamadı.</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
