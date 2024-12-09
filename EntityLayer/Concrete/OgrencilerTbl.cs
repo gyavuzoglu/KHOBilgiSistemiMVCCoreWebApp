@@ -11,7 +11,10 @@ namespace EntityLayer.Concrete
     public class OgrencilerTbl
     {
         [Key]
-        public long OgrenciTC { get; set; }
+        public long OgrenciID { get; set; }
+
+        [StringLength(11)]
+        public string? OgrenciTC { get; set; }
         public int YakaNo { get; set; }
         public int Tabur { get; set; }
         public int Boluk { get; set; }
@@ -50,6 +53,8 @@ namespace EntityLayer.Concrete
         public virtual UyrukTbl? UyrukTbl { get; set; }
         public virtual KisimlarTbl? KisimlarTbl { get; set; }
         public virtual BolumTbl? BolumTbl { get; set; }
+        public virtual OgrenciDegerlendirmeleriTbl? OgrenciDegerlendirmeleriTbl { get; set; }
+
 
     }
 }
