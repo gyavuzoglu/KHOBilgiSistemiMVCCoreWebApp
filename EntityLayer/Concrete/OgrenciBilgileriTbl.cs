@@ -13,8 +13,8 @@ namespace EntityLayer.Concrete
     public class OgrenciBilgileriTbl
     {
         [Key]
-
-        public long OgrenciID { get; set; }
+        public long OgrBilgiID { get; set; }
+        
 
         [StringLength(11)]
         [DisplayName("Öğrenci TC No")]
@@ -83,7 +83,9 @@ namespace EntityLayer.Concrete
         [DisplayName("Disiplin Puanı")]
         public float DisiplinPuani { get; set; } //decimal(4,1)
 
-        public virtual OgrencilerTbl? OgrencilerTbl { get; set; }
+        [ForeignKey("OgrencilerTbl")]
+        public long OgrenciID { get; set; }
+        public OgrencilerTbl OgrencilerTbl { get; set; }
 
     }
 }

@@ -28,6 +28,11 @@
             @await Html.PartialAsync("OgrenciProfileNavBar")
         }
 
+        @if (@ViewBag.RoleName == "Akademik Danışman")
+        {
+            @await Html.PartialAsync("AkademikDanismanProfileNavBar")
+        }
+
         @if (@ViewBag.RoleName == "Yönetici")
         {
            

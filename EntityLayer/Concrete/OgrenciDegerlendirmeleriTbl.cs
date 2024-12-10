@@ -24,7 +24,7 @@ namespace EntityLayer.Concrete
         [ForeignKey("OgrencilerTbl")]
 
         [DisplayName("Öğc.ID")]
-        public int OgrenciID { get; set; }
+        public long OgrenciID { get; set; }
 
         [ForeignKey("PersonelTbl")]
 

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 {
-    //[Authorize(Roles = "Akademik Danışman")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Akademik Danışman")]
+    //[AllowAnonymous]
 
     [Area("AkademikDanismanArea")]
     public class OgrenciDegerlendirmeleriController : Controller
@@ -29,6 +29,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 return View(); 
             }
             
+        public IActionResult OgrenciDegerlendirmeleriniGetir(int? EOYiliID, int? Donem, int? PerID)
+        {
+            var values = ogrencidegerlendirmemanager.GetList(EOYiliID, Donem, PerID);
+            return View(values);
+        }
         
     }
 }
