@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +50,14 @@ namespace BusinessLayer.Concrete
             return _ogrenciDegerlendirmeleriDAL.GetList(x=>x.EOYiliID==EOYiliID && x.Donem==Donem && x.PerID==PerID);
         }
 
+        public List<OgrenciDegerlendirmeleriTbl> DegerlendirmeFilter(Expression<Func<OgrenciDegerlendirmeleriTbl, bool>> filter)
+        {
+            using var c = new Context();
+            return c.Set<OgrenciDegerlendirmeleriTbl>().Where(filter).ToList();
+        }
+
         
+
 
     }
 }

@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,5 +49,11 @@ namespace BusinessLayer.Concrete
         {
             return _ogrencilerDAL.GetByID(id);
         }
+
+        //public List<OgrencilerTbl> OgrenciFilter(Expression<Func<OgrencilerTbl, bool>> filter)
+        //{
+        //    using var c = new Context();
+        //    return c.Set<OgrencilerTbl>().Where(filter).ToList();
+        //}
     }
 }

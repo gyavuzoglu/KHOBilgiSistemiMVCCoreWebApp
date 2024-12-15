@@ -43,5 +43,10 @@ namespace BusinessLayer.Concrete
         {
             _kisimDegerlendirmeleriDAL.Update(kisimDegerlendirmeleriTbl);
         }
+
+        public List<KisimDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID)
+        {
+            return _kisimDegerlendirmeleriDAL.GetList(x => x.EOYiliID == EOYiliID && x.Donem == Donem && x.PerID == PerID);
+        }
     }
 }

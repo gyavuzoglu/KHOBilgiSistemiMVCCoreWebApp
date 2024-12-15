@@ -31,6 +31,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<RutbeTbl> RutbeTbl { get; set; }
         public DbSet<UnvanTbl> UnvanTbl { get; set; }
         public DbSet<UyrukTbl> UyrukTbl { get; set; }
+        public DbSet<SiniflarTbl> SiniflarTbl { get; set; }
+        public DbSet<DonemlerTbl> DonemlerTbl { get; set; }
         public DbSet<AkademikDanismanlarTbl> AkademikDanismanlarTbl { get; set; }
         public DbSet<OgrenciDegerlendirmeleriTbl> OgrenciDegerlendirmeleriTbl { get; set; }
         public DbSet<OgrenciDegerlendirmeTurleriTbl> OgrenciDegerlendirmeTurleriTbl { get; set; }

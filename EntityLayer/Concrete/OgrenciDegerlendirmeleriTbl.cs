@@ -29,7 +29,7 @@ namespace EntityLayer.Concrete
         [ForeignKey("PersonelTbl")]
 
         [DisplayName("Per.ID")]
-        public int PerID { get; set; }
+        public long PerID { get; set; }
 
         [DisplayName("Değ.Tarihi")]
         public DateTime TarihSaat { get; set; }

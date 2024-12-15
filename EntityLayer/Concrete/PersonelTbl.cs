@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
     {
         [Key]
         [DisplayName("Per.ID")]
-        public int PerId { get; set; }
+        public long PerId { get; set; }
        
         [StringLength(11)]
         [DisplayName("Per.TC No")]

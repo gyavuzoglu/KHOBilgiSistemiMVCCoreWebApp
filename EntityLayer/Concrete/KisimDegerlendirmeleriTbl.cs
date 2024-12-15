@@ -21,7 +21,7 @@ namespace EntityLayer.Concrete
         public string? KisimAdi { get; set; }
 
         [DisplayName("Per.ID")]
-        public int PerID { get; set; }
+        public long PerID { get; set; }
 
         [DisplayName("Değ.Tarihi")]
         public DateTime TarihSaat { get; set; }
@@ -31,6 +31,9 @@ namespace EntityLayer.Concrete
 
         [DisplayName("Eğt.Öğt.Yılı ID")]
         public int EOYiliID { get; set; }
+
+        [DisplayName("Dönem")]
+        public int Donem { get; set; }
 
     }
 }

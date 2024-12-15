@@ -13,6 +13,7 @@ namespace BusinessLayer.Abstract
         void KisimDegerlendirmeDelete(KisimDegerlendirmeleriTbl kisimDegerlendirmeleriTbl);
         void KisimDegerlendirmeUpdate(KisimDegerlendirmeleriTbl kisimDegerlendirmeleriTbl);
         List<KisimDegerlendirmeleriTbl> GetListAll();
+        List<KisimDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID);
         KisimDegerlendirmeleriTbl GetByID(int id);
     }
 }
