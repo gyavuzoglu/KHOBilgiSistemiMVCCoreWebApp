@@ -1,0 +1,107 @@
+﻿@using EntityLayer.Concrete
+@model OgrenciDegerlendirmeleriTbl
+
+@{
+    ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-3" style="max-width: 70rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <div class="col-1">
+                <img src="@ViewBag.Fotograf" width="75" height="100" />
+                
+            </div>
+            <div class="col-7">
+                <h4 class="text-primary">Öğrenci Değerlendirme İşlemleri</h4>
+                <h5 class="text-primary">Değerlendirilen Öğrenci : @ViewBag.OgrenciAdi @ViewBag.OgrenciSoyadi</h5>
+                <h5 class="text-primary">Değerlendirilen Sınıf - Kısım : @ViewBag.Sinif / @ViewBag.KisimAdi</h5>
+                
+            </div>
+            <div class="col-2 text-end">
+                <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi, EOYiliID=ViewBag.EOYiliID, Donem=ViewBag.Donem, area ="AkademikDanismanArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
+
+            </div>
+            <div class="col-2 text-end">
+                <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=ViewBag.PerID, EOYiliID=ViewBag.EOYiliID, OgrenciID=ViewBag.OgrenciID, Donem=ViewBag.Donem, Fotograf=ViewBag.Fotograf, OgrenciAdi=ViewBag.OgrenciAdi,OgrenciSoyadi=ViewBag.OgrenciSoyadi, Sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi, area ="AkademikDanismanArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</a>
+
+            </div>
+
+            <div style="width:90%;margin:auto;">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col" class="text-left" width="10%">Sıra No</th>
+                            <th scope="col" class="text-left" width="20%">Değerlendirme ID</th>
+                            <th scope="col" class="text-left" width="15%">Tarih-Saat</th>
+                            <th scope="col" class="text-left" width="50%">Değerlendirme</th>
+                            <th scope="col" class="text-left" width="5%">Sil</th>
+                            
+                        </tr>
+                    </thead>
+                    @{
+                        int adet = 1;
+                    }
+                    @if(Enumerable.Count(ViewBag.OgrDegListe) > 0)
+                    {
+                        @foreach (var item in @ViewBag.OgrDegListe)
+                        {
+                            <tr class="table-light">
+                                <td scope="row" class="text-left text-primary">@adet</td>
+                                <td scope="row" class="text-left text-primary">@item.DegerlendirmeID</td>
+                                <td scope="row" class="text-left text-primary">@item.TarihSaat</td>
+                                <td scope="row" class="text-left text-primary">@item.Degerlendirme</td>
+                                
+                                <td scope="row" class="text-center">
+                                
+                                <a data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">
+                                    <i class="fa-solid fa-trash text-primary"></i>
+                                </a>
+                                @* Modal Sil *@
+                                <div class="modal fade" id="Sil_@item.DegerlendirmeID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="SilModalLongTitle">Değerlendirme Silme</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h5>Bu Değerlendirmeyi silmek istediğinize emin misiniz ? </h5>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                @Html.ActionLink("Sil", "OgrenciDegerlendirmeDelete", "OgrenciDegerlendirmeleri", new { id = @item.DegerlendirmeID, ogrenciId = @item.OgrenciID, Adi = @ViewBag.OgrenciAdi, Soyadi = @ViewBag.OgrenciSoyadi, Sinif = @ViewBag.Sinif, KisimAdi = @ViewBag.KisimAdi, EOYiliID = @ViewBag.EOYiliID, Donem = @ViewBag.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-danger" })
+                                                <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </td>
+                            </tr>
+
+                            adet++;
+
+                        }
+                    }
+                    else
+                    {
+                    <tr>
+                        <td class="text-center text-primary" colspan="5">Herhangi bir kayıt bulunamadı.</td>
+                    </tr>
+                    }
+                   
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

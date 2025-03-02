@@ -61,6 +61,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
                                 if (result.Succeeded)
                                 {
 
+                                    HttpContext.Session.SetString("PerTC", p.UserName);
                                     HttpContext.Session.SetString("UserName", user.Adi + " " + user.Soyadi);
                                     HttpContext.Session.SetString("RoleName", role.Name);
                                     if (p.RoleID=="1")  //Öðrenci rolü ise

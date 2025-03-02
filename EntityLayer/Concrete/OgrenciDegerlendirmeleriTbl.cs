@@ -14,7 +14,7 @@ namespace EntityLayer.Concrete
         [Key]
 
         [DisplayName("Değ.ID")]
-        public int DegerlendirmeID { get; set; }
+        public long DegerlendirmeID { get; set; }
 
         [ForeignKey("OgrenciDegerlendirmeTurleriTbl")]
 

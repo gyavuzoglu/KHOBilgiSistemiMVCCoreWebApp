@@ -1,0 +1,61 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+@model DegerlendirmeGirisClass
+
+@{
+    ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-3" style="max-width: 70rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <div class="col-1">
+                <img src="@Model.Fotograf" width="75" height="100" />
+
+            </div>
+            <div class="col-7">
+                <h4 class="text-primary">Öğrenci Değerlendirme İşlemleri</h4>
+                <h5 class="text-primary">Öğrenci : @Model.Adi @Model.Soyadi</h5>
+                <h5 class="text-primary">Sınıf - Kısım : @Model.Sinif / @Model.KisimAdi</h5>
+
+            </div>
+            <div class="col-2 text-end">
+                <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri",new {area ="AkademikDanismanArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
+
+            </div>
+            @* <div class="col-2 text-end">
+                <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=Model.PerID, EOYiliID=Model.EOYiliID, OgrenciId=Model.OgrenciId, Sinif=Model.Sinif, Donem=Model.Donem, area ="AkademikDanismanArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</a>
+
+            </div> *@
+            <br />
+            <div style="width:60%;margin:auto;">
+
+                @using (Html.BeginForm("OgcDegerlendirmeAdd", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYili, Donem = Model.Donem, OgrenciID = Model.OgrenciId, TarihSaat = DateTime.Now, Sinif=Model.Sinif, KisimAdi=Model.KisimAdi, Fotograf=Model.Fotograf }, FormMethod.Post))
+                {
+                    <div class="form-outline mb-4">
+                         <label>Değerlendirme Türü</label>
+                   
+                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "dropdown form-control", @id = "DegTurID" })
+                        
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <label>Değerlendirmeniz</label>
+
+                        @Html.TextAreaFor(x => x.Degerlendirme, 5, 80, new { @class = "form-control", @id = "Degerlendirme" })
+                    </div>
+                    <br />
+                    
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { sinif = Model.Sinif, kisimadi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
+                }
+                
+                
+               
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -18,6 +18,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Controllers
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
+
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
             return View();

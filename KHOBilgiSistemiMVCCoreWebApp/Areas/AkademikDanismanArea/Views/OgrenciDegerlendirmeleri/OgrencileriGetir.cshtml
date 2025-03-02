@@ -11,8 +11,8 @@
 
 <script>
     $(function () {
-        $('#DrpSiniflar').change(function () {
-            var Sinif = $('#DrpSiniflar').val();
+        $('#Sinif').change(function () {
+            var Sinif = $('#Sinif').val();
             $.ajax({
                 url: '@Url.Action("KisimGetir", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" })',
                 data: { p: Sinif },
@@ -20,9 +20,9 @@
                 dataType: "JSon",
                 success: function (data) {
                     console.log(data);
-                    $('#DrpKisimlar').empty();
+                    $('#KisimAdi').empty();
                     for (var i = 0; i < data.length; i++) {
-                        $('#DrpKisimlar').append($('<option/>').attr("value", data[i].value).text(data[i].text));
+                        $('#KisimAdi').append($('<option/>').attr("value", data[i].value).text(data[i].text));
 
                     }
                 }
@@ -52,23 +52,25 @@
                 {
                     <div class="form-outline mb-4">
                         <label>Eğitim-Öğretim Yılı</label>
-                        @Html.DropDownListFor(x => x.EOYiliID, new SelectList(ViewBag.EOYiliListe, "Value", "Text"), "Eğitim-Öğretim Yılı Seçiniz", new { @class = "form-control" })
+                        @* @Html.DropDownListFor(x => x.EOYiliID, new SelectList(ViewBag.EOYiliListe, "Value", "Text"), "Eğitim-Öğretim Yılı Seçiniz", new { @class = "form-control", @id = "EOYiliID"}) *@
+                        @Html.DropDownListFor(x => x.EOYiliID, Model.EOYiliListe, "Eğitim-Öğretim Yılı Seçiniz", new { @class = "dropdown form-control", @id = "EOYiliID" })
                     </div>
 
                     <div class="form-outline mb-4">
                         <label>Dönem</label>
-                        @Html.DropDownListFor(x => x.Donem, new SelectList(ViewBag.DonemListe, "Value", "Text"), "Dönem Seçiniz", new { @class = "form-control" })
+                        @* @Html.DropDownListFor(x => x.Donem, new SelectList(ViewBag.DonemListe, "Value", "Text"), "Dönem Seçiniz", new { @class = "form-control", @id = "Donem" }) *@
+                        @Html.DropDownListFor(x => x.Donem, Model.DonemlerListe, "Dönem Seçiniz", new { @class = "dropdown form-control", @id = "Donem" })
                     </div>
 
                     <div class="form-outline mb-4">
                         <label>Okuduğu Sınıf</label>
-                        @Html.DropDownListFor(x => x.Sinif, Model.SiniflarTbl, "Sınıf Seçiniz", new { @class = "dropdown form-control", @id = "DrpSiniflar" })
+                        @Html.DropDownListFor(x => x.Sinif, Model.SiniflarListe, "Sınıf Seçiniz", new { @class = "dropdown form-control", @id = "Sinif" })
                         
                     </div>
 
                     <div class="form-outline mb-4">
                         <label>Okuduğu Kısım</label>
-                        @Html.DropDownListFor(x => x.KisimAdi, Model.KisimlarTbl, "Kısım Seçiniz", new { @class = "dropdown form-control", @id = "DrpKisimlar" })
+                        @Html.DropDownListFor(x => x.KisimAdi, Model.KisimlarListe, "Kısım Seçiniz", new { @class = "dropdown form-control", @id = "KisimAdi" })
                     </div>
 
                     

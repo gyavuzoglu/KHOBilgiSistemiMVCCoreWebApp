@@ -5,12 +5,14 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
 {
     public class SinifKisimSecmeClass
     {
-        public IEnumerable<SelectListItem> SiniflarTbl { get; set; }
-        public IEnumerable<SelectListItem> KisimlarTbl { get; set; }
+        public IEnumerable<SelectListItem> SiniflarListe { get; set; }
+        public IEnumerable<SelectListItem> KisimlarListe { get; set; }
+        public IEnumerable<SelectListItem> EOYiliListe { get; set; }
+        public IEnumerable<SelectListItem> DonemlerListe { get; set; }
         public int Sinif { get; set; }
         public string KisimAdi { get; set; }
-        public string EOYiliID { get; set; }
-        public string Donem { get; set; }
+        public int EOYiliID { get; set; }
+        public int Donem { get; set; }
 
     }
 }

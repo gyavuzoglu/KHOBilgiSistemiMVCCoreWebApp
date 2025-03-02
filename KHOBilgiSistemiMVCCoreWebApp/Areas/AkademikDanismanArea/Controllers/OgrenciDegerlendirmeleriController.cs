@@ -9,6 +9,7 @@ using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDege
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 using System.Drawing;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
@@ -28,7 +29,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         EOYiliManager EOYilimng = new EOYiliManager(new EfEOYiliRepository());
         DonemlerManager donemmng = new DonemlerManager(new EfDonemlerRepository());
 
-        SinifKisimSecmeClass skc = new SinifKisimSecmeClass();
+        
 
 
         [HttpGet]
@@ -36,6 +37,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC= HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
@@ -44,14 +46,29 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         }
 
         [HttpGet]
-        public IActionResult OgrencileriListele()
+        public IActionResult OgrencileriListele(KisimOgrenciListeClass model)
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
-            return View();
+            var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == null && x.KisimAdi == null).ToList();
+            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+
+            var modelOgrenciListe = new KisimOgrenciListeClass
+            {
+                SelectedSinif = model.SelectedSinif,
+                SelectedDonem = model.SelectedDonem,
+                SelectedEOYili = model.SelectedEOYili,
+                SelectedKisimAdi = model.SelectedKisimAdi,
+                OgrencilerListe = kisimogrencilistesi,
+                PerID = PerID,
+
+            };
+
+            return View(modelOgrenciListe);
 
         }
 
@@ -82,124 +99,137 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         [HttpGet]
         public IActionResult OgrencileriGetir()
         {
+            SinifKisimSecmeClass skc = new SinifKisimSecmeClass();
+
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
-            skc.SiniflarTbl = new SelectList(db.SiniflarTbl, "Sinif", "SinifAdi");
-            skc.KisimlarTbl = new SelectList(db.KisimlarTbl, "KisimAdi", "KisimAdi");
+            skc.SiniflarListe = new SelectList(db.SiniflarTbl, "Sinif", "SinifAdi");
+            skc.KisimlarListe = new SelectList(db.KisimlarTbl, "KisimAdi", "KisimAdi");
+            skc.EOYiliListe = new SelectList(db.EOYiliTbl, "EOYiliID", "EOYili");
+            skc.DonemlerListe = new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
 
-            IEnumerable<SelectListItem> EOYiliList =
-                db.EOYiliTbl.Select(i => new SelectListItem
-                {
-                    Text = i.EOYili,
-                    Value = i.EOYiliID.ToString()
-                });
-            ViewBag.EOYiliListe = EOYiliList;
 
-            IEnumerable<SelectListItem> DonemList =
-                db.DonemlerTbl.Select(i => new SelectListItem
-                {
-                    Text = i.DonemAdi,
-                    Value = i.Donem.ToString()
-                });
-            ViewBag.DonemListe = DonemList;
+            //IEnumerable<SelectListItem> EOYiliList =
+            //    db.EOYiliTbl.Select(i => new SelectListItem
+            //    {
+            //        Text = i.EOYili,
+            //        Value = i.EOYiliID.ToString()
+            //    });
+            //ViewBag.EOYiliListe = EOYiliList;
+
+            //IEnumerable<SelectListItem> DonemList =
+            //    db.DonemlerTbl.Select(i => new SelectListItem
+            //    {
+            //        Text = i.DonemAdi,
+            //        Value = i.Donem.ToString()
+            //    });
+            //ViewBag.DonemListe = DonemList;
 
             return View(skc);
         }
 
         [HttpPost]
-        public IActionResult OgrencileriGetir(int sinif, string KisimAdi, int EOYiliID, int Donem)
+        public IActionResult OgrencileriGetir(SinifKisimSecmeClass model)
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
             var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == null && x.KisimAdi == null).ToList();
-            if (sinif != null && !string.IsNullOrEmpty(KisimAdi))
+            if (model.Sinif != null && !string.IsNullOrEmpty(model.KisimAdi))
             {
-                kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == sinif && x.KisimAdi == KisimAdi).ToList();
-                ViewBag.sinif = sinif;
-                ViewBag.KisimAdi = KisimAdi;
-                ViewBag.EOYiliID = EOYiliID;
-                ViewBag.EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == EOYiliID).Select(x => x.EOYili).FirstOrDefault();
-                ViewBag.Donem = Donem;
-                ViewBag.DonemAdi = db.DonemlerTbl.Where(x => x.Donem == Donem).Select(x => x.DonemAdi).FirstOrDefault();
-
-                return View("OgrencileriListele", kisimogrencilistesi);
+                kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi).ToList();
+                var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+                var modelKisimOgrenciListe=new KisimOgrenciListeClass
+                { 
+                    SelectedSinif = model.Sinif,
+                    SelectedDonem = model.Donem,
+                    SelectedEOYili = model.EOYiliID,
+                    SelectedKisimAdi = model.KisimAdi,
+                    OgrencilerListe = kisimogrencilistesi,
+                    PerID=PerID,
+                
+                };
+                return View("OgrencileriListele", modelKisimOgrenciListe);
             }
-            else return View("OgrencileriListele", kisimogrencilistesi);
+            else return View();
         }
 
 
         [HttpGet]
-        public IActionResult OgrenciDegerlendirmeAdd(long ogrenciId, string Adi, string Soyadi, int sinif, string KisimAdi, int EOYiliID, int Donem)
+        public IActionResult OgcDegerlendirmeAdd(DegerlendirmeGirisClass model)
         {
-
+            
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
-
-            ViewBag.OgrenciId = ogrenciId;
-            ViewBag.OgrenciAdi = Adi;
-            ViewBag.OgrenciSoyadi = Soyadi;
-            ViewBag.Sinif = sinif;
-            ViewBag.KisimAdi = KisimAdi;
-            ViewBag.EOYiliID = EOYiliID;
-            ViewBag.EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == EOYiliID).Select(x => x.EOYili);
-            ViewBag.Donem = Donem;
-            ViewBag.DonemAdi = db.DonemlerTbl.Where(x => x.Donem == Donem).Select(x => x.DonemAdi);
-
-            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == UserName).Select(x => x.PerId).FirstOrDefault();
-            ViewBag.PerID = PerID;
-
-            var OgrenciDegerlendirmeListe = db.OgrenciDegerlendirmeleriTbl.Where(x => x.PerID == PerID && x.OgrenciID == ogrenciId && x.EOYiliID == EOYiliID && x.Donem == Donem);
-            return View();
+            
+            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+            var DegerlendirmeGirisModel = new DegerlendirmeGirisClass
+            {
+                PerID = PerID,
+                OgrenciId = model.OgrenciId,
+                Adi = model.Adi,
+                Soyadi = model.Soyadi,
+                Sinif = model.Sinif,
+                KisimAdi = model.KisimAdi,
+                EOYili = model.EOYili,
+                EOYiliID = db.EOYiliTbl.Where(x => x.EOYili == model.EOYili).Select(x => x.EOYiliID).FirstOrDefault(),
+                Donem = model.Donem,
+                OgrenciDegerlendirmeleriListe= db.OgrenciDegerlendirmeleriTbl.Where(x => x.PerID == model.PerID && x.OgrenciID == model.OgrenciId && x.EOYiliID == model.EOYiliID && x.Donem == model.Donem).ToList(),
+                OgrenciDegerlendirmeTurleriListe= new SelectList(db.OgrenciDegerlendirmeTurleriTbl, "DegTurID", "TurAdi"),
+            };
+            return View(DegerlendirmeGirisModel);
 
         }
 
 
         [HttpPost]
-        public IActionResult OgrenciDegerlendirmeAdd(OgrenciDegerlendirmeKayit p, int Sinif, string KisimAdi, int EOYiliID, int Donem)
+        public IActionResult OgcDegerlendirmeAdd(OgcDegerlendirmeKayitClass model)
         {
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
 
+            var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi).ToList();
+
+            var kisimogrenciclass = new KisimOgrenciListeClass
+            {
+                OgrencilerListe = kisimogrencilistesi,
+                SelectedEOYili = model.EOYiliID,
+                SelectedSinif = model.Sinif,
+                SelectedDonem = model.Donem,
+                SelectedKisimAdi = model.KisimAdi
+            };
+
             if (ModelState.IsValid)
             {
-                OgrenciDegerlendirmeleriTbl OgrenciDegerlendirme = new OgrenciDegerlendirmeleriTbl()
+                OgrenciDegerlendirmeleriTbl YapilanDegerlendirme = new OgrenciDegerlendirmeleriTbl()
                 {
-                    PerID = p.PerID,
-                    OgrenciID = p.OgrenciID,
-                    DegTurID = p.DegTurID,
+                    PerID = model.PerID,
+                    OgrenciID = model.OgrenciID,
+                    DegTurID = model.DegTurID,
                     TarihSaat = DateTime.Now,
-                    Degerlendirme = p.Degerlendirme,
-                    EOYiliID = p.EOYiliID,
-                    Donem = p.Donem,
+                    Degerlendirme = model.Degerlendirme,
+                    EOYiliID = model.EOYiliID,
+                    Donem = model.Donem,
                 };
 
-                ogrencidegerlendirmemanager.OgrenciDegerlendirmeAdd(OgrenciDegerlendirme);
-
-                var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == null && x.KisimAdi == null).ToList();
-
-                kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == Sinif && x.KisimAdi == KisimAdi).ToList();
-                ViewBag.sinif = Sinif;
-                ViewBag.KisimAdi = KisimAdi;
-                ViewBag.EOYiliID = EOYiliID;
-                ViewBag.EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == EOYiliID).Select(x => x.EOYili).FirstOrDefault();
-                ViewBag.Donem = Donem;
-                ViewBag.DonemAdi = db.DonemlerTbl.Where(x => x.Donem == Donem).Select(x => x.DonemAdi).FirstOrDefault();
-
-                return View("OgrencileriListele", kisimogrencilistesi);
+                ogrencidegerlendirmemanager.OgrenciDegerlendirmeAdd(YapilanDegerlendirme);               
 
             }
+            
+            return View("OgrencileriListele", kisimogrenciclass);
 
-            return View();
         }
 
         public IActionResult OgrenciDegerlendirmeDelete(int id)
