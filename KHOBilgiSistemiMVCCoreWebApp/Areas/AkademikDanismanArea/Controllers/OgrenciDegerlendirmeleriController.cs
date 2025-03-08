@@ -96,6 +96,22 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             return View(values);
         }
 
+        public IActionResult OgrenciDegerlendirmeListele() 
+        {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
+            ViewBag.EOYiliList= new SelectList(db.EOYiliTbl, "EOYiliID", "EOYili");
+            ViewBag.DonemList= new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
+            ViewBag.SinifList= new SelectList(db.SiniflarTbl, "Sinif", "SinifAdi");
+            ViewBag.KisimList= new SelectList(db.KisimlarTbl, "KisimAdi", "KisimAdi");
+
+
+            return View(); 
+        }
+
         [HttpGet]
         public IActionResult OgrencileriGetir()
         {
@@ -110,7 +126,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             skc.KisimlarListe = new SelectList(db.KisimlarTbl, "KisimAdi", "KisimAdi");
             skc.EOYiliListe = new SelectList(db.EOYiliTbl, "EOYiliID", "EOYili");
             skc.DonemlerListe = new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
-
+           
 
             //IEnumerable<SelectListItem> EOYiliList =
             //    db.EOYiliTbl.Select(i => new SelectListItem
@@ -139,6 +155,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
+            var EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == model.EOYiliID).Select(x=>x.EOYili).FirstOrDefault();
+            ViewBag.EOYili = EOYili;
 
             var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == null && x.KisimAdi == null).ToList();
             if (model.Sinif != null && !string.IsNullOrEmpty(model.KisimAdi))
@@ -183,6 +201,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYili = model.EOYili,
                 EOYiliID = db.EOYiliTbl.Where(x => x.EOYili == model.EOYili).Select(x => x.EOYiliID).FirstOrDefault(),
                 Donem = model.Donem,
+                Fotograf = model.Fotograf,
                 OgrenciDegerlendirmeleriListe= db.OgrenciDegerlendirmeleriTbl.Where(x => x.PerID == model.PerID && x.OgrenciID == model.OgrenciId && x.EOYiliID == model.EOYiliID && x.Donem == model.Donem).ToList(),
                 OgrenciDegerlendirmeTurleriListe= new SelectList(db.OgrenciDegerlendirmeTurleriTbl, "DegTurID", "TurAdi"),
             };
@@ -201,15 +220,20 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.UserName = UserName;
 
             var kisimogrencilistesi = db.OgrencilerTbl.Where(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi).ToList();
+            var EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == model.EOYiliID).Select(x => x.EOYili).FirstOrDefault();
+            ViewBag.EOYili = EOYili;
 
             var kisimogrenciclass = new KisimOgrenciListeClass
             {
-                OgrencilerListe = kisimogrencilistesi,
-                SelectedEOYili = model.EOYiliID,
                 SelectedSinif = model.Sinif,
                 SelectedDonem = model.Donem,
-                SelectedKisimAdi = model.KisimAdi
+                SelectedEOYili = model.EOYiliID,
+                SelectedKisimAdi = model.KisimAdi,
+                OgrencilerListe = kisimogrencilistesi,
+                PerID = model.PerID,
+
             };
+          
 
             if (ModelState.IsValid)
             {

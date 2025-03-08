@@ -11,24 +11,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
+        <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" asp-action="Index" asp-controller="AkademikDanisman" asp-area="Home">
                         Ana Sayfa
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Değerlendirme İşlemleri</a>
-                    <div class="dropdown-menu bg-primary" data-bs-theme="light">
-                        <a class="dropdown-item" asp-action="Index" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Öğrenci Değerlendirme İşlemleri</a>
-                        <a class="dropdown-item" asp-action="OgcDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Bir Öğrenci Hakkında Yaptığım Değerlendirmeleri Listeleme</a>
-                        <a class="dropdown-item" asp-action="OgcDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Yaptığım Tüm Öğrenci Değerlendirmelerimi Listeleme</a>
-                        <a class="dropdown-item" asp-action="KisimDegIndex" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Kısım Değerlendirme İşlemleri</a>
-                        <a class="dropdown-item" asp-action="KisimDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Bir Kısım Hakkında Yaptığım Değerlendirmeleri Listeleme</a>
-                        <a class="dropdown-item" asp-action="KisimDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Yaptığım Tüm Kısım Değerlendirmelerimi Listeleme</a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Değerlendirme İşlemleri</a>
+                    <div class="dropdown-menu">
+                        
+                        <a class="dropdown-item" asp-action="OgrencileriGetir" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Öğrenciye Değerlendirme Yaz</a>
+                        <a class="dropdown-item" asp-action="OgcDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Öğrenci Değerlendirmelerimi Listele</a>
+                        <a class="dropdown-item" asp-action="KisimDegIndex" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Kısma Değerlendirme Yaz</a>
+                        <a class="dropdown-item" asp-action="KisimDegerlendirmeListele" asp-controller="OgrenciDegerlendirmeleri" asp-area="AkademikDanismanArea">Kısım Değerlendirmelerimi Listele</a>                  
                     </div>
 
                 </li>
@@ -36,12 +35,12 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Diğer İşlemler</a>
-                    <div class="dropdown-menu bg-primary" data-bs-theme="light">
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" asp-action="Index" asp-controller="KisiselBilgi" asp-area="AkademikDanismanArea">Kişisel Bilgilerim</a>
                     </div>
 
                 </li>
-                <li class="nav-item"><a class="nav-link" style="color:lightblue" href="#">Mesajlarım</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:coral" href="#">Mesajlarım</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
