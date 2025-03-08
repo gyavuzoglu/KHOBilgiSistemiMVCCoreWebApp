@@ -51,19 +51,19 @@
 
                 {
                     <div class="form-outline mb-2">
-                        @Html.DropDownListFor(x => x.EOYiliID, Model.EOYiliListe, "Eğitim-Öğretim Yılı Seçiniz", new { @class = "dropdown form-control", @id = "EOYiliID" })
+                        @Html.DropDownListFor(x => x.EOYiliID, Model.EOYiliListe, "Eğitim-Öğretim Yılı Seçiniz", new { @class = "form-control form-select", @id = "EOYiliID" })
                     </div>
 
                     <div class="form-outline mb-2">
-                        @Html.DropDownListFor(x => x.Donem, Model.DonemlerListe, "Dönem Seçiniz", new { @class = "dropdown form-control", @id = "Donem" })
+                        @Html.DropDownListFor(x => x.Donem, Model.DonemlerListe, "Dönem Seçiniz", new { @class = "form-control form-select", @id = "Donem" })
                     </div>
 
                     <div class="form-outline mb-2">
-                        @Html.DropDownListFor(x => x.Sinif, Model.SiniflarListe, "Sınıf Seçiniz", new { @class = "dropdown form-control", @id = "Sinif" })
+                        @Html.DropDownListFor(x => x.Sinif, Model.SiniflarListe, "Sınıf Seçiniz", new { @class = "form-control form-select", @id = "Sinif" })
                     </div>
 
                     <div class="form-outline mb-2">
-                        @Html.DropDownListFor(x => x.KisimAdi, Model.KisimlarListe, "Kısım Seçiniz", new { @class = "dropdown form-control", @id = "KisimAdi" })
+                        @Html.DropDownListFor(x => x.KisimAdi, Model.KisimlarListe, "Kısım Seçiniz", new { @class = "form-control form-select", @id = "KisimAdi" })
                     </div>
 
                     <br />
