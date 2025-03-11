@@ -5,11 +5,22 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
 {
     public class KisimOgrenciListeClass
     {
-        public List<OgrencilerTbl> OgrencilerListe { get; set; }
-        public int SelectedSinif { get; set; }
-        public int SelectedEOYili { get; set; }
-        public int SelectedDonem { get; set; }
-        public string SelectedKisimAdi { get; set; }
+        //public List<OgrencilerTbl> OgrencilerListe { get; set; }
+        public long? OgrenciID { get; set; }
+        public int? YakaNo { get; set; }
+        public string? Adi{ get; set; }
+        public string? Soyadi{ get; set; }
+        public string? FotografAdresi{ get; set; }
+        public int Sinif { get; set; }
+        public int EOYili { get; set; }
+        public int Donem { get; set; }
+        public string? KisimAdi { get; set; }
         public long PerID { get; set; }
+        public int? OgrToplamDegAdedi { get; set; }
+        public int? OgrOgretmeninDegAdedi { get; set; }
+
+
+
+
     }
 }

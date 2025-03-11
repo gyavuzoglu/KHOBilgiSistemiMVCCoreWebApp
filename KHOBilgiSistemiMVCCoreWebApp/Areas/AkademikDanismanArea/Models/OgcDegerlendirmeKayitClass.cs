@@ -11,7 +11,7 @@
         public DateTime TarihSaat { get; set; }
         public string? Degerlendirme { get; set; }
         public int Sinif { get; set; }
-        public string KisimAdi { get; set; }
+        public string? KisimAdi { get; set; }
         
         
     }

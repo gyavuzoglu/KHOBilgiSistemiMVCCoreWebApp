@@ -1,0 +1,10 @@
+﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+{
+    public class ListelemeSartlari
+    {
+        public int EOYiliID { get; set; }
+        public int Sinif { get; set; }
+        public string? KisimAdi { get; set; }
+        public int Donem { get; set; }
+    }
+}
