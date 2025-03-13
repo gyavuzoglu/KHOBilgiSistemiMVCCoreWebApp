@@ -30,24 +30,18 @@
         });
     });
 </script>
+<br/>
+<br/>
+<br/>
 
-<div class="mb-3" style="max-width: 70rem;margin:auto;">
-    <div class="col-12">
-        </br>
-        <div class="row">
+<div class="card border-primary mb-3" style="max-width: 40rem;margin:auto;">
 
-            <div class="col-12" text-align="center">
-
-                <h3 class="text-primary">Öğrenci Değerlendirme Yazma</h3>
-
-            </div>
-
-        </div>
-        </br>
-        <div class="row">
-            <div class="col-md-6">
-
-                @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { sinif = Model.Sinif, kisimadi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem }, FormMethod.Post))
+    <div class="card-header"><h4>Öğrenci Değerlendirme Yazma </h4></div>
+           
+    <div class="card-body">
+    
+          
+                @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem }, FormMethod.Post))
 
                 {
                     <div class="form-outline mb-2">
@@ -69,8 +63,7 @@
                     <br />
                     <button type="submit" class="btn btn-primary">Öğrencileri Getir</button>
                 }
-            </div>
-        </div>
+            
     </div>
 
 </div>

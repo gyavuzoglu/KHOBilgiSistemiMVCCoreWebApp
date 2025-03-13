@@ -12,12 +12,12 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
         public string? Soyadi{ get; set; }
         public string? FotografAdresi{ get; set; }
         public int Sinif { get; set; }
-        public int EOYili { get; set; }
+        public int EOYiliID { get; set; }
         public int Donem { get; set; }
         public string? KisimAdi { get; set; }
         public long PerID { get; set; }
-        public int? OgrToplamDegAdedi { get; set; }
-        public int? OgrOgretmeninDegAdedi { get; set; }
+        public int OgrToplamDegAdedi { get; set; }
+        public int OgrOgretmeninDegAdedi { get; set; }
 
 
 

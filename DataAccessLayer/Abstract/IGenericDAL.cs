@@ -13,7 +13,7 @@ namespace DataAccessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetListAll();
-        T? GetByID(int id);
+        T? GetByID(long id);
         List<T> GetList(Expression<Func<T, bool>> filter);
 
         //Yeni metodları buraya tanımlayacağız. Diğer Dal lar buradan alacak.

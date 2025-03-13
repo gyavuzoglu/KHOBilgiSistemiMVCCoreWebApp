@@ -16,7 +16,7 @@ namespace BusinessLayer.Abstract
         List<OgrenciDegerlendirmeleriTbl> GetListAll();
         List<OgrenciDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID);
         List<OgrenciDegerlendirmeleriTbl> DegerlendirmeFilter(Expression<Func<OgrenciDegerlendirmeleriTbl, bool>> filter);
-        OgrenciDegerlendirmeleriTbl GetByID(int id);
+        OgrenciDegerlendirmeleriTbl GetByID(long id);
         
     }
 }

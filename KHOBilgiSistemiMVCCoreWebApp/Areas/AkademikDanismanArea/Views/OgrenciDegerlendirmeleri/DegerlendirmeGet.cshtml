@@ -1,10 +1,12 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
-@model DegerlendirmeGirisClass
+@model DegerlendirmeGetClass
 
 @{
-    ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
+    ViewData["Title"] = "Değerlendirme Güncelleme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <br />
 <br />
 <br />
@@ -13,14 +15,14 @@
     <div class="card-header col-md-12">
         <div class="row pt-2">
             <div class="col-md-9">
-                <h4 class="text-primary">Öğrenci Değerlendirme Ekleme</h4>
+                <h4 class="text-primary">Öğrenci Değerlendirme Güncelleme</h4>
                 <h5 class="text-primary">Öğrenci : @Model.Adi @Model.Soyadi</h5>
                 <h5 class="text-primary">Sınıf - Kısım - Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo</h5>
             </div>
             <div class="col-md-3">
                 <div class="d-grid gap-2">
                     <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri",new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
-                                       
+
                     @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem }, FormMethod.Post))
                     {
 
@@ -36,16 +38,16 @@
         <div class="row pt-2">
             <div class="col-2">
                 <img src="@Model.Fotograf" width="200" height="240" />
-                
+
             </div>
-            
+
             <div class="col-10" style="max-width: 70rem;margin:auto;">
 
 
-                @using (Html.BeginForm("OgcDegerlendirmeAdd", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciId, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.Fotograf }, FormMethod.Post))
+                @using (Html.BeginForm("DegerlendirmeUpdate", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciId, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.Fotograf }, FormMethod.Post))
                 {
                     <div class="form-outline mb-4">
-                        @* <label>Değerlendirme Türü</label> *@
+                        
 
                         @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "dropdown form-control", @id = "DegTurID" })
 
@@ -64,5 +66,3 @@
             </div>
         </div>
     </div>
-      
-</div>

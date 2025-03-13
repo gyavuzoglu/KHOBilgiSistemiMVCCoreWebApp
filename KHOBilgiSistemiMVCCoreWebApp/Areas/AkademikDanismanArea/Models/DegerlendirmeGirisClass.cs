@@ -9,6 +9,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
         public long OgrenciId { get; set; }
         public string Adi { get; set; }
         public string Soyadi { get; set; }
+        public int YakaNo { get; set; }
         public int Sinif { get; set; }
         public string KisimAdi { get; set; }
         public int EOYiliID { get; set; }

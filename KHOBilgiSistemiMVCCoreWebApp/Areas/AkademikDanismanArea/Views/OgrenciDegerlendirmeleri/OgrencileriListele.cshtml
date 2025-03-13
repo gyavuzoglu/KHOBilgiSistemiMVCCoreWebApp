@@ -9,88 +9,104 @@
 <div class="mb-3" style="max-width: 80rem;margin:auto;">
     <div class="col-md-12">
         <div class="row pt-4">
-            <h3 class="text-primary text-center">Öğrenci Değerlendirme İşlemleri</h4>
-            <div class="col-9">
-                
-                <h5 class="text-primary">Eğitim-Öğretim Yılı : @ViewBag.EOYili </h5>
-                <h5 class="text-primary">Dönem : @ViewBag.DonemAdi</h5>
+            <h3 class="text-primary text-center">
+                @ViewBag.KisimAdi Kısım Öğrenci Listesi</h4>
+                <div class="col-9">
 
-            </div>
-            <div class="col-3 text-end">
-                <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
+                    <h5 class="text-primary">Eğitim-Öğretim Yılı : @ViewBag.EOYili </h5>
+                    <h5 class="text-primary">Dönem : @ViewBag.DonemAdi</h5>
 
-            </div>
-          
-            <div style="margin:auto;">
-                <table class="table table-hover table-sm">
-                    <thead>
-                        <tr class="table-primary">
-                            <th scope="col" class="text-left" width="8%">Sıra No</th>
-                            <th scope="col" class="text-left" width="8%">Sınıf</th>
-                            <th scope="col" class="text-left" width="8%">Kısım</th>
-                            <th scope="col" class="text-left" width="10%">Yaka No</th>
-                            <th scope="col" class="text-left" width="15%">Adı</th>
-                            <th scope="col" class="text-left" width="15%">Soyadı</th>
-                            <th scope="col" class="text-left" width="10%">Fotoğraf</th>
-                            <th scope="col" class="text-center" width="7%">Toplam Değerlendirme</th>
-                            <th scope="col" class="text-center" width="8%">Sizin Değerlendirmeniz</th>
-                            <th scope="col" class="text-center" width="11%">İşlem</th>
-                        
+                </div>
+                <div class="col-3 text-end">
+                    <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
 
+                </div>
 
-                        </tr>
-                    </thead>
-                    @{
-                        int adet = 1;
-                    }
-                    @if (Model.Count > 0)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr class="table-light">
-                                <td scope="row" class="text-left text-primary align-middle">@adet</td>
-                                <td scope="row" class="text-left text-primary align-middle">@item.Sinif</td>
-                                <td scope="row" class="text-left text-primary align-middle">@item.KisimAdi</td>
-                                <td scope="row" class="text-left text-primary align-middle">@item.YakaNo</td>
-                                <td scope="row" class="text-left text-primary align-middle">@item.Adi</td>
-                                <td scope="row" class="text-left text-primary align-middle">@item.Soyadi</td>
-                                <td scope="row" class="text-left text-primary align-middle">
-                                    <img src="@item.FotografAdresi" width="60" height="80" />
-                                </td>
+                <div style="margin:auto;">
+                    <table class="table table-hover table-sm">
+                        <thead class="pt-4">
+                            <tr class="table-primary">
+                                <th scope="col" class="text-left align-middle" width="8%">Sıra No</th>
+                                <th scope="col" class="text-left align-middle" width="8%">Sınıf</th>
+                                <th scope="col" class="text-left align-middle" width="8%">Kısım</th>
+                                <th scope="col" class="text-left align-middle" width="10%">Yaka No</th>
+                                <th scope="col" class="text-left align-middle" width="15%">Adı</th>
+                                <th scope="col" class="text-left align-middle" width="15%">Soyadı</th>
+                                <th scope="col" class="text-left align-middle" width="10%">Fotoğraf</th>
+                                <th scope="col" class="text-center align-middle" width="15%">Değerlendirme Durumu</th>
+                                <th scope="col" class="text-center align-middle" width="11%">İşlem</th>
 
-                                <td scope="row" class="text-center text-primary align-middle">@item.OgrToplamDegAdedi</td>
-                                <td scope="row" class="text-center text-primary align-middle">@item.OgrOgretmeninDegAdedi</td>
-                                
-                                <td scope="row" class="text-center align-middle">
-                                    <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, Adi=item.Adi, Soyadi=item.Soyadi, Sinif=item.Sinif, KisimAdi=item.KisimAdi, EOYili=item.EOYili, Donem=item.Donem, Fotograf=item.FotografAdresi, area ="AkademikDanismanArea"})">
-
-                                        <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
-                                    </a>
-                                 &nbsp;
-                                 &nbsp;
-                                    <a href="@Url.Action("OgrenciDegerlendirmeList","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, Adi=item.Adi, Soyadi=item.Soyadi, Sinif=item.Sinif, KisimAdi=item.KisimAdi, EOYili=item.EOYili, Donem=item.Donem, Fotograf=item.FotografAdresi, area ="AkademikDanismanArea"})">
-
-                                        <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
-                                    </a>
-                                    @* style="color:#FF0000;" , *@
-                                </td>
-                                
                             </tr>
-                            
-                            adet++;
-                            
+                        </thead>
+                        @{
+                            int adet = 1;
                         }
-                    }
 
-                    else
-                    {
-                        <tr>
-                            <td class="text-center text-danger" colspan="7">Herhangi bir kayıt bulunamadı.</td>
-                        </tr>
-                    }
+                        @if (Model.Count > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
 
-                </table>
-            </div>
+                                int mindeger = 0;
+                                int maxdeger = 1;
+                                if (item.OgrToplamDegAdedi >= 0) maxdeger = @item.OgrToplamDegAdedi;
+
+                                <tr class="table-light">
+                                    <td scope="row" class="text-left text-primary align-middle">@adet</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.Sinif</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.KisimAdi</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.YakaNo</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.Adi</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.Soyadi</td>
+                                    <td scope="row" class="text-left text-primary align-middle">
+                                        <img src="@item.FotografAdresi" width="60" height="80" />
+                                    </td>
+                                    @{
+                                        double oran = ((double)(item.OgrOgretmeninDegAdedi - mindeger) / (maxdeger - mindeger) * 100);
+                                        double yuzde = Math.Round(oran);
+                                        if (yuzde < 0) { yuzde = 0; }
+                                        if (yuzde > 100) { yuzde = 100; }
+                                    }
+                                    <td scope="row" class="text-center text-primary align-middle">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width:@yuzde%;" aria-valuenow="@yuzde" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        @item.OgrOgretmeninDegAdedi  / @item.OgrToplamDegAdedi
+
+                                    </td>
+                                    @* <td scope="row" class="text-center text-primary align-middle">@item.OgrOgretmeninDegAdedi</td> *@
+
+                                    <td scope="row" class="text-center align-middle">
+                                        <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, Adi=item.Adi, Soyadi=item.Soyadi, YakaNo=item.YakaNo, Sinif=item.Sinif, KisimAdi=item.KisimAdi, EOYiliID=item.EOYiliID, Donem=item.Donem, Fotograf=item.FotografAdresi, area ="AkademikDanismanArea"})">
+
+                                            <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
+                                        </a>
+                                        &nbsp;
+                                        &nbsp;
+                                        <a href="@Url.Action("OgrenciDegerlendirmeListeleme","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, EOYiliID=item.EOYiliID, Donem=item.Donem, Sinif=item.Sinif, KisimAdi=item.KisimAdi, OgrAdi=item.Adi, OgrSoyadi=item.Soyadi, FotografAdresi=item.FotografAdresi, area ="AkademikDanismanArea"})">
+
+                                            <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
+                                        </a>
+                                        @* style="color:#FF0000;" , *@
+                                    </td>
+
+                                </tr>
+
+                                adet++;
+
+                            }
+                        }
+
+                        else
+                        {
+                            <tr>
+                                <td class="text-center text-danger" colspan="7">Herhangi bir kayıt bulunamadı.</td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
 
         </div>
     </div>

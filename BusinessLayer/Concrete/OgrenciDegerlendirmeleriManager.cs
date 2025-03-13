@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
             _ogrenciDegerlendirmeleriDAL = ogrenciDegerlendirmeleriDAL;
         }
 
-        public OgrenciDegerlendirmeleriTbl GetByID(int id)
+        public OgrenciDegerlendirmeleriTbl GetByID(long id)
         {
             return _ogrenciDegerlendirmeleriDAL.GetByID(id);
         }
