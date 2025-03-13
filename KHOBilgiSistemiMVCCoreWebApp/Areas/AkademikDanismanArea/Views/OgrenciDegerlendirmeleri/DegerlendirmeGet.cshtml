@@ -16,7 +16,7 @@
         <div class="row pt-2">
             <div class="col-md-9">
                 <h4 class="text-primary">Öğrenci Değerlendirme Güncelleme</h4>
-                <h5 class="text-primary">Öğrenci : @Model.Adi @Model.Soyadi</h5>
+                <h5 class="text-primary">Öğrenci : @Model.OgrAdi @Model.OgrSoyadi</h5>
                 <h5 class="text-primary">Sınıf - Kısım - Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo</h5>
             </div>
             <div class="col-md-3">
@@ -37,19 +37,19 @@
     <div class="card-body col-md-12">
         <div class="row pt-2">
             <div class="col-2">
-                <img src="@Model.Fotograf" width="200" height="240" />
+                <img src="@Model.FotografAdresi" width="200" height="240" />
 
             </div>
 
             <div class="col-10" style="max-width: 70rem;margin:auto;">
 
 
-                @using (Html.BeginForm("DegerlendirmeUpdate", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciId, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.Fotograf }, FormMethod.Post))
+                @using (Html.BeginForm("DegerlendirmeUpdate", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciID, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.FotografAdresi }, FormMethod.Post))
                 {
                     <div class="form-outline mb-4">
                         
 
-                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "dropdown form-control", @id = "DegTurID" })
+                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "form-control", @id = "DegTurID" })
 
                     </div>
 

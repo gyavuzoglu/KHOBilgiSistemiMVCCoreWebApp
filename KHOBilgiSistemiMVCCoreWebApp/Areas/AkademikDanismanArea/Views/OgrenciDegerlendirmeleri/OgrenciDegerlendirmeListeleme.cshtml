@@ -39,10 +39,10 @@
                         <tr class="table-primary">
                             <th scope="col" class="text-center align-middle" width="8%">Sıra No</th>
                             <th scope="col" class="text-center align-middle" width="12%">Değerlendirme ID</th>
-                            <th scope="col" class="text-center align-middle" width="20%">Değerlendirme Türü</th>
+                            <th scope="col" class="text-center align-middle" width="18%">Değerlendirme Türü</th>
                             <th scope="col" class="text-center align-middle" width="15%">Tarih-Saat</th>
                             <th scope="col" class="text-center align-middle" width="40%">Değerlendirme</th>
-                            <th scope="col" class="text-center align-middle" width="5%">Sil</th>
+                            <th scope="col" class="text-center align-middle" width="7%">İşlem</th>
 
                         </tr>
                     </thead>
@@ -62,10 +62,10 @@
 
                                 <td scope="row" class="text-center text-primary align-middle">
 
-                                    <a href="@Url.Action("DegerlendirmeGet","OgrenciDegerlendirmeleri", new {id=item.DegerlendirmeID, Sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi,YakaNo=ViewBag.YakaNo, OgrAdi=ViewBag.OgrAdi, OgrSoyadi=ViewBag.OgrSoyadi, FotografAdresi=ViewBag.Fotograf, area ="AkademikDanismanArea"})">
-                                        <i class="fa-solid fa-pen-to-square text-primary"></i>
+                                    <a href="@Url.Action("DegerlendirmeGet","OgrenciDegerlendirmeleri", new {id=item.DegerlendirmeID, Sinif=@ViewBag.Sinif, KisimAdi=@ViewBag.KisimAdi,YakaNo=@ViewBag.YakaNo, OgrAdi=@ViewBag.OgrAdi, OgrSoyadi=@ViewBag.OgrSoyadi, FotografAdresi=@ViewBag.Fotograf, area ="AkademikDanismanArea"})">
+                                        <i class="fa-solid fa-lg fa-pen-to-square text-primary"></i>
                                     </a>
-
+                                    &nbsp;&nbsp;
                                     <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">
                                         <span title="Değerlendirmeyi Sil"><i class="fa-solid fa-lg fa-trash text-primary"></i></span>
                                     </a>

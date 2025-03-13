@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
 {
@@ -17,7 +18,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
         public int? YakaNo { get; set; }
         public string? OgrAdi { get; set; }
         public string? OgrSoyadi { get; set; }
-        public string? FotografAdresi { get; set; }
+        public string FotografAdresi { get; set; }
+        public IEnumerable<SelectListItem> OgrenciDegerlendirmeTurleriListe { get; set; }
 
 
     }

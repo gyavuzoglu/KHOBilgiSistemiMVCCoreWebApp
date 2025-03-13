@@ -356,6 +356,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgrenciID=degerlendirmevalue.OgrenciID,
                 EOYiliID=degerlendirmevalue.EOYiliID,
                 Donem=degerlendirmevalue.Donem,
+                DegTurID=degerlendirmevalue.DegTurID,
                 TarihSaat=degerlendirmevalue.TarihSaat,
                 Degerlendirme=degerlendirmevalue.Degerlendirme,
                 Sinif=Sinif,
@@ -363,7 +364,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 YakaNo=YakaNo,
                 OgrAdi=OgrAdi,
                 OgrSoyadi=OgrSoyadi,
-                FotografAdresi=FotografAdresi,
+                FotografAdresi = FotografAdresi,
+                OgrenciDegerlendirmeTurleriListe = new SelectList(db.OgrenciDegerlendirmeTurleriTbl, "DegTurID", "TurAdi"),
             };
             
             
