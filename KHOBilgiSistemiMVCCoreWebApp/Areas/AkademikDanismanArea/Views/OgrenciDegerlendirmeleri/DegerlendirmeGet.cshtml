@@ -36,18 +36,18 @@
     <br />
     <div class="card-body col-md-12">
         <div class="row pt-2">
-            <div class="col-2">
-                <img src="@Model.FotografAdresi" width="200" height="240" />
+            <div class="col-md-2 ms-md-auto">
+                <img src="@Model.FotografAdresi" width="180" height="220" />
 
             </div>
 
             <div class="col-10" style="max-width: 70rem;margin:auto;">
 
 
-                @using (Html.BeginForm("DegerlendirmeUpdate", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciID, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.FotografAdresi }, FormMethod.Post))
+                @using (Html.BeginForm("DegerlendirmeUpdate", "OgrenciDegerlendirmeleri", new { DegId = Model.DegId, PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciID, TarihSaat = DateTime.Now }, FormMethod.Post))
                 {
                     <div class="form-outline mb-4">
-                        
+
 
                         @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "form-control", @id = "DegTurID" })
 
@@ -61,8 +61,9 @@
                     <br />
 
                     <button type="submit" class="btn btn-primary">Kaydet</button>
-                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { sinif = Model.Sinif, kisimadi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
                 }
             </div>
         </div>
     </div>
+</div>

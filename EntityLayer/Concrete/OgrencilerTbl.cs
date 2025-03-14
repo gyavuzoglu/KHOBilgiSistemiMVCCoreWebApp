@@ -22,7 +22,7 @@ namespace EntityLayer.Concrete
         [StringLength(5)]
         [ForeignKey("KisimlarTbl")]
         public string? KisimAdi { get; set; }
-        public int? Sinif { get; set; }
+        public int Sinif { get; set; }
         public int? AskeriSinifID { get; set; }
         
         [StringLength(100)]

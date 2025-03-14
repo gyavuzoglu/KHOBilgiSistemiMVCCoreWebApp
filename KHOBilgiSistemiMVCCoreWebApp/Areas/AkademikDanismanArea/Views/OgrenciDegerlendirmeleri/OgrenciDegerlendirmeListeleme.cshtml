@@ -14,6 +14,7 @@
             </h3>
             <div class="col-2 text-end">
                 <img src="@ViewBag.Fotograf" width="100" height="120" />
+                
             </div>
             <div class="col-8">
 
@@ -62,8 +63,8 @@
 
                                 <td scope="row" class="text-center text-primary align-middle">
 
-                                    <a href="@Url.Action("DegerlendirmeGet","OgrenciDegerlendirmeleri", new {id=item.DegerlendirmeID, Sinif=@ViewBag.Sinif, KisimAdi=@ViewBag.KisimAdi,YakaNo=@ViewBag.YakaNo, OgrAdi=@ViewBag.OgrAdi, OgrSoyadi=@ViewBag.OgrSoyadi, FotografAdresi=@ViewBag.Fotograf, area ="AkademikDanismanArea"})">
-                                        <i class="fa-solid fa-lg fa-pen-to-square text-primary"></i>
+                                    <a href="@Url.Action("DegerlendirmeGet","OgrenciDegerlendirmeleri", new {id=item.DegerlendirmeID, Sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi, YakaNo=ViewBag.YakaNo, OgrAdi=ViewBag.OgrAdi, OgrSoyadi=ViewBag.OgrSoyadi, FotografAdresi=ViewBag.Fotograf, area ="AkademikDanismanArea"})">
+                                        <span title="Değerlendirmeyi Güncelle"><i class="fa-solid fa-lg fa-pen-to-square text-primary"></i></span>
                                     </a>
                                     &nbsp;&nbsp;
                                     <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">

@@ -348,10 +348,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
             
+            
             var degerlendirmevalue = ogrencidegerlendirmemanager.GetByID(id);
             var modelDegerlendirmeGetClass = new DegerlendirmeGetClass
             {
-                DegId = degerlendirmevalue.DegerlendirmeID,
+                DegId = id,
                 PerID=degerlendirmevalue.PerID,
                 OgrenciID=degerlendirmevalue.OgrenciID,
                 EOYiliID=degerlendirmevalue.EOYiliID,
@@ -368,19 +369,51 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgrenciDegerlendirmeTurleriListe = new SelectList(db.OgrenciDegerlendirmeTurleriTbl, "DegTurID", "TurAdi"),
             };
             
-            
-            
             return View(modelDegerlendirmeGetClass);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DegerlendirmeUpdate(OgrenciDegerlendirmeleriTbl p)
+        public IActionResult DegerlendirmeUpdate(long DegId, OgcDegUpdateClass p)
         {
+            OgrenciDegerlendirmeleriTbl OgcDegTbl= ogrencidegerlendirmemanager.GetByID(DegId);
+            if (OgcDegTbl != null)
+            {
+                if (!string.IsNullOrEmpty(p.Degerlendirme))
+                {
+                    OgcDegTbl.Degerlendirme = p.Degerlendirme;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Degerlendirme boş olamaz.");
+                }
+                OgcDegTbl.PerID = p.PerID;
+                OgcDegTbl.DegTurID = p.DegTurID;
+                OgcDegTbl.OgrenciID = db.OgrenciDegerlendirmeleriTbl.Where(x=>x.DegerlendirmeID==DegId).Select(x=>x.OgrenciID).FirstOrDefault();
+                OgcDegTbl.TarihSaat = p.TarihSaat;
+                OgcDegTbl.EOYiliID = p.EOYiliID;
+                OgcDegTbl.Donem = p.Donem;
 
-            ogrencidegerlendirmemanager.OgrenciDegerlendirmeUpdate(p);
+            }
+            ogrencidegerlendirmemanager.OgrenciDegerlendirmeUpdate(OgcDegTbl);
 
-            return RedirectToAction("Index", "Birimler");
+            var modelOgrenciDegerlendirmeListeSartlari = new OgrenciDegerlendirmeleriListelemeSartlari
+            {
+
+                PerID = OgcDegTbl.PerID,
+                EOYiliID = OgcDegTbl.EOYiliID,
+                Donem = OgcDegTbl.Donem,
+                OgrenciID = OgcDegTbl.OgrenciID,
+                Sinif = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.Sinif).FirstOrDefault(),
+                KisimAdi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x=>x.KisimAdi).FirstOrDefault(),
+                OgrAdi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.Adi).FirstOrDefault(),
+                OgrSoyadi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.Soyadi).FirstOrDefault(),
+                YakaNo = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.YakaNo).FirstOrDefault(),
+                FotografAdresi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.FotografAdresi).FirstOrDefault(),
+
+            };
+
+            return RedirectToAction("OgrenciDegerlendirmeListeleme", modelOgrenciDegerlendirmeListeSartlari);
         }
     }
 }
