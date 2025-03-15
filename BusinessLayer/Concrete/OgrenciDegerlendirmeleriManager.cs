@@ -45,7 +45,7 @@ namespace BusinessLayer.Concrete
             _ogrenciDegerlendirmeleriDAL.Update(ogrenciDegerlendirmeleriTbl);
         }
         
-        public List<OgrenciDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID)
+        public List<OgrenciDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, long? PerID)
         {
             return _ogrenciDegerlendirmeleriDAL.GetList(x=>x.EOYiliID==EOYiliID && x.Donem==Donem && x.PerID==PerID);
         }

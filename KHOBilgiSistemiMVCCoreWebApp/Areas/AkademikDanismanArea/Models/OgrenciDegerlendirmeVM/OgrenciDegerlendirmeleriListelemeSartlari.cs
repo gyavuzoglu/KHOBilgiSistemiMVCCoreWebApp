@@ -1,4 +1,6 @@
-﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
+﻿using EntityLayer.Concrete;
+
+namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class OgrenciDegerlendirmeleriListelemeSartlari
     {
@@ -12,6 +14,11 @@
         public string? OgrSoyadi { get; set; }
         public int? YakaNo { get; set; }
         public string? FotografAdresi { get; set; }
+        public string? UserName { get; set; }
+        public string? RoleName { get; set; }
+        public string? EOYili { get; set; }
+        public string? DonemAdi { get; set; }
+        public List<OgrenciDegerlendirmeList> OgrenciDegListe { get; set; }
 
     }
 }

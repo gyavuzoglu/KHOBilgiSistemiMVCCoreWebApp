@@ -1,5 +1,5 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
-@model List<OgrenciDegerlendirmeList>
+@model OgrenciDegerlendirmeleriListelemeSartlari
 
 @{
     ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
@@ -13,14 +13,14 @@
                 Öğrencinin Değerlendirmeleri
             </h3>
             <div class="col-2 text-end">
-                <img src="@ViewBag.Fotograf" width="100" height="120" />
+                <img src="@Model.FotografAdresi" width="100" height="120" />
                 
             </div>
             <div class="col-8">
 
-                <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @ViewBag.EOYili / @ViewBag.Donem </h5>
-                <h5 class="text-primary">Öğrenci Adı Soyadı : @ViewBag.OgrAdi @ViewBag.OgrSoyadi</h5>
-                <h5 class="text-primary">Öğrenci Sınıf / Kısım / Yaka No : @ViewBag.Sinif / @ViewBag.KisimAdi / @ViewBag.YakaNo </h5>
+                <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @Model.EOYili / @Model.Donem </h5>
+                <h5 class="text-primary">Öğrenci Adı Soyadı : @Model.OgrAdi @Model.OgrSoyadi</h5>
+                <h5 class="text-primary">Öğrenci Sınıf / Kısım / Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo </h5>
 
             </div>
 
@@ -28,7 +28,7 @@
             <div class="col-2 text-end">
                 <div class="d-grid gap-2">
                     <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
-                    <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=ViewBag.PerID, EOYiliID=ViewBag.EOYiliID, OgrenciID=ViewBag.OgrenciID, Donem=ViewBag.Donem, Fotograf=ViewBag.Fotograf, Adi=ViewBag.OgrAdi, Soyadi=ViewBag.OgrSoyadi, Sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi, area ="AkademikDanismanArea"})" class="btn btn-outline-info"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</a>
+                    <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=Model.PerID, EOYiliID=Model.EOYiliID, OgrenciID=Model.OgrenciID, Donem=Model.Donem, Fotograf=Model.FotografAdresi, Adi=Model.OgrAdi, Soyadi=Model.OgrSoyadi, Sinif=Model.Sinif, KisimAdi=Model.KisimAdi, area ="AkademikDanismanArea"})" class="btn btn-outline-info"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</a>
                 </div>
             </div>
 
@@ -50,9 +50,9 @@
                     @{
                         int adet = 1;
                     }
-                    @if (Enumerable.Count(Model) > 0)
+                    @if (Enumerable.Count(Model.OgrenciDegListe) > 0)
                     {
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.OgrenciDegListe)
                         {
                             <tr class="table-light">
                                 <td scope="row" class="text-center text-primary align-middle">@adet</td>

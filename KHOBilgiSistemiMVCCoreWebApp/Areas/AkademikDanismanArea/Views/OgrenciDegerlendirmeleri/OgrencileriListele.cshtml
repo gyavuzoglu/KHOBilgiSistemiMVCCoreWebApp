@@ -1,20 +1,21 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
-@model List<KisimOgrenciListeClass>
+@model KisimOgrenciListeClass
 
 @{
     ViewData["Title"] = "Öğrencileri Listeleme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/js/jquery-3.7.1.min.js"></script>
 
 <div class="mb-3" style="max-width: 80rem;margin:auto;">
     <div class="col-md-12">
         <div class="row pt-4">
             <h3 class="text-primary text-center">
-                @ViewBag.KisimAdi Kısım Öğrenci Listesi</h4>
+                @Model.KisimAdi Kısım Öğrenci Listesi</h4>
                 <div class="col-9">
 
-                    <h5 class="text-primary">Eğitim-Öğretim Yılı : @ViewBag.EOYili </h5>
-                    <h5 class="text-primary">Dönem : @ViewBag.DonemAdi</h5>
+                    <h5 class="text-primary">Eğitim-Öğretim Yılı : @Model.EOYili </h5>
+                    <h5 class="text-primary">Dönem : @Model.DonemAdi</h5>
 
                 </div>
                 <div class="col-3 text-end">
@@ -33,8 +34,8 @@
                                 <th scope="col" class="text-left align-middle" width="15%">Adı</th>
                                 <th scope="col" class="text-left align-middle" width="15%">Soyadı</th>
                                 <th scope="col" class="text-left align-middle" width="10%">Fotoğraf</th>
-                                <th scope="col" class="text-center align-middle" width="15%">Değerlendirme Durumu</th>
-                                <th scope="col" class="text-center align-middle" width="11%">İşlem</th>
+                                <th scope="col" class="text-center align-middle" width="14%">Değerlendirme Durumu</th>
+                                <th scope="col" class="text-center align-middle" width="12%">İşlem</th>
 
                             </tr>
                         </thead>
@@ -42,19 +43,19 @@
                             int adet = 1;
                         }
 
-                        @if (Model.Count > 0)
+                        @if (Model.OgrenciListe.Count > 0)
                         {
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.OgrenciListe)
                             {
 
                                 int mindeger = 0;
                                 int maxdeger = 1;
-                                if (item.OgrToplamDegAdedi >= 0) maxdeger = @item.OgrToplamDegAdedi;
+                                if (@item.OgcToplamDegAdedi >= 0) maxdeger = @item.OgcToplamDegAdedi;
 
                                 <tr class="table-light">
                                     <td scope="row" class="text-left text-primary align-middle">@adet</td>
-                                    <td scope="row" class="text-left text-primary align-middle">@item.Sinif</td>
-                                    <td scope="row" class="text-left text-primary align-middle">@item.KisimAdi</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@Model.Sinif</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@Model.KisimAdi</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.YakaNo</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.Adi</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.Soyadi</td>
@@ -62,7 +63,7 @@
                                         <img src="@item.FotografAdresi" width="60" height="80" />
                                     </td>
                                     @{
-                                        double oran = ((double)(item.OgrOgretmeninDegAdedi - mindeger) / (maxdeger - mindeger) * 100);
+                                        double oran = ((double)(item.OgcOgretmeninDegAdedi - mindeger) / (maxdeger - mindeger) * 100);
                                         double yuzde = Math.Round(oran);
                                         if (yuzde < 0) { yuzde = 0; }
                                         if (yuzde > 100) { yuzde = 100; }
@@ -72,22 +73,66 @@
                                             <div class="progress-bar progress-bar-striped" role="progressbar" style="width:@yuzde%;" aria-valuenow="@yuzde" aria-valuemin="0" aria-valuemax="100">
                                             </div>
                                         </div>
-                                        @item.OgrOgretmeninDegAdedi  / @item.OgrToplamDegAdedi
+                                        @item.OgcOgretmeninDegAdedi  / @item.OgcToplamDegAdedi
 
                                     </td>
-                                    @* <td scope="row" class="text-center text-primary align-middle">@item.OgrOgretmeninDegAdedi</td> *@
+                                   
 
                                     <td scope="row" class="text-center align-middle">
-                                        <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, Adi=item.Adi, Soyadi=item.Soyadi, YakaNo=item.YakaNo, Sinif=item.Sinif, KisimAdi=item.KisimAdi, EOYiliID=item.EOYiliID, Donem=item.Donem, Fotograf=item.FotografAdresi, area ="AkademikDanismanArea"})">
+                                        @using (Html.BeginForm("OgcDegerlendirmeEkleForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                        
+                                        {
+                                            <input type="hidden" name="PerID" value="@Model.PerID" />
+                                            <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
+                                            <input type="hidden" name="Adi" value="@item.Adi" />
+                                            <input type="hidden" name="Soyadi" value="@item.Soyadi" />
+                                            <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                            <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                            <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                            <input type="hidden" name="Donem" value="@Model.Donem" />
+                                            <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
 
-                                            <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
-                                        </a>
+                                            <button type="submit" class="btn">
+                                                <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
+
+                                            </button>
+                                        }
+                                       
+                                                                                
                                         &nbsp;
-                                        &nbsp;
-                                        <a href="@Url.Action("OgrenciDegerlendirmeListeleme","OgrenciDegerlendirmeleri", new {PerID=item.PerID,OgrenciId=item.OgrenciID, EOYiliID=item.EOYiliID, Donem=item.Donem, Sinif=item.Sinif, KisimAdi=item.KisimAdi, OgrAdi=item.Adi, OgrSoyadi=item.Soyadi, FotografAdresi=item.FotografAdresi, area ="AkademikDanismanArea"})">
+                                        
+
+                                        @using (Html.BeginForm("OgcDegerlendirmeListelemeForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+
+                                        {
+                                            <input type="hidden" name="PerID" value="@Model.PerID" />
+                                            <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                            <input type="hidden" name="Donem" value="@Model.Donem" />
+                                            <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
+                                            <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                            <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                            <input type="hidden" name="OgrAdi" value="@item.Adi" />
+                                            <input type="hidden" name="OgrSoyadi" value="@item.Soyadi" />
+                                            <input type="hidden" name="YakaNo" value="@item.YakaNo" />
+                                            <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
+                                            <input type="hidden" name="UserName" value="@Model.UserName" /> 
+                                            <input type="hidden" name="RoleName" value="@Model.RoleName" />
+                                            <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                            <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+
+                                            <input type="hidden" name="OgrenciDegListe" value="" />
+                                           
+                                            <button type="submit" class="btn">
+                                                <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
+
+                                            </button>
+                                        }
+                                        
+                                                                                
+                                        @* <a href="@Url.Action("OgrenciDegerlendirmeListeleme","OgrenciDegerlendirmeleri", new {PerID=Model.PerID,OgrenciId=item.OgrenciID, EOYiliID=Model.EOYiliID, Donem=Model.Donem, Sinif=Model.Sinif, KisimAdi=Model.KisimAdi, OgrAdi=item.Adi, OgrSoyadi=item.Soyadi, FotografAdresi=item.FotografAdresi, area ="AkademikDanismanArea"})">
 
                                             <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
-                                        </a>
+                                        </a> *@
                                         @* style="color:#FF0000;" , *@
                                     </td>
 

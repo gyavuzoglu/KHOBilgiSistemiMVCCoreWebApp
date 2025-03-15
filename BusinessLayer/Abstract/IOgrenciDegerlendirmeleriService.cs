@@ -14,7 +14,7 @@ namespace BusinessLayer.Abstract
         void OgrenciDegerlendirmeDelete(OgrenciDegerlendirmeleriTbl ogrenciDegerlendirmeleriTbl);
         void OgrenciDegerlendirmeUpdate(OgrenciDegerlendirmeleriTbl ogrenciDegerlendirmeleriTbl);
         List<OgrenciDegerlendirmeleriTbl> GetListAll();
-        List<OgrenciDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID);
+        List<OgrenciDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, long? PerID);
         List<OgrenciDegerlendirmeleriTbl> DegerlendirmeFilter(Expression<Func<OgrenciDegerlendirmeleriTbl, bool>> filter);
         OgrenciDegerlendirmeleriTbl GetByID(long id);
         
