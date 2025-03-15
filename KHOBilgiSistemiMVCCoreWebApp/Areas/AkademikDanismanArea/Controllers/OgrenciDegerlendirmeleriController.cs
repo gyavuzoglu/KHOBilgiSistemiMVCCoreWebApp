@@ -14,8 +14,6 @@ using System.Drawing;
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 {
     [Authorize(Roles = "Akademik Danışman")]
-
-
     [Area("AkademikDanismanArea")]
 
     public class OgrenciDegerlendirmeleriController : Controller
@@ -33,17 +31,17 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         public IActionResult Index()
         {
             
-            var DegListOnBilgi = new DegListOnBilgiVM
-            {
-                UserName = HttpContext.Session.GetString("UserName"),
-                RoleName = HttpContext.Session.GetString("RoleName"),
-                Sinif = 0,
-                EOYiliID = 0,
-                Donem = 0,
+            //var DegListOnBilgi = new DegListOnBilgiVM
+            //{
+            //    UserName = HttpContext.Session.GetString("UserName"),
+            //    RoleName = HttpContext.Session.GetString("RoleName"),
+            //    Sinif = 0,
+            //    EOYiliID = 0,
+            //    Donem = 0,
                 
-            };
+            //};
 
-            return View(DegListOnBilgi);
+            return View();
 
         }
 
@@ -224,6 +222,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult OgcDegerlendirmeEkleForm(DegerlendirmeAddClass model)
         {
             //var PerTC = HttpContext.Session.GetString("PerTC");
