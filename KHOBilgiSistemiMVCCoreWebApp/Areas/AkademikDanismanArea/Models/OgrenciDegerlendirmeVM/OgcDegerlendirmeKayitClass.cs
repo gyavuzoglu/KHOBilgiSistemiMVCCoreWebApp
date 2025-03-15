@@ -1,4 +1,4 @@
-﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class OgcDegerlendirmeKayitClass
     {
@@ -13,7 +13,7 @@
         public string? Degerlendirme { get; set; }
         public int Sinif { get; set; }
         public string? KisimAdi { get; set; }
-        
-        
+
+
     }
 }

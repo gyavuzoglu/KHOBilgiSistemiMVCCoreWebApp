@@ -1,6 +1,6 @@
 ﻿using EntityLayer.Concrete;
 
-namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class OgrenciDegerlendirmeList
     {

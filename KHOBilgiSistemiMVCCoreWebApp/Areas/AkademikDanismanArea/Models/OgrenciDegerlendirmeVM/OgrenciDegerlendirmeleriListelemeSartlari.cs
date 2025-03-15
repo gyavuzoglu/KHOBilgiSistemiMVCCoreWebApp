@@ -1,4 +1,4 @@
-﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+﻿namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class OgrenciDegerlendirmeleriListelemeSartlari
     {

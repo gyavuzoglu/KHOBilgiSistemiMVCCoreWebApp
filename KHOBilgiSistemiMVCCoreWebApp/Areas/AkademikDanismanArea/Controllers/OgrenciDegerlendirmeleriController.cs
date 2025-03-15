@@ -4,7 +4,6 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
-using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models;
 using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class OgcDegUpdateClass
     {

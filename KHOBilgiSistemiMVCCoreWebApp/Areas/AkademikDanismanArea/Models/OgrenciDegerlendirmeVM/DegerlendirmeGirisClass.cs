@@ -1,7 +1,7 @@
 ﻿using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models
+namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
     public class DegerlendirmeGirisClass
     {

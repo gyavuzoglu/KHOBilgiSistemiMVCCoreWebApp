@@ -1,3 +1,4 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 @model DegerlendirmeGirisClass
 
 @{
@@ -44,8 +45,7 @@
                 @using (Html.BeginForm("OgcDegerlendirmeAdd", "OgrenciDegerlendirmeleri", new { PerID = Model.PerID, EOYiliID = Model.EOYiliID, Donem = Model.Donem, OgrenciID = Model.OgrenciId, TarihSaat = DateTime.Now, Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, Fotograf = Model.Fotograf }, FormMethod.Post))
                 {
                     <div class="form-outline mb-4">
-                        @* <label>Değerlendirme Türü</label> *@
-
+                       
                         @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "dropdown form-control", @id = "DegTurID" })
 
                     </div>
@@ -57,11 +57,10 @@
                     </div>
                     <br />
 
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
-                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { sinif = Model.Sinif, kisimadi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
+                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
                 }
             </div>
         </div>
-    </div>
-      
+    </div> 
 </div>
