@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
-    public class OgcDegUpdateClass
+    public class OgcDegUpdateClassVM
     {
         public int DegTurID { get; set; }
 

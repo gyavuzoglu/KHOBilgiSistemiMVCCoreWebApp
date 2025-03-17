@@ -3,7 +3,7 @@ using EntityLayer.Concrete;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
-    public class SinifKisimSecmeClass
+    public class OgrenciGetirFormVM
     {
         public IEnumerable<SelectListItem> SiniflarListe { get; set; }
         public IEnumerable<SelectListItem> KisimlarListe { get; set; }

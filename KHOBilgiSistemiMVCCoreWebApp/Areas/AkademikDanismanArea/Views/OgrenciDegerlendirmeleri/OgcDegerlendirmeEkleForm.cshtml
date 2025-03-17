@@ -1,5 +1,5 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
-@model DegerlendirmeAddClass
+@model DegerlendirmeClassVM
 
 @{
     ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
@@ -17,57 +17,89 @@
                 <h5 class="text-primary">Öğrenci : @Model.Adi @Model.Soyadi</h5>
                 <h5 class="text-primary">Sınıf - Kısım - Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo</h5>
             </div>
-            <div class="col-md-3">
-                <div class="d-grid gap-2">
-                    <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri",new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
-                                       
-                    @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem }, FormMethod.Post))
+            <div class="col-md-3 display: flex;">
+
+                <div class="justify-content: space-between; m-2">
+                    @using (Html.BeginForm("OgrencileriGetirForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
                     {
 
+                        <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</button>
+                    }
+                </div>
+
+                <div class="justify-content: space-between; m-2">
+
+                    @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                        <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
                         <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
                     }
-
                 </div>
             </div>
         </div>
     </div>
+
+
     <br />
     <div class="card-body col-md-12">
         <div class="row pt-2">
             <div class="col-md-2 ms-md-auto">
                 <img src="@Model.FotografAdresi" width="180" height="220" />
-                
+
             </div>
-            
+
             <div class="col-10" style="max-width: 70rem;margin:auto;">
 
 
-                @using (Html.BeginForm("OgcDegerlendirmeAdd", "OgrenciDegerlendirmeleri", new { area="AkademikDanismanArea" }, FormMethod.Post))
+                @using (Html.BeginForm("OgcDegerlendirmeAdd", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
                 {
                     <input type="hidden" name="PerID" value="@Model.PerID" />
+                    <input type="hidden" name="OgrenciId" value="@Model.OgrenciID" />
                     <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                    <input type="hidden" name="EOYili" value="@Model.EOYili" />
                     <input type="hidden" name="Donem" value="@Model.Donem" />
                     <input type="hidden" name="TarihSaat" value="@DateTime.Now" />
                     <input type="hidden" name="Sinif" value="@Model.Sinif" />
                     <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                    <input type="hidden" name="Adi" value="@Model.Adi" />
+                    <input type="hidden" name="Soyadi" value="@Model.Soyadi" />
+                    <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
                     <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
-                    <div class="form-outline mb-4">
-                       
-                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "dropdown form-control", @id = "DegTurID" })
+                    <input type="hidden" name="OgrenciDegerlendirmeTurleriListe" value="@Model.OgrenciDegerlendirmeTurleriListe" />
+                    <div class="form-outline mb-3">
+
+
+                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "form-control", @id = "DegTurID" })
 
                     </div>
 
-                    <div class="form-outline mb-4">
+                    <div class="form-outline mb-3">
+
                         <label>Değerlendirmeniz :</label>
 
                         @Html.TextAreaFor(x => x.Degerlendirme, 5, 80, new { @class = "form-control", @id = "Degerlendirme" })
                     </div>
                     <br />
 
-                    <button type="submit" class="btn btn-primary">Kaydet</button>
-                    @Html.ActionLink("Vazgeç", "OgrencileriGetir", "OgrenciDegerlendirmeleri", new { Sinif = Model.Sinif, KisimAdi = Model.KisimAdi, EOYiliID = Model.EOYiliID, Donem = Model.Donem, area = "AkademikDanismanArea" }, new { @class = "btn btn-secondary" })
+                    <button type="submit" class="btn btn-outline-primary mb-2" style="width:100%;"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Kaydet</button>
                 }
+
+                @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                {
+                    <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                    <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                    <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                    <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                    <button type="submit" class="btn btn-outline-secondary mb-2" style="width:100%;"><i class="fa-solid fa-user-plus"></i>&nbsp;Vazgeç</button>
+                }
+
+
+
             </div>
         </div>
-    </div> 
+    </div>
 </div>

@@ -15,8 +15,7 @@
         public string? Degerlendirme { get; set; }
         public int Sinif { get; set; }
         public string? KisimAdi { get; set; }
-        public string? UserName { get; set; }
-        public string? RoleName { get; set; }
+        
         
 
 

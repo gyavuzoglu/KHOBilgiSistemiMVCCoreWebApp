@@ -5,7 +5,7 @@
     ViewData["Title"] = "Öğrencileri Listeleme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/js/jquery-3.7.1.min.js"></script>
+
 
 <div class="mb-3" style="max-width: 80rem;margin:auto;">
     <div class="col-md-12">
@@ -19,7 +19,7 @@
 
                 </div>
                 <div class="col-3 text-end">
-                    <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
+                    <a href="@Url.Action("OgrencileriGetirForm","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
 
                 </div>
 
@@ -34,8 +34,8 @@
                                 <th scope="col" class="text-left align-middle" width="15%">Adı</th>
                                 <th scope="col" class="text-left align-middle" width="15%">Soyadı</th>
                                 <th scope="col" class="text-left align-middle" width="10%">Fotoğraf</th>
-                                <th scope="col" class="text-center align-middle" width="14%">Değerlendirme Durumu</th>
-                                <th scope="col" class="text-center align-middle" width="12%">İşlem</th>
+                                <th scope="col" class="text-center align-middle" width="15%">Değerlendirme Durumu</th>
+                                <th scope="col" class="text-center align-middle" width="10%">İşlem</th>
 
                             </tr>
                         </thead>
@@ -79,54 +79,57 @@
 
 
                                     <td scope="row" class="text-center align-middle">
-                                        <div>
-                                            @using (Html.BeginForm("OgcDegerlendirmeEkleForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                        <div class="row">
+                                            <div class="col" style="margin:0;padding:0;">
+                                                @using (Html.BeginForm("OgcDegerlendirmeEkleForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
 
-                                            {
-                                                <input type="hidden" name="PerID" value="@Model.PerID" />
-                                                <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
-                                                <input type="hidden" name="Adi" value="@item.Adi" />
-                                                <input type="hidden" name="Soyadi" value="@item.Soyadi" />
-                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
-                                                <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
-                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
-                                                <input type="hidden" name="Donem" value="@Model.Donem" />
-                                                <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
+                                                {
+                                                    <input type="hidden" name="PerID" value="@Model.PerID" />
+                                                    <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
+                                                    <input type="hidden" name="Adi" value="@item.Adi" />
+                                                    <input type="hidden" name="Soyadi" value="@item.Soyadi" />
+                                                    <input type="hidden" name="YakaNo" value="@item.YakaNo" />
+                                                    <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                    <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                    <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                    <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                                    <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                    <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
 
-                                                <button type="submit" class="btn">
-                                                    <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
+                                                    <button type="submit" class="btn">
+                                                        <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
 
-                                                </button>
-                                            }
+                                                    </button>
+                                                }
+                                            </div>
+
+                                            <div class="col" style="margin:0;padding:0;">
+                                                @using (Html.BeginForm("OgcDegerlendirmeListelemeForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+
+                                                {
+                                                    <input type="hidden" name="PerID" value="@Model.PerID" />
+                                                    <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                    <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                    <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
+                                                    <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                    <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                    <input type="hidden" name="OgrAdi" value="@item.Adi" />
+                                                    <input type="hidden" name="OgrSoyadi" value="@item.Soyadi" />
+                                                    <input type="hidden" name="YakaNo" value="@item.YakaNo" />
+                                                    <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
+                                                    <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                                    <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+
+                                                    <input type="hidden" name="OgrenciDegListe" value="" />
+
+                                                    <button type="submit" class="btn">
+                                                        <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
+
+                                                    </button>
+                                                }
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            @using (Html.BeginForm("OgcDegerlendirmeListelemeForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
-
-                                            {
-                                                <input type="hidden" name="PerID" value="@Model.PerID" />
-                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
-                                                <input type="hidden" name="Donem" value="@Model.Donem" />
-                                                <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
-                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
-                                                <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
-                                                <input type="hidden" name="OgrAdi" value="@item.Adi" />
-                                                <input type="hidden" name="OgrSoyadi" value="@item.Soyadi" />
-                                                <input type="hidden" name="YakaNo" value="@item.YakaNo" />
-                                                <input type="hidden" name="FotografAdresi" value="@item.FotografAdresi" />
-                                                <input type="hidden" name="UserName" value="@Model.UserName" />
-                                                <input type="hidden" name="RoleName" value="@Model.RoleName" />
-                                                <input type="hidden" name="EOYili" value="@Model.EOYili" />
-                                                <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
-
-                                                <input type="hidden" name="OgrenciDegListe" value="" />
-
-                                                <button type="submit" class="btn">
-                                                    <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
-
-                                                </button>
-                                            }
-                                        </div>
 
                                     </td>
 
@@ -150,7 +153,4 @@
         </div>
     </div>
 </div>
-
-
-
 

@@ -1,5 +1,5 @@
 ﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
-@model OgrenciDegerlendirmeleriListelemeSartlari
+@model OgcDegerlendirmeleriListesiVM
 
 @{
     ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
@@ -13,25 +13,56 @@
                 Öğrencinin Değerlendirmeleri
             </h3>
             <div class="col-2 text-end">
-                <img src="@Model.FotografAdresi" width="100" height="120" />
-                
+                <img src="@Model.FotografAdresi" width="130" height="160" />
+
             </div>
-            <div class="col-8">
+            <div class="col-8 align-middle">
 
                 <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @Model.EOYili / @Model.Donem </h5>
-                <h5 class="text-primary">Öğrenci Adı Soyadı : @Model.OgrAdi @Model.OgrSoyadi</h5>
+                <h5 class="text-primary">Öğrenci Adı Soyadı : @Model.Adi @Model.Soyadi</h5>
                 <h5 class="text-primary">Öğrenci Sınıf / Kısım / Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo </h5>
 
             </div>
 
 
             <div class="col-2 text-end">
-                <div class="d-grid gap-2">
-                    <a href="@Url.Action("OgrencileriGetir","OgrenciDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</a>
-                    <a href="@Url.Action("OgcDegerlendirmeAdd","OgrenciDegerlendirmeleri", new {PerID=Model.PerID, EOYiliID=Model.EOYiliID, OgrenciID=Model.OgrenciID, Donem=Model.Donem, Fotograf=Model.FotografAdresi, Adi=Model.OgrAdi, Soyadi=Model.OgrSoyadi, Sinif=Model.Sinif, KisimAdi=Model.KisimAdi, area ="AkademikDanismanArea"})" class="btn btn-outline-info"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</a>
+                <div class="d-grid gap-3">
+                    @using (Html.BeginForm("OgrencileriGetirForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
+                    {
+                       <button type="submit" class="btn btn-outline-primary" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf-Kısım Seç</button>
+                    }
+                    @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                        <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                        <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
+                    }
+
+                    @using (Html.BeginForm("OgcDegerlendirmeEkleForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="PerID" value="@Model.PerID" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                        <input type="hidden" name="OgrenciID" value="@Model.OgrenciID" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
+                        <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+                        <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
+                        <input type="hidden" name="Adi" value="@Model.Adi" />
+                        <input type="hidden" name="Soyadi" value="@Model.Soyadi" />
+                        <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                        <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+
+                        <button type="submit" class="btn btn-outline-info" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</button>
+                    }
+                    <br />
+                   
                 </div>
             </div>
-
+       
 
 
             <div style="width:90%;margin:auto;">
@@ -42,8 +73,8 @@
                             <th scope="col" class="text-center align-middle" width="12%">Değerlendirme ID</th>
                             <th scope="col" class="text-center align-middle" width="18%">Değerlendirme Türü</th>
                             <th scope="col" class="text-center align-middle" width="15%">Tarih-Saat</th>
-                            <th scope="col" class="text-center align-middle" width="40%">Değerlendirme</th>
-                            <th scope="col" class="text-center align-middle" width="7%">İşlem</th>
+                            <th scope="col" class="text-center align-middle" width="37%">Değerlendirme</th>
+                            <th scope="col" class="text-center align-middle" width="10%">İşlem</th>
 
                         </tr>
                     </thead>
@@ -62,37 +93,75 @@
                                 <td scope="row" class="text-left text-primary align-middle">@item.Degerlendirme</td>
 
                                 <td scope="row" class="text-center text-primary align-middle">
+                                    <div class="row">
+                                        <div class="col align-middle">
 
-                                    <a href="@Url.Action("DegerlendirmeGet","OgrenciDegerlendirmeleri", new {id=item.DegerlendirmeID, Sinif=ViewBag.Sinif, KisimAdi=ViewBag.KisimAdi, YakaNo=ViewBag.YakaNo, OgrAdi=ViewBag.OgrAdi, OgrSoyadi=ViewBag.OgrSoyadi, FotografAdresi=ViewBag.Fotograf, area ="AkademikDanismanArea"})">
-                                        <span title="Değerlendirmeyi Güncelle"><i class="fa-solid fa-lg fa-pen-to-square text-primary"></i></span>
-                                    </a>
-                                    &nbsp;&nbsp;
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">
-                                        <span title="Değerlendirmeyi Sil"><i class="fa-solid fa-lg fa-trash text-primary"></i></span>
-                                    </a>
-                                    @* Modal Sil *@
-                                    <div class="modal fade" id="Sil_@item.DegerlendirmeID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="SilModalLongTitle">Değerlendirme Silme</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h5>Bu Değerlendirmeyi silmek istediğinize emin misiniz ? </h5>
-                                                </div>
-                                                <div class="modal-footer">
+                                            @using (Html.BeginForm("DegerlendirmeGet", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="id" value="@item.DegerlendirmeID" />
+                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
+                                                <input type="hidden" name="OgrAdi" value="@Model.Adi" />
+                                                <input type="hidden" name="OgrSoyadi" value="@Model.Soyadi" />
+                                                <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
+                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                <input type="hidden" name="Donem" value="@Model.Donem" />
 
-                                                    @Html.ActionLink("Sil", "OgrenciDegerlendirmeDelete", "OgrenciDegerlendirmeleri", new { id = @item.DegerlendirmeID, PerID = @ViewBag.PerID, OgrenciID = @item.OgrenciID, OgrAdi = @ViewBag.OgrAdi, OgrSoyadi = @ViewBag.OgrSoyadi, YakaNo = @ViewBag.YakaNo, Sinif = @ViewBag.Sinif, KisimAdi = @ViewBag.KisimAdi, EOYiliID = @ViewBag.EOYiliID, Donem = @ViewBag.Donem, FotografAdresi=@ViewBag.Fotograf, area = "AkademikDanismanArea" }, new { @class = "btn btn-danger" })
-                                                    <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                                <button type="submit" class="btn">
+                                                    <span title="Değerlendirmeyi Güncelle"><i class="fa-solid fa-lg fa-pen-to-square text-primary"></i></span>
+
+                                                </button>
+
+                                            }
+                                        </div>
+                                                                              
+                                        <div class="col align-middle">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">
+                                                <span title="Değerlendirmeyi Sil"><i class="fa-solid fa-lg fa-trash text-primary"></i></span>
+                                            </a>
+                                            @* Modal Sil *@
+                                            <div class="modal fade" id="Sil_@item.DegerlendirmeID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="SilModalLongTitle">Değerlendirme Silme</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h5>Bu Değerlendirmeyi silmek istediğinize emin misiniz ? </h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            @using (Html.BeginForm("OgrenciDegerlendirmeDelete", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                                            {
+                                                                <input type="hidden" name="id" value="@item.DegerlendirmeID" />
+                                                                <input type="hidden" name="PerID" value="@item.PerID" />
+                                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                                <input type="hidden" name="OgrenciID" value="@Model.OgrenciID" />
+                                                                <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                                <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
+                                                                <input type="hidden" name="OgrAdi" value="@Model.Adi" />
+                                                                <input type="hidden" name="OgrSoyadi" value="@Model.Soyadi" />
+                                                                <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
+                                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Değerlendirmeyi Sil
+                                                                </button>
+
+                                                            }
+                                                                                                                             
+                                                            <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                 
 
                                 </td>
                             </tr>

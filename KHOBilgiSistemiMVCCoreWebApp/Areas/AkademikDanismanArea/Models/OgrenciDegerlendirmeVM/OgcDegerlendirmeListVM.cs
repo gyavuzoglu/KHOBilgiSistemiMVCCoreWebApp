@@ -2,7 +2,7 @@
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
 {
-    public class OgrenciDegerlendirmeList
+    public class OgcDegerlendirmeListVM
     {
         public long DegerlendirmeID { get; set; }
         public long PerID { get; set; }
