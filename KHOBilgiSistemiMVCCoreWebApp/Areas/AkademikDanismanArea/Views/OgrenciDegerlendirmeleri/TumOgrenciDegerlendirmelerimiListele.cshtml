@@ -1,0 +1,139 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
+@model TumOgcDegListelemeVM
+
+@{
+    ViewData["Title"] = "Öğrenci Değerlendirme Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-3" style="max-width: 80rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <h3 class="text-primary text-center">
+                Tüm Öğrenci Değerlendirmeleriniz
+            </h3>
+
+            <div class="col-8 align-middle">
+
+                <h5 class="text-primary">Eğitim-Öğretim Yılı : @Model.EOYili  </h5>
+                <h5 class="text-primary">Dönemi : @Model.DonemAdi </h5>
+
+            </div>
+
+            <div class="col-4 text-end">
+                
+                    @using (Html.BeginForm("TumOgrenciDegerlendirmelerimiGetirForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
+                    {
+                        <button type="submit" class="btn btn-outline-primary" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Başka Eğt.Öğt.Yılı ve Dönem Seç</button>
+                    }                                 
+            </div>
+
+            <div style="width:100%;margin:auto;">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr class="table-primary">                            
+                            <th scope="col" class="text-center align-middle" width="5%">Sıra No</th>
+                            <th scope="col" class="text-center align-middle" width="5%">Sınıf</th>
+                            <th scope="col" class="text-center align-middle" width="5%">Kısım</th>
+                            <th scope="col" class="text-center align-middle" width="7%">Yaka No</th>
+                            <th scope="col" class="text-center align-middle" width="10%">Adı</th>
+                            <th scope="col" class="text-center align-middle" width="12%">Soyadi</th>
+                            <th scope="col" class="text-center align-middle" width="8%">Fotoğraf</th>
+                            <th scope="col" class="text-center align-middle" width="11%">Değ.Türü</th>
+                            <th scope="col" class="text-center align-middle" width="10%">Tarih-Saat</th>
+                            <th scope="col" class="text-center align-middle" width="22%">Değerlendirme</th>
+                            <th scope="col" class="text-center align-middle" width="5%">İşlem</th>
+                        </tr>
+                    </thead>
+                    @{
+                        int adet = 1;
+                    }
+                    @if (Enumerable.Count(Model.TumOgrenciDegListe) > 0)
+                    {
+                        @foreach (var item in Model.TumOgrenciDegListe)
+                        {
+                            <tr class="table-light">
+                                <td scope="row" class="text-center text-primary align-middle">@adet</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.Sinif</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.KisimAdi</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.YakaNo</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.Adi</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.Soyadi</td>
+                                <td scope="row" class="text-center text-primary align-middle">
+                                    <img src="@item.FotografAdresi" width="60" height="80" />
+                                </td>
+                                <td scope="row" class="text-left text-primary align-middle">@item.TurAdi</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.TarihSaat</td>
+                                <td scope="row" class="text-left text-primary align-middle">@item.Degerlendirme</td>
+
+                                <td scope="row" class="text-center text-primary align-middle">
+                                    <div class="row">
+                                        <div class="col align-middle">
+
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.DegerlendirmeID">
+                                                <span title="Değerlendirmeyi Sil"><i class="fa-solid fa-lg fa-trash text-primary"></i></span>
+                                            </a>
+                                            @* Modal Sil *@
+                                            <div class="modal fade" id="Sil_@item.DegerlendirmeID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="SilModalLongTitle">Değerlendirme Silme</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h5>Bu Değerlendirmeyi silmek istediğinize emin misiniz ? </h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            @using (Html.BeginForm("TumOgrenciDegerlendirmeDelete", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                                            {
+                                                                <input type="hidden" name="id" value="@item.DegerlendirmeID" />
+                                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                                <input type="hidden" name="PerID" value="@Model.PerID" />
+                                                                 
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    Değerlendirmeyi Sil
+                                                                </button>
+
+                                                            }
+
+                                                            <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                                                                
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            adet++;
+
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="text-center text-primary" colspan="10">Herhangi bir kayıt bulunamadı.</td>
+                        </tr>
+                    }
+
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

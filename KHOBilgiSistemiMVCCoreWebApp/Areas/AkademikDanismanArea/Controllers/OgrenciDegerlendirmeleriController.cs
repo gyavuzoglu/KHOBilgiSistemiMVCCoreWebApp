@@ -1,15 +1,12 @@
 ﻿using BusinessLayer.Concrete;
-using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFrameWork;
 using EntityLayer.Concrete;
-using FluentValidation.Results;
 using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
-using System.Drawing;
+using Microsoft.EntityFrameworkCore;
 
 namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 {
@@ -26,13 +23,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
             var PerTC = HttpContext.Session.GetString("PerTC");
             var UserName = HttpContext.Session.GetString("UserName");
             var RoleName = HttpContext.Session.GetString("RoleName");
             ViewBag.UserName = UserName;
             ViewBag.RoleName = RoleName;
-
 
             return View();
 
@@ -93,6 +88,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult OgcDegerlendirmeListelemeForm(OgcDegerlendirmeleriListesiVM model)
         {
             var PerTC = HttpContext.Session.GetString("PerTC");
@@ -112,8 +108,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
                 Degerlendirme = deglist.Degerlendirme,
-
-
             }).ToList();
 
             var modelOgcDegSartlari = new OgcDegerlendirmeleriListesiVM
@@ -130,8 +124,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 Adi=db.OgrencilerTbl.Where(x=>x.OgrenciID==model.OgrenciID).Select(x=>x.Adi).FirstOrDefault(),
                 Soyadi= db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.Soyadi).FirstOrDefault(),
                 YakaNo= db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.YakaNo).FirstOrDefault(),
-                FotografAdresi= db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.FotografAdresi).FirstOrDefault(),
-                
+                FotografAdresi= db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.FotografAdresi).FirstOrDefault(),                
             };
 
             return View(modelOgcDegSartlari);
@@ -158,7 +151,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             skc.DonemlerListe = new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
             skc.PerID=PerID;
             
-
             return View(skc);
         }
 
@@ -174,8 +166,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.UserName=UserName;
             ViewBag.RoleName=RoleName;
             
-            ViewBag.kisimogrenciadedi = db.OgrencilerTbl.Count(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi);
-
             var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
 
             var modelOgrenciListe = db.OgrencilerTbl.Where(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi).Select(OgcList => new OgrenciListeDegSayilariIleVM
@@ -201,11 +191,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgrenciListe= modelOgrenciListe,
                 PerID=PerID,
 
-            };
-
-            
-            return View("OgrencileriListele", modelKisimOgrenciListe);
-            
+            };            
+            return View("OgrencileriListele", modelKisimOgrenciListe);            
         }
 
 
@@ -261,9 +248,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                     EOYiliID = model.EOYiliID,
                     Donem = model.Donem,
                 };
-
                 ogrencidegerlendirmemanager.OgrenciDegerlendirmeAdd(YapilanDegerlendirme);
-
             }
 
             var modelOgrenciDegerlendirmeListe = db.OgrenciDegerlendirmeleriTbl.Where(deglist => deglist.PerID == model.PerID && deglist.OgrenciID == model.OgrenciID && deglist.EOYiliID == model.EOYiliID && deglist.Donem == model.Donem).Select(deglist => new OgcDegerlendirmeListVM
@@ -277,8 +262,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
                 Degerlendirme = deglist.Degerlendirme,
-
-
             }).ToList();
 
             var DegList = new OgcDegerlendirmeleriListesiVM
@@ -294,15 +277,13 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 YakaNo=db.OgrencilerTbl.Where(x=>x.OgrenciID==model.OgrenciID).Select(x=>x.YakaNo).FirstOrDefault(),
                 FotografAdresi=db.OgrencilerTbl.Where(x=>x.OgrenciID==model.OgrenciID).Select(x=>x.FotografAdresi).FirstOrDefault(),                
                 OgrenciDegListe= modelOgrenciDegerlendirmeListe,
-
             };
-
-
             return View("OgcDegerlendirmeListelemeForm", DegList);
 
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult OgrenciDegerlendirmeDelete(long id, OgcDegerlendirmeleriListesiVM model)
         {
             var UserName = HttpContext.Session.GetString("UserName");
@@ -314,8 +295,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 
             var Degerlendirmevalue = ogrencidegerlendirmemanager.GetByID(id);
             ogrencidegerlendirmemanager.OgrenciDegerlendirmeDelete(Degerlendirmevalue);
-
-           
+                       
             var modelOgrenciDegerlendirmeListe = db.OgrenciDegerlendirmeleriTbl.Where(deglist => deglist.PerID == model.PerID && deglist.OgrenciID == model.OgrenciID && deglist.EOYiliID == model.EOYiliID && deglist.Donem == model.Donem).Select(deglist => new OgcDegerlendirmeListVM
             {
                 DegerlendirmeID = deglist.DegerlendirmeID,
@@ -327,8 +307,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
                 Degerlendirme = deglist.Degerlendirme,
-
-
             }).ToList();
 
             var ModelDegList = new OgcDegerlendirmeleriListesiVM
@@ -344,7 +322,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 YakaNo = db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.YakaNo).FirstOrDefault(),
                 FotografAdresi = db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.FotografAdresi).FirstOrDefault(),
                 OgrenciDegListe = modelOgrenciDegerlendirmeListe,
-
             };
 
             return View("OgcDegerlendirmeListelemeForm", ModelDegList);
@@ -352,6 +329,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DegerlendirmeGet(long id, DegerlendirmeClassVM model)
         {
             var UserName = HttpContext.Session.GetString("UserName");
@@ -359,8 +337,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             var PerTC = HttpContext.Session.GetString("PerTC");
             ViewBag.RoleName = RoleName;
             ViewBag.UserName = UserName;
-            
-            
+                        
             var degerlendirmevalue = ogrencidegerlendirmemanager.GetByID(id);
             var modelDegerlendirmeClassVM = new DegerlendirmeClassVM
             {
@@ -379,8 +356,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 Soyadi= model.Soyadi,
                 FotografAdresi = model.FotografAdresi,
                 OgrenciDegerlendirmeTurleriListe = new SelectList(db.OgrenciDegerlendirmeTurleriTbl, "DegTurID", "TurAdi"),
-            };
-            
+            };            
             return View(modelDegerlendirmeClassVM);
         }
 
@@ -405,7 +381,6 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgcDegTbl.TarihSaat = p.TarihSaat;
                 OgcDegTbl.EOYiliID = p.EOYiliID;
                 OgcDegTbl.Donem = p.Donem;
-
             }
             ogrencidegerlendirmemanager.OgrenciDegerlendirmeUpdate(OgcDegTbl);
 
@@ -420,13 +395,10 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
                 Degerlendirme = deglist.Degerlendirme,
-
-
             }).ToList();
 
             var modelOgrenciDegerlendirmeListeSartlari = new OgcDegerlendirmeleriListesiVM
             {
-
                 PerID = OgcDegTbl.PerID,
                 EOYiliID = OgcDegTbl.EOYiliID,
                 Donem = OgcDegTbl.Donem,
@@ -441,8 +413,124 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 DonemAdi=db.DonemlerTbl.Where(x=>x.Donem==p.Donem).Select(x=>x.DonemAdi).FirstOrDefault(),
                 OgrenciDegListe= modelOgrenciDegerlendirmeListe,
             };
-
             return View("OgcDegerlendirmeListelemeForm", modelOgrenciDegerlendirmeListeSartlari);
+        }
+
+
+        [HttpGet]
+        public IActionResult TumOgrenciDegerlendirmelerimiGetirForm()
+        {
+            OgrenciGetirFormVM OgrenciGetirForm = new OgrenciGetirFormVM();
+
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
+            var PerTC = HttpContext.Session.GetString("PerTC");
+            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+
+            OgrenciGetirForm.SiniflarListe = new SelectList(db.SiniflarTbl, "Sinif", "SinifAdi");
+            OgrenciGetirForm.KisimlarListe = new SelectList(db.KisimlarTbl, "KisimAdi", "KisimAdi");
+            OgrenciGetirForm.EOYiliListe = new SelectList(db.EOYiliTbl, "EOYiliID", "EOYili");
+            OgrenciGetirForm.DonemlerListe = new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
+            OgrenciGetirForm.PerID = PerID;
+
+            return View(OgrenciGetirForm);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult TumOgrenciDegerlendirmelerimiListele(OgrenciGetirFormVM model)
+        {
+            var PerTC = HttpContext.Session.GetString("PerTC");
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            ViewBag.UserName = UserName;
+            ViewBag.RoleName = RoleName;
+
+            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+
+            var TumOgcDegListe = db.OgrenciDegerlendirmeleriTbl.Include(OgcList => OgcList.OgrencilerTbl).Where(OgcList => OgcList.EOYiliID == model.EOYiliID && OgcList.Donem == model.Donem).Include(OgcList => OgcList.OgrenciDegerlendirmeTurleriTbl).Include(OgcList => OgcList.PersonelTbl).Where(OgcList => OgcList.PerID == model.PerID).Select(OgcList => new TumOgcDegListeFormVM
+            {
+                OgrenciID = OgcList.OgrencilerTbl.OgrenciID,
+                YakaNo = OgcList.OgrencilerTbl.YakaNo,
+                Adi = OgcList.OgrencilerTbl.Adi,
+                Soyadi = OgcList.OgrencilerTbl.Soyadi,
+                FotografAdresi = OgcList.OgrencilerTbl.FotografAdresi,
+                Sinif = OgcList.OgrencilerTbl.Sinif,
+                KisimAdi = OgcList.OgrencilerTbl.KisimAdi,
+
+                DegerlendirmeID = OgcList.DegerlendirmeID,
+                DegTurID = OgcList.OgrenciDegerlendirmeTurleriTbl.DegTurID,
+                TurAdi = OgcList.OgrenciDegerlendirmeTurleriTbl.TurAdi,
+                TarihSaat = OgcList.TarihSaat,
+                Degerlendirme = OgcList.Degerlendirme,
+            //}).OrderByDescending(x => x.TarihSaat).ThenBy(x=>x.OgrenciID).ToList(); //Yavaşlama yapıyor
+            }).ToList();
+
+        var modelTumOgcDegListe = new TumOgcDegListelemeVM
+            {
+                TumOgrenciDegListe=TumOgcDegListe,
+                EOYiliID = model.EOYiliID,
+                EOYili= db.EOYiliTbl.Where(x => x.EOYiliID == model.EOYiliID).Select(x => x.EOYili).FirstOrDefault(),
+                Donem= model.Donem,
+                DonemAdi= db.DonemlerTbl.Where(x => x.Donem == model.Donem).Select(x => x.DonemAdi).FirstOrDefault(),
+                PerID=PerID, 
+            }; 
+
+            return View(modelTumOgcDegListe);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult TumOgrenciDegerlendirmeDelete(long id, OgrenciGetirFormVM model)
+        {
+            var UserName = HttpContext.Session.GetString("UserName");
+            var RoleName = HttpContext.Session.GetString("RoleName");
+            var PerTC = HttpContext.Session.GetString("PerTC");
+
+            ViewBag.RoleName = RoleName;
+            ViewBag.UserName = UserName;
+
+            var Degerlendirmevalue = ogrencidegerlendirmemanager.GetByID(id);
+            ogrencidegerlendirmemanager.OgrenciDegerlendirmeDelete(Degerlendirmevalue);
+
+            var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+
+            var TumOgcDegListe = db.OgrenciDegerlendirmeleriTbl.Include(OgcList => OgcList.OgrencilerTbl).Where(OgcList => OgcList.EOYiliID == model.EOYiliID && OgcList.Donem == model.Donem).Include(OgcList => OgcList.OgrenciDegerlendirmeTurleriTbl).Include(OgcList => OgcList.PersonelTbl).Where(OgcList => OgcList.PerID == model.PerID).Select(OgcList => new TumOgcDegListeFormVM
+            {
+                OgrenciID = OgcList.OgrencilerTbl.OgrenciID,
+                YakaNo = OgcList.OgrencilerTbl.YakaNo,
+                Adi = OgcList.OgrencilerTbl.Adi,
+                Soyadi = OgcList.OgrencilerTbl.Soyadi,
+                FotografAdresi = OgcList.OgrencilerTbl.FotografAdresi,
+                Sinif = OgcList.OgrencilerTbl.Sinif,
+                KisimAdi = OgcList.OgrencilerTbl.KisimAdi,
+
+                DegerlendirmeID = OgcList.DegerlendirmeID,
+                DegTurID = OgcList.OgrenciDegerlendirmeTurleriTbl.DegTurID,
+                TurAdi = OgcList.OgrenciDegerlendirmeTurleriTbl.TurAdi,
+                TarihSaat = OgcList.TarihSaat,
+                Degerlendirme = OgcList.Degerlendirme,
+                //}).OrderByDescending(x => x.TarihSaat).ThenBy(x => x.OgrenciID).ToList();  //Yavaşlama yapıyor
+            }).ToList();
+
+            var modelTumOgcDegListe = new TumOgcDegListelemeVM
+            {
+                TumOgrenciDegListe = TumOgcDegListe,
+                EOYiliID = model.EOYiliID,
+                EOYili = db.EOYiliTbl.Where(x => x.EOYiliID == model.EOYiliID).Select(x => x.EOYili).FirstOrDefault(),
+                Donem = model.Donem,
+                DonemAdi = db.DonemlerTbl.Where(x => x.Donem == model.Donem).Select(x => x.DonemAdi).FirstOrDefault(),
+                PerID = PerID,
+            };
+
+            return View("TumOgrenciDegerlendirmelerimiListele", modelTumOgcDegListe);
+
         }
     }
 }

@@ -1,0 +1,70 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.OgrenciDegerlendirmeVM
+@model OgrenciGetirFormVM
+
+@{
+    ViewData["Title"] = "Ogrenci Degerlendirmeleri Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<br/>
+<br/>
+
+<div class="card border-primary mb-3" style="max-width: 40rem;margin:auto;">
+
+    <div class="card-header"><h4>Tüm Öğrenci Değerlendirmelerinizi Listeleme </h4></div>
+
+    <div class="card-body">
+
+
+        @using (Html.BeginForm("TumOgrenciDegerlendirmelerimiListele", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+        {
+            <input type="hidden" name="PerID" value="@Model.PerID" />
+            <input type="hidden" name="Sinif" value="@Model.Sinif" />
+            <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+            <input type="hidden" name="SiniflarListe" value="@Model.SiniflarListe" />
+            <input type="hidden" name="KisimlarListe" value="@Model.KisimlarListe" />
+            <input type="hidden" name="EOYiliListe" value="@Model.EOYiliListe" />
+            <input type="hidden" name="DonemlerListe" value="@Model.DonemlerListe" />
+
+            <div class="form-outline mb-3">
+                @Html.DropDownListFor(x => x.EOYiliID, Model.EOYiliListe, "Eğitim-Öğretim Yılı Seçiniz", new { @class = "form-control form-select", @id = "EOYiliID" })
+            </div>
+
+            <div class="form-outline mb-3">
+                @Html.DropDownListFor(x => x.Donem, Model.DonemlerListe, "Dönem Seçiniz", new { @class = "form-control form-select", @id = "Donem" })
+            </div>
+            <br/>
+            
+            <button type="submit" class="btn btn-primary m-2" style="width:100%">Öğrencileri Listele</button>
+                       
+        }
+
+        @using (Html.BeginForm("Index", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
+        {
+            <button type="submit" class="btn btn-secondary m-2" style="width:100%" data-bs-dismiss="form">Vazgeç</button>
+        }
+        
+        
+
+    </div>
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
