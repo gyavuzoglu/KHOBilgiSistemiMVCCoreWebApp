@@ -7,11 +7,11 @@
 }
 
 
-<div class="mb-3" style="max-width: 80rem;margin:auto;">
+<div class="mb-3" style="max-width: 90rem;margin:auto;">
     <div class="col-md-12">
         <div class="row pt-4">
-            <h3 class="text-primary text-center">
-                @Model.KisimAdi Kısım Öğrenci Listesi</h4>
+            <h3 class="text-primary text-center"></h3>
+                <h4>@Model.KisimAdi Kısım Öğrenci Listesi</h4>
                 <div class="col-9">
 
                     <h5 class="text-primary">Eğitim-Öğretim Yılı : @Model.EOYili </h5>
@@ -27,14 +27,15 @@
                     <table class="table table-hover table-sm">
                         <thead class="pt-4">
                             <tr class="table-primary">
-                                <th scope="col" class="text-left align-middle" width="8%">Sıra No</th>
-                                <th scope="col" class="text-left align-middle" width="8%">Sınıf</th>
-                                <th scope="col" class="text-left align-middle" width="8%">Kısım</th>
-                                <th scope="col" class="text-left align-middle" width="10%">Yaka No</th>
+                                <th scope="col" class="text-left align-middle" width="5%">Sıra No</th>
+                                <th scope="col" class="text-left align-middle" width="5%">Sınıf</th>
+                                <th scope="col" class="text-left align-middle" width="5%">Kısım</th>
+                                <th scope="col" class="text-left align-middle" width="7%">Yaka No</th>
+                                <th scope="col" class="text-left align-middle" width="10%">Bölümü</th>
                                 <th scope="col" class="text-left align-middle" width="15%">Adı</th>
-                                <th scope="col" class="text-left align-middle" width="15%">Soyadı</th>
-                                <th scope="col" class="text-left align-middle" width="10%">Fotoğraf</th>
-                                <th scope="col" class="text-center align-middle" width="15%">Değerlendirme Durumu</th>
+                                <th scope="col" class="text-left align-middle" width="20%">Soyadı</th>
+                                <th scope="col" class="text-left align-middle" width="8%">Fotoğraf</th>
+                                <th scope="col" class="text-center align-middle" width="14%">Değerlendirme Durumu</th>
                                 <th scope="col" class="text-center align-middle" width="10%">İşlem</th>
 
                             </tr>
@@ -57,6 +58,7 @@
                                     <td scope="row" class="text-left text-primary align-middle">@Model.Sinif</td>
                                     <td scope="row" class="text-left text-primary align-middle">@Model.KisimAdi</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.YakaNo</td>
+                                    <td scope="row" class="text-left text-primary align-middle">@item.BolumAdiKisa</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.Adi</td>
                                     <td scope="row" class="text-left text-primary align-middle">@item.Soyadi</td>
                                     <td scope="row" class="text-left text-primary align-middle">
@@ -91,6 +93,8 @@
                                                     <input type="hidden" name="YakaNo" value="@item.YakaNo" />
                                                     <input type="hidden" name="Sinif" value="@Model.Sinif" />
                                                     <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                    <input type="hidden" name="BolumID" value="@item.BolumID" />
+                                                    <input type="hidden" name="BolumAdiKisa" value="@item.BolumAdiKisa" />
                                                     <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                                                     <input type="hidden" name="EOYili" value="@Model.EOYili" />
                                                     <input type="hidden" name="Donem" value="@Model.Donem" />
@@ -113,6 +117,7 @@
                                                     <input type="hidden" name="OgrenciId" value="@item.OgrenciID" />
                                                     <input type="hidden" name="Sinif" value="@Model.Sinif" />
                                                     <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                    <input type="hidden" name="BolumID" value="@item.BolumID" />
                                                     <input type="hidden" name="OgrAdi" value="@item.Adi" />
                                                     <input type="hidden" name="OgrSoyadi" value="@item.Soyadi" />
                                                     <input type="hidden" name="YakaNo" value="@item.YakaNo" />

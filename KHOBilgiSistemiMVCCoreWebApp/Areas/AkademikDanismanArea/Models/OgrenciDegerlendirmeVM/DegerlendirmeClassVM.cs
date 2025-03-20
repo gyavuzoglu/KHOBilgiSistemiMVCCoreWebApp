@@ -7,13 +7,17 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.Ogrenci
 
     {
         public int EOYiliID { get; set; }
-        public string EOYili { get; set; }
+        public string? EOYili { get; set; }
         public int Donem { get; set; }
         public int Sinif { get; set; }
         public string? KisimAdi { get; set; }
 
         public long PerID { get; set; }
         public long OgrenciID { get; set; }
+        public int BolumID { get; set; }
+        public string? BolumAdiKisa { get; set; }
+        public string? BolumAdi { get; set; }
+
         public int YakaNo { get; set; }
         public string? Adi { get; set; }
         public string? Soyadi { get; set; }
@@ -24,7 +28,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.Ogrenci
         public DateTime TarihSaat { get; set; }
         public string? Degerlendirme { get; set; }
         
-        public IEnumerable<SelectListItem> OgrenciDegerlendirmeTurleriListe { get; set; }
+        public IEnumerable<SelectListItem>? OgrenciDegerlendirmeTurleriListe { get; set; }
 
 
     }

@@ -14,9 +14,13 @@ namespace EntityLayer.Concrete
         [DisplayName("Bölüm ID")]
         public int BolumID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         [DisplayName("Bölüm Adı")]
         public string? BolumAdi { get; set; }
+
+        [StringLength(100)]
+        [DisplayName("Bölüm Adı Kısa")]
+        public string? BolumAdiKisa { get; set; }
 
         public List<OgrencilerTbl>? OgrencilerTbl { get; set; }
         public List<DerslerTbl>? DerslerTbl { get; set; }

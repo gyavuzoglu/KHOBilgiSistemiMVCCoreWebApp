@@ -15,10 +15,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
 
     public class OgrenciDegerlendirmeleriController : Controller
     {
-
         Context db = new Context();
         OgrenciDegerlendirmeleriManager ogrencidegerlendirmemanager = new OgrenciDegerlendirmeleriManager(new EfOgrenciDegerlendirmeleriRepository());
-        OgrenciManager OgrencilerMng = new OgrenciManager(new EfOgrencilerRepository());
+     
 
         [HttpGet]
         public IActionResult Index()
@@ -44,8 +43,12 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.RoleName=RoleName;
 
             var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+            var BolumID=db.OgrencilerTbl.Where(x=>x.Sinif==model.Sinif && x.KisimAdi==model.KisimAdi).Select(x=>x.BolumID).FirstOrDefault();
+
             var modelOgrenciDegListe = db.OgrencilerTbl.Where(x=>x.Sinif==model.Sinif && x.KisimAdi == model.KisimAdi).Select(OgcList => new OgrenciListeDegSayilariIleVM
             {
+                BolumID=BolumID,
+                BolumAdiKisa=db.BolumlerTbl.Where(x=>x.BolumID==BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
                 YakaNo=OgcList.YakaNo,
                 Adi=OgcList.Adi,
                 Soyadi=OgcList.Soyadi,
@@ -97,6 +100,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.UserName = UserName;
             ViewBag.RoleName = RoleName;
 
+            var BolumID=model.BolumID;
+
             var modelOgrenciDegerlendirmeListe = db.OgrenciDegerlendirmeleriTbl.Where(deglist => deglist.PerID == model.PerID && deglist.OgrenciID == model.OgrenciID && deglist.EOYiliID == model.EOYiliID && deglist.Donem == model.Donem).Select(deglist => new OgcDegerlendirmeListVM
             {
                 DegerlendirmeID= deglist.DegerlendirmeID,
@@ -104,6 +109,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYiliID = model.EOYiliID,
                 Donem = model.Donem,
                 OgrenciID = deglist.OgrenciID,
+                BolumID = model.BolumID,
+                BolumAdiKisa = db.BolumlerTbl.Where(x=>x.BolumID==BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
                 DegTurID = deglist.DegTurID,
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
@@ -118,7 +125,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYili=model.EOYili,
                 Donem = model.Donem,
                 DonemAdi = model.DonemAdi,
-                OgrenciID=model.OgrenciID,
+                BolumID = model.BolumID,
+                BolumAdi = db.BolumlerTbl.Where(x => x.BolumID == BolumID).Select(x => x.BolumAdi).FirstOrDefault(),
+                OgrenciID =model.OgrenciID,
                 Sinif=model.Sinif,
                 KisimAdi = model.KisimAdi,
                 Adi=db.OgrencilerTbl.Where(x=>x.OgrenciID==model.OgrenciID).Select(x=>x.Adi).FirstOrDefault(),
@@ -167,11 +176,14 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.RoleName=RoleName;
             
             var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+            var BolumID=db.OgrencilerTbl.Where(x=>x.KisimAdi==model.KisimAdi && x.Sinif==model.Sinif).Select(x=>x.BolumID).FirstOrDefault();
 
             var modelOgrenciListe = db.OgrencilerTbl.Where(x => x.Sinif == model.Sinif && x.KisimAdi == model.KisimAdi).Select(OgcList => new OgrenciListeDegSayilariIleVM
             {
-                OgrenciID=OgcList.OgrenciID,
+                OgrenciID = OgcList.OgrenciID,
                 YakaNo = OgcList.YakaNo,
+                BolumID = OgcList.BolumID,
+                BolumAdiKisa = db.BolumlerTbl.Where(x=>x.BolumID==BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
                 Adi = OgcList.Adi,
                 Soyadi = OgcList.Soyadi,
                 FotografAdresi = OgcList.FotografAdresi,
@@ -213,6 +225,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 Adi = model.Adi,
                 Soyadi = model.Soyadi,
                 YakaNo=model.YakaNo,
+                BolumID=model.BolumID,
+                BolumAdiKisa=db.BolumlerTbl.Where(x=>x.BolumID==model.BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
+                BolumAdi=db.BolumlerTbl.Where(x=>x.BolumID== model.BolumID).Select(x=>x.BolumAdi).FirstOrDefault(),
                 Sinif = model.Sinif,
                 KisimAdi = model.KisimAdi,
                 EOYiliID = model.EOYiliID,
@@ -258,6 +273,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYiliID = deglist.EOYiliID,
                 Donem = deglist.Donem,
                 OgrenciID = deglist.OgrenciID,
+                BolumID = model.BolumID,
+                BolumAdiKisa = model.BolumAdiKisa,
                 DegTurID = deglist.DegTurID,
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
@@ -268,8 +285,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             {
                 PerID = model.PerID,
                 EOYiliID=model.EOYiliID,
+                EOYili=model.EOYili,
                 Donem = model.Donem,
                 OgrenciID=model.OgrenciID,
+                BolumID=model.BolumID,
+                BolumAdi=model.BolumAdi,
                 Sinif=model.Sinif,
                 KisimAdi=model.KisimAdi,
                 Adi=db.OgrencilerTbl.Where(x=>x.OgrenciID==model.OgrenciID).Select(x=>x.Adi).FirstOrDefault(),
@@ -303,6 +323,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYiliID = deglist.EOYiliID,
                 Donem = deglist.Donem,
                 OgrenciID = deglist.OgrenciID,
+                BolumID = model.BolumID,
+                BolumAdiKisa = db.BolumlerTbl.Where(x=>x.BolumID==model.BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
                 DegTurID = deglist.DegTurID,
                 TurAdi = db.OgrenciDegerlendirmeTurleriTbl.Where(x => x.DegTurID == deglist.DegTurID).Select(x => x.TurAdi).FirstOrDefault(),
                 TarihSaat = deglist.TarihSaat,
@@ -317,6 +339,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgrenciID = model.OgrenciID,
                 Sinif = model.Sinif,
                 KisimAdi = model.KisimAdi,
+                BolumID = model.BolumID,
+                BolumAdi = model.BolumAdi,
                 Adi = db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.Adi).FirstOrDefault(),
                 Soyadi = db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.Soyadi).FirstOrDefault(),
                 YakaNo = db.OgrencilerTbl.Where(x => x.OgrenciID == model.OgrenciID).Select(x => x.YakaNo).FirstOrDefault(),
@@ -351,6 +375,9 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 Degerlendirme=degerlendirmevalue.Degerlendirme,
                 Sinif=model.Sinif,
                 KisimAdi= model.KisimAdi,
+                BolumID= model.BolumID,
+                BolumAdi= model.BolumAdi,
+                BolumAdiKisa= model.BolumAdiKisa,
                 YakaNo= model.YakaNo,
                 Adi= model.Adi,
                 Soyadi= model.Soyadi,
@@ -381,8 +408,10 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 OgcDegTbl.TarihSaat = p.TarihSaat;
                 OgcDegTbl.EOYiliID = p.EOYiliID;
                 OgcDegTbl.Donem = p.Donem;
+
+                ogrencidegerlendirmemanager.OgrenciDegerlendirmeUpdate(OgcDegTbl);
             }
-            ogrencidegerlendirmemanager.OgrenciDegerlendirmeUpdate(OgcDegTbl);
+           
 
             var modelOgrenciDegerlendirmeListe = db.OgrenciDegerlendirmeleriTbl.Where(deglist => deglist.PerID == p.PerID && deglist.OgrenciID == p.OgrenciID && deglist.EOYiliID == p.EOYiliID && deglist.Donem == p.Donem).Select(deglist => new OgcDegerlendirmeListVM
             {
@@ -403,6 +432,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 EOYiliID = OgcDegTbl.EOYiliID,
                 Donem = OgcDegTbl.Donem,
                 OgrenciID = OgcDegTbl.OgrenciID,
+                BolumID = p.BolumID,
+                BolumAdi = p.BolumAdi,
                 Sinif = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.Sinif).FirstOrDefault(),
                 KisimAdi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x=>x.KisimAdi).FirstOrDefault(),
                 Adi = db.OgrencilerTbl.Where(x => x.OgrenciID == OgcDegTbl.OgrenciID).Select(x => x.Adi).FirstOrDefault(),
@@ -435,6 +466,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             OgrenciGetirForm.EOYiliListe = new SelectList(db.EOYiliTbl, "EOYiliID", "EOYili");
             OgrenciGetirForm.DonemlerListe = new SelectList(db.DonemlerTbl, "Donem", "DonemAdi");
             OgrenciGetirForm.PerID = PerID;
+            
 
             return View(OgrenciGetirForm);
         }
@@ -452,6 +484,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
             ViewBag.RoleName = RoleName;
 
             var PerID = db.PersonelTbl.Where(x => x.PersonelTC == PerTC).Select(x => x.PerId).FirstOrDefault();
+            
 
             var TumOgcDegListe = db.OgrenciDegerlendirmeleriTbl.Include(OgcList => OgcList.OgrencilerTbl).Where(OgcList => OgcList.EOYiliID == model.EOYiliID && OgcList.Donem == model.Donem).Include(OgcList => OgcList.OgrenciDegerlendirmeTurleriTbl).Include(OgcList => OgcList.PersonelTbl).Where(OgcList => OgcList.PerID == model.PerID).Select(OgcList => new TumOgcDegListeFormVM
             {
@@ -462,6 +495,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 FotografAdresi = OgcList.OgrencilerTbl.FotografAdresi,
                 Sinif = OgcList.OgrencilerTbl.Sinif,
                 KisimAdi = OgcList.OgrencilerTbl.KisimAdi,
+                BolumID = OgcList.OgrencilerTbl.BolumID,
+                BolumAdiKisa = db.BolumlerTbl.Where(x=>x.BolumID==OgcList.OgrencilerTbl.BolumID).Select(x=>x.BolumAdiKisa).FirstOrDefault(),
 
                 DegerlendirmeID = OgcList.DegerlendirmeID,
                 DegTurID = OgcList.OgrenciDegerlendirmeTurleriTbl.DegTurID,
@@ -510,6 +545,8 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 FotografAdresi = OgcList.OgrencilerTbl.FotografAdresi,
                 Sinif = OgcList.OgrencilerTbl.Sinif,
                 KisimAdi = OgcList.OgrencilerTbl.KisimAdi,
+                BolumID = OgcList.OgrencilerTbl.BolumID,
+                BolumAdiKisa = db.BolumlerTbl.Where(x => x.BolumID == OgcList.OgrencilerTbl.BolumID).Select(x => x.BolumAdiKisa).FirstOrDefault(),
 
                 DegerlendirmeID = OgcList.DegerlendirmeID,
                 DegTurID = OgcList.OgrenciDegerlendirmeTurleriTbl.DegTurID,
@@ -527,6 +564,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Controllers
                 Donem = model.Donem,
                 DonemAdi = db.DonemlerTbl.Where(x => x.Donem == model.Donem).Select(x => x.DonemAdi).FirstOrDefault(),
                 PerID = PerID,
+
             };
 
             return View("TumOgrenciDegerlendirmelerimiListele", modelTumOgcDegListe);

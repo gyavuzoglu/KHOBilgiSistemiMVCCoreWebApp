@@ -17,6 +17,7 @@
             <div class="col-md-9">
                 <h4 class="text-primary">Öğrenci Değerlendirme Güncelleme</h4>
                 <h5 class="text-primary">Öğrenci : @Model.Adi @Model.Soyadi</h5>
+                <h5 class="text-primary">Bölümü : @Model.BolumAdi</h5>
                 <h5 class="text-primary">Sınıf - Kısım - Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo</h5>
             </div>
             <div class="col-md-3">
@@ -53,12 +54,14 @@
                     <input type="hidden" name="PerID" value="@Model.PerID" />
                     <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                     <input type="hidden" name="Donem" value="@Model.Donem" />
+                    <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                    <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
                     <input type="hidden" name="OgrenciID" value="@Model.OgrenciID" />
                     <input type="hidden" name="TarihSaat" value="@DateTime.Now" />
 
                     <div class="form-outline mb-4">
 
-                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "form-control", @id = "DegTurID" })
+                        @Html.DropDownListFor(x => x.DegTurID, Model.OgrenciDegerlendirmeTurleriListe, "Değerlendirme Türü Seçiniz", new { @class = "form-control form-select", @id = "DegTurID" })
 
                     </div>
 
@@ -77,6 +80,9 @@
                     <input type="hidden" name="PerID" value="@Model.PerID" />
                     <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                     <input type="hidden" name="Donem" value="@Model.Donem" />
+                    <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                    <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
+                    <input type="hidden" name="BolumAdiKisa" value="@Model.BolumAdiKisa" />
                     <input type="hidden" name="OgrenciId" value="@Model.OgrenciID" />
                     <input type="hidden" name="Sinif" value="@Model.Sinif" />
                     <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />

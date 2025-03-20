@@ -9,9 +9,11 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.Ogrenci
         public int EOYiliID { get; set; }
         public int Donem { get; set; }
         public long OgrenciID { get; set; }
+        public int BolumID { get; set; }
+        public string? BolumAdiKisa { get; set; }
         public int DegTurID { get; set; }
-        public string TurAdi { get; set; }
+        public string? TurAdi { get; set; }
         public DateTime TarihSaat { get; set; }
-        public string Degerlendirme { get; set; }
+        public string? Degerlendirme { get; set; }
     }
 }

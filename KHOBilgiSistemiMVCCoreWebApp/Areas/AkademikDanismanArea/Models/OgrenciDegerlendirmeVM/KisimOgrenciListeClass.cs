@@ -5,7 +5,7 @@ namespace KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.Ogrenci
 {
     public class KisimOgrenciListeClass
     {
-        public List<OgrenciListeDegSayilariIleVM> OgrenciListe { get; set; }
+        public List<OgrenciListeDegSayilariIleVM>? OgrenciListe { get; set; }
         public int Sinif { get; set; }
         public int EOYiliID { get; set; }
         public string? EOYili { get; set; }

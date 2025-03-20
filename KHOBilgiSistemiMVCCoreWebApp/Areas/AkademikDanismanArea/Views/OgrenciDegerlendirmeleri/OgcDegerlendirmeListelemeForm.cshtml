@@ -20,6 +20,7 @@
 
                 <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @Model.EOYili / @Model.Donem </h5>
                 <h5 class="text-primary">Öğrenci Adı Soyadı : @Model.Adi @Model.Soyadi</h5>
+                <h5 class="text-primary">Öğrenci Bölümü : @Model.BolumAdi </h5>
                 <h5 class="text-primary">Öğrenci Sınıf / Kısım / Yaka No : @Model.Sinif / @Model.KisimAdi / @Model.YakaNo </h5>
 
             </div>
@@ -47,12 +48,15 @@
                         <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                         <input type="hidden" name="EOYili" value="@Model.EOYili" />
                         <input type="hidden" name="OgrenciID" value="@Model.OgrenciID" />
+                        <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                        <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
                         <input type="hidden" name="Donem" value="@Model.Donem" />
                         <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
                         <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
                         <input type="hidden" name="Adi" value="@Model.Adi" />
                         <input type="hidden" name="Soyadi" value="@Model.Soyadi" />
                         <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
+                        <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
                         <input type="hidden" name="Sinif" value="@Model.Sinif" />
                         <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
 
@@ -101,9 +105,11 @@
                                                 <input type="hidden" name="id" value="@item.DegerlendirmeID" />
                                                 <input type="hidden" name="Sinif" value="@Model.Sinif" />
                                                 <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                                                <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
                                                 <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
-                                                <input type="hidden" name="OgrAdi" value="@Model.Adi" />
-                                                <input type="hidden" name="OgrSoyadi" value="@Model.Soyadi" />
+                                                <input type="hidden" name="Adi" value="@Model.Adi" />
+                                                <input type="hidden" name="Soyadi" value="@Model.Soyadi" />
                                                 <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
                                                 <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                                                 <input type="hidden" name="Donem" value="@Model.Donem" />
@@ -143,6 +149,8 @@
                                                                 <input type="hidden" name="OgrenciID" value="@Model.OgrenciID" />
                                                                 <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
                                                                 <input type="hidden" name="YakaNo" value="@Model.YakaNo" />
+                                                                <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                                                                <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />                                                                
                                                                 <input type="hidden" name="OgrAdi" value="@Model.Adi" />
                                                                 <input type="hidden" name="OgrSoyadi" value="@Model.Soyadi" />
                                                                 <input type="hidden" name="FotografAdresi" value="@Model.FotografAdresi" />
