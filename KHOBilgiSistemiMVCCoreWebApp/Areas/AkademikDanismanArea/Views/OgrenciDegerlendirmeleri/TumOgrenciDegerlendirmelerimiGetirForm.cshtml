@@ -11,7 +11,7 @@
 
 <div class="card border-primary mb-3" style="max-width: 40rem;margin:auto;">
 
-    <div class="card-header"><h4>Tüm Öğrenci Değerlendirmelerinizi Listeleme </h4></div>
+    <div class="card-header"><h4>Öğrenci Değerlendirmelerinizi Listeleme </h4></div>
 
     <div class="card-body">
 
@@ -21,8 +21,6 @@
             <input type="hidden" name="PerID" value="@Model.PerID" />
             <input type="hidden" name="Sinif" value="@Model.Sinif" />
             <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
-           @*  <input type="hidden" name="SiniflarListe" value="@Model.SiniflarListe" />
-            <input type="hidden" name="KisimlarListe" value="@Model.KisimlarListe" /> *@
             <input type="hidden" name="EOYiliListe" value="@Model.EOYiliListe" />
             <input type="hidden" name="DonemlerListe" value="@Model.DonemlerListe" />
 
@@ -34,8 +32,8 @@
                 @Html.DropDownListFor(x => x.Donem, Model.DonemlerListe, "Dönem Seçiniz", new { @class = "form-control form-select", @id = "Donem" })
             </div>
             <br/>
-            
-            <button type="submit" class="btn btn-primary m-2" style="width:100%">Öğrencileri Listele</button>
+
+            <button id="spinner" type="submit" class="btn btn-primary m-2" style="width:100%">Öğrencileri Listele</button>
                        
         }
 
@@ -50,7 +48,9 @@
 
 </div>
 
-  
+<script src="~/js/jquery-3.7.1.min.js"></script>
+
+
 
 
 

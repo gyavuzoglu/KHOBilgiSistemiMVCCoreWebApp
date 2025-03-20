@@ -39,7 +39,7 @@
                         <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                         <input type="hidden" name="Donem" value="@Model.Donem" />
 
-                        <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
+                        <button type="submit" id="spinner" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
                     }
 
                     @using (Html.BeginForm("OgcDegerlendirmeEkleForm", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
@@ -60,7 +60,7 @@
                         <input type="hidden" name="Sinif" value="@Model.Sinif" />
                         <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
 
-                        <button type="submit" class="btn btn-outline-info" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</button>
+                        <button type="submit" id="spinner" class="btn btn-outline-info" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</button>
                     }
                     <br />
                    
@@ -114,7 +114,7 @@
                                                 <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                                                 <input type="hidden" name="Donem" value="@Model.Donem" />
 
-                                                <button type="submit" class="btn">
+                                                <button type="submit" id="spinner" class="btn">
                                                     <span title="Değerlendirmeyi Güncelle"><i class="fa-solid fa-lg fa-pen-to-square text-primary"></i></span>
 
                                                 </button>
@@ -157,13 +157,13 @@
                                                                 <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                                                                 <input type="hidden" name="Donem" value="@Model.Donem" />
 
-                                                                <button type="submit" class="btn btn-danger">
+                                                                <button type="submit" id="spinner" class="btn btn-danger">
                                                                     Değerlendirmeyi Sil
                                                                 </button>
 
                                                             }
-                                                                                                                             
-                                                            <button type="reset" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+
+                                                            <button type="reset" id="spinner" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
                                                         </div>
                                                     </div>
                                                 </div>

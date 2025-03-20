@@ -36,7 +36,7 @@
                         <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
                         <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                         <input type="hidden" name="Donem" value="@Model.Donem" />
-                        <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
+                        <button type="submit" id="spinner" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Öğrenci Seç</button>
                     }
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </div>
                     <br />
 
-                    <button type="submit" class="btn btn-outline-primary mb-2" style="width:100%;"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Kaydet</button>
+                    <button type="submit" id="spinner" class="btn btn-outline-primary mb-2" style="width:100%;"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Kaydet</button>
                 }
 
                 @using (Html.BeginForm("OgrencileriGetir", "OgrenciDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
@@ -98,7 +98,7 @@
                     <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
                     <input type="hidden" name="Donem" value="@Model.Donem" />
 
-                    <button type="submit" class="btn btn-outline-secondary mb-2" style="width:100%;"><i class="fa-solid fa-user-plus"></i>&nbsp;Vazgeç</button>
+                    <button type="submit" id="spinner" class="btn btn-outline-secondary mb-2" style="width:100%;"><i class="fa-solid fa-user-plus"></i>&nbsp;Vazgeç</button>
                 }
 
             </div>
