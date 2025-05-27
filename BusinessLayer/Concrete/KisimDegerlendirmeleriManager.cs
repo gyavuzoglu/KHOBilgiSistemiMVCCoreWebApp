@@ -19,7 +19,7 @@ namespace BusinessLayer.Concrete
             _kisimDegerlendirmeleriDAL = kisimDegerlendirmeleriDAL;
         }
 
-        public KisimDegerlendirmeleriTbl GetByID(int id)
+        public KisimDegerlendirmeleriTbl GetByID(long id)
         {
             return _kisimDegerlendirmeleriDAL.GetByID(id);
         }

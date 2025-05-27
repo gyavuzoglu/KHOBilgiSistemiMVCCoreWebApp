@@ -23,7 +23,13 @@ namespace EntityLayer.Concrete
 
         [DisplayName("Bölüm ID")]
         public int? BolumID { get; set; }
+
+        [ForeignKey("EOYiliTbl")]
+
+        [DisplayName("EOYili ID")]
+        public int? EOYiliID { get; set; }
         public List<OgrencilerTbl>? OgrencilerTbl { get; set; }
         public virtual BolumTbl? BolumTbl { get; set; }
+        public virtual EOYiliTbl? EOYiliTbl { get; set; }
     }
 }

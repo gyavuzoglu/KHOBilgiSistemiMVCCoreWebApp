@@ -13,7 +13,7 @@ namespace EntityLayer.Concrete
         [Key]
 
         [DisplayName("Kısım Değ.ID")]
-        public int KisimDegerlendirmeID { get; set; }
+        public long KisimDegerlendirmeID { get; set; }
 
         [StringLength(5)]
 

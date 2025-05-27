@@ -1,0 +1,178 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.KisimDegerlendirmeVM
+@model KisimDegerlendirmeleriListesiVM
+
+@{
+    ViewData["Title"] = "Kısım Değerlendirme Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-3" style="max-width: 80rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <h3 class="text-primary text-center">
+                Kısım Değerlendirmeleri
+            </h3>
+            
+            <div class="col-10 align-middle">
+
+                <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @Model.EOYili / @Model.Donem </h5>
+                <h5 class="text-primary">Bölüm : @Model.BolumAdi </h5>
+                <h5 class="text-primary">Sınıf : @Model.Sinif </h5>
+                <h5 class="text-primary">Kısım : @Model.KisimAdi </h5>
+
+            </div>
+
+
+            <div class="col-2 text-end">
+                <div class="d-grid gap-3">
+                    @using (Html.BeginForm("KisimlariGetirForm", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
+                    {
+                        <button type="submit" class="btn btn-outline-primary" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf Seç</button>
+                    }
+                    @using (Html.BeginForm("KisimlariGetir", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                        <button type="submit" id="spinner" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Kısım Seç</button>
+                    }
+
+                    @using (Html.BeginForm("KisimDegerlendirmeEkleForm", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="PerID" value="@Model.PerID" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                        <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                        <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
+                        <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
+                        <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                       
+                        <button type="submit" id="spinner" class="btn btn-outline-info" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Değerlendirme Ekle</button>
+                    }
+                    <br />
+
+                </div>
+            </div>
+
+            <div style="width:90%;margin:auto;">
+                <table class="table table-hover table-sm">
+                    <thead>
+                        <tr class="table-primary">
+                            <th scope="col" class="text-center align-middle" width="8%">Sıra No</th>
+                            <th scope="col" class="text-center align-middle" width="12%">Değerlendirme ID</th>
+                            <th scope="col" class="text-center align-middle" width="15%">Tarih-Saat</th>
+                            <th scope="col" class="text-center align-middle" width="37%">Değerlendirme</th>
+                            <th scope="col" class="text-center align-middle" width="10%">İşlem</th>
+
+                        </tr>
+                    </thead>
+                    @{
+                        int adet = 1;
+                    }
+                    @if (Enumerable.Count(Model.KisimDegListe) > 0)
+                    {
+                        @foreach (var item in Model.KisimDegListe)
+                        {
+                            <tr class="table-light">
+                                <td scope="row" class="text-center text-primary align-middle">@adet</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.KisimDegerlendirmeID</td>
+                                <td scope="row" class="text-center text-primary align-middle">@item.TarihSaat</td>
+                                <td scope="row" class="text-left text-primary align-middle">@item.KisimDegerlendirme</td>
+
+                                <td scope="row" class="text-center text-primary align-middle">
+                                    <div class="row">
+                                        <div class="col align-middle">
+
+                                            @using (Html.BeginForm("DegerlendirmeGet", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="id" value="@item.KisimDegerlendirmeID" />
+                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                <input type="hidden" name="KisimAdi" value="@item.KisimAdi" />
+                                                <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                                                <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
+                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                                                <button type="submit" id="spinner" class="btn">
+                                                    <span title="Değerlendirmeyi Güncelle"><i class="fa-solid fa-lg fa-pen-to-square text-primary"></i></span>
+
+                                                </button>
+
+                                            }
+                                        </div>
+
+                                        <div class="col align-middle">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#Sil_@item.KisimDegerlendirmeID">
+                                                <span title="Değerlendirmeyi Sil"><i class="fa-solid fa-lg fa-trash text-primary"></i></span>
+                                            </a>
+                                            @* Modal Sil *@
+                                            <div class="modal fade" id="Sil_@item.KisimDegerlendirmeID" tabindex="-1" role="dialog" aria-labelledby="SilModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="SilModalLongTitle">Değerlendirme Silme</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h5>Bu Değerlendirmeyi silmek istediğinize emin misiniz? </h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                            @using (Html.BeginForm("KisimDegerlendirmeDelete", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                                            {
+                                                                <input type="hidden" name="id" value="@item.KisimDegerlendirmeID" />
+                                                                <input type="hidden" name="PerID" value="@item.PerID" />
+                                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                                <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                                                                <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                                                                <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
+                                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                                <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                                                <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+                                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                                <input type="hidden" name="KisimDegListe" value="" />
+
+                                                                <button type="submit" id="spinner" class="btn btn-danger">
+                                                                    Değerlendirmeyi Sil
+                                                                </button>
+
+                                                            }
+
+                                                            <button type="reset" id="spinner" class="btn btn-info" data-bs-dismiss="modal">Vazgeç</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            adet++;
+
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td class="text-center text-primary" colspan="6">Herhangi bir kayıt bulunamadı.</td>
+                        </tr>
+                    }
+
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+

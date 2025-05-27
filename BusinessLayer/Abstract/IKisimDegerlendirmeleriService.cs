@@ -14,6 +14,6 @@ namespace BusinessLayer.Abstract
         void KisimDegerlendirmeUpdate(KisimDegerlendirmeleriTbl kisimDegerlendirmeleriTbl);
         List<KisimDegerlendirmeleriTbl> GetListAll();
         List<KisimDegerlendirmeleriTbl> GetList(int? EOYiliID, int? Donem, int? PerID);
-        KisimDegerlendirmeleriTbl GetByID(int id);
+        KisimDegerlendirmeleriTbl GetByID(long id);
     }
 }

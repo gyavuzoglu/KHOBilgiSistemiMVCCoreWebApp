@@ -1,0 +1,142 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.KisimDegerlendirmeVM
+@model KisimListeClass
+
+@{
+    ViewData["Title"] = "Kısımları Listeleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="mb-3" style="max-width: 90rem;margin:auto;">
+    <div class="col-md-12">
+        <div class="row pt-4">
+            <h3 class="text-primary text-center"></h3>
+            <h4>Kısım Listesi</h4>
+            <div class="col-9">
+
+                <h5 class="text-primary">Eğitim-Öğretim Yılı / Dönemi : @Model.EOYili / @Model.DonemAdi </h5>
+                <h5 class="text-primary">Sınıf : @Model.Sinif </h5>
+
+            </div>
+            <div class="col-3 text-end">
+                <a href="@Url.Action("KisimlariGetirForm","KisimDegerlendirmeleri", new {area ="AkademikDanismanArea"})" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf Seç</a>
+
+            </div>
+
+            <div style="margin:auto;">
+                <table class="table table-hover table-sm">
+                    <thead class="pt-4">
+                        <tr class="table-primary">
+                            <th scope="col" class="text-left align-middle" width="5%">Sıra No</th>
+                            <th scope="col" class="text-left align-middle" width="5%">Sınıf</th>
+                            <th scope="col" class="text-left align-middle" width="5%">Kısım</th>
+                            <th scope="col" class="text-left align-middle" width="10%">Bölümü</th>
+                            <th scope="col" class="text-center align-middle" width="14%">Değerlendirme Durumu</th>
+                            <th scope="col" class="text-center align-middle" width="10%">İşlem</th>
+
+                        </tr>
+                    </thead>
+                    @{
+                        int adet = 1;
+                    }
+
+                    @if (Model.KisimVeDegListe.Count > 0)
+                    {
+                        @foreach (var item in Model.KisimVeDegListe)
+                        {
+
+                            int mindeger = 0;
+                            int maxdeger = 1;
+                            if (@item.KisimToplamDegAdedi >= 0) maxdeger = @item.KisimToplamDegAdedi;
+
+                            <tr class="table-light">
+                                <td scope="row" class="text-left text-primary align-middle">@adet</td>
+                                <td scope="row" class="text-left text-primary align-middle">@Model.Sinif</td>
+                                <td scope="row" class="text-left text-primary align-middle">@item.KisimAdi</td>
+                                <td scope="row" class="text-left text-primary align-middle">@item.BolumAdi</td>
+                                
+                                @{
+                                    double oran = ((double)(item.KisimOgretmeninDegAdedi - mindeger) / (maxdeger - mindeger) * 100);
+                                    double yuzde = Math.Round(oran);
+                                    if (yuzde < 0) { yuzde = 0; }
+                                    if (yuzde > 100) { yuzde = 100; }
+                                }
+                                <td scope="row" class="text-center text-primary align-middle">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width:@yuzde%;" aria-valuenow="@yuzde" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                    @item.KisimOgretmeninDegAdedi  / @item.KisimToplamDegAdedi
+
+                                </td>
+
+
+                                <td scope="row" class="text-center align-middle">
+                                    <div class="row">
+                                        <div class="col" style="margin:0;padding:0;">
+                                            @using (Html.BeginForm("KisimDegerlendirmeEkleForm", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+
+                                            {
+                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                <input type="hidden" name="KisimAdi" value="@item.KisimAdi" />
+                                                <input type="hidden" name="PerID" value="@Model.PerID" />
+                                                <input type="hidden" name="BolumID" value="@item.BolumID" />
+                                                <input type="hidden" name="BolumAdiKisa" value="@item.BolumAdiKisa" />
+                                                <input type="hidden" name="BolumAdi" value="@item.BolumAdi" />
+                                                                                                
+                                                <button type="submit" id="spinner" class="btn">
+                                                    <span title="Değerlendirme Ekle"><i class="fa-solid fa-plus-square fa-lg text-primary"></i></span>
+
+                                                </button>
+                                            }
+                                        </div>
+
+                                        <div class="col" style="margin:0;padding:0;">
+                                            @using (Html.BeginForm("KisimDegerlendirmeListelemeForm", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="PerID" value="@Model.PerID" />
+                                                <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                                                <input type="hidden" name="Donem" value="@Model.Donem" />
+                                                <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                                                <input type="hidden" name="KisimAdi" value="@item.KisimAdi" />
+                                                <input type="hidden" name="BolumID" value="@item.BolumID" />
+                                                <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                                                <input type="hidden" name="DonemAdi" value="@Model.DonemAdi" />
+
+                                                <input type="hidden" name="KisimDegListe" value="" />
+
+                                                <button type="submit" id="spinner" class="btn">
+                                                    <span title="Değerlendirme Listeleme"><i class="fa-solid fa-list fa-lg text-primary"></i></span>
+
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+
+
+                                </td>
+
+                            </tr>
+
+                            adet++;
+
+                        }
+                    }
+
+                    else
+                    {
+                        <tr>
+                            <td class="text-center text-danger" colspan="6">Herhangi bir kayıt bulunamadı.</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+

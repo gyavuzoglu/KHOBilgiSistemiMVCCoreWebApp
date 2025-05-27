@@ -1,0 +1,89 @@
+﻿@using KHOBilgiSistemiMVCCoreWebApp.Areas.AkademikDanismanArea.Models.KisimDegerlendirmeVM
+@model KisimDegerlendirmeClassVM
+
+@{
+    ViewData["Title"] = "Kısım Değerlendirme Ekleme Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<div class="card border-primary mb-3" style="max-width: 70rem;margin:auto;">
+
+    <div class="card-header col-md-12">
+        <div class="row pt-2">
+            <div class="col-md-9">
+                <h4 class="text-primary">Kısım Değerlendirme Ekleme</h4>
+                <h5 class="text-primary">Kısım : @Model.KisimAdi</h5>
+                <h5 class="text-primary">Bölümü : @Model.BolumAdi</h5>
+                <h5 class="text-primary">Sınıf : @Model.Sinif</h5>
+            </div>
+            <div class="col-md-3 display: flex;">
+
+                <div class="justify-content: space-between; m-2">
+                    @using (Html.BeginForm("KisimlariGetirForm", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Get))
+                    {
+
+                        <button type="submit" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-plus"></i>&nbsp;Başka Sınıf Seç</button>
+                    }
+                </div>
+
+                <div class="justify-content: space-between; m-2">
+
+                    @using (Html.BeginForm("KisimlariGetir", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                    {
+                        <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                        <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                        <input type="hidden" name="Donem" value="@Model.Donem" />
+                        <button type="submit" id="spinner" class="btn btn-outline-secondary" style="width:100%;"><i class="fa-solid fa-user-plus"></i>Başka Kısım Seç</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br />
+    <div class="card-body col-md-12">
+        <div class="row pt-2">
+            <div class="col-10" style="max-width: 70rem;margin:auto;">
+
+
+                @using (Html.BeginForm("KisimDegerlendirmeAdd", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                {
+                    <input type="hidden" name="PerID" value="@Model.PerID" />
+                    <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                    <input type="hidden" name="EOYili" value="@Model.EOYili" />
+                    <input type="hidden" name="Donem" value="@Model.Donem" />
+                    
+                    <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                    <input type="hidden" name="KisimAdi" value="@Model.KisimAdi" />
+                    <input type="hidden" name="BolumID" value="@Model.BolumID" />
+                    <input type="hidden" name="BolumAdi" value="@Model.BolumAdi" />
+                    <input type="hidden" name="BolumAdiKisa" value="@Model.BolumAdiKisa" />
+                    <input type="hidden" name="TarihSaat" value="@DateTime.Now" />
+
+                    <div class="form-outline mb-3">
+
+                        <label>Kısım İçin Değerlendirmeniz :</label>
+
+                        @Html.TextAreaFor(x => x.KisimDegerlendirme, 5, 80, new { @class = "form-control", @id = "KisimDegerlendirme" })
+                    </div>
+                    <br />
+
+                    <button type="submit" id="spinner" class="btn btn-outline-primary mb-2" style="width:100%;"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Kaydet</button>
+                }
+
+                @using (Html.BeginForm("KisimlariGetir", "KisimDegerlendirmeleri", new { area = "AkademikDanismanArea" }, FormMethod.Post))
+                {
+                    <input type="hidden" name="Sinif" value="@Model.Sinif" />
+                    <input type="hidden" name="EOYiliID" value="@Model.EOYiliID" />
+                    <input type="hidden" name="Donem" value="@Model.Donem" />
+
+                    <button type="submit" id="spinner" class="btn btn-outline-secondary mb-2" style="width:100%;"><i class="fa-solid fa-user-plus"></i>&nbsp;Vazgeç</button>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

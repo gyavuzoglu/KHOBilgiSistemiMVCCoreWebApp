@@ -18,5 +18,6 @@ namespace EntityLayer.Concrete
         [DisplayName("Eğt.Öğt.Yılı")]
         public string? EOYili { get;set; }
         public List<DerslerTbl>? DerslerTbl { get; set; }
+        public List<KisimlarTbl>? KisimlarTbl { get; set; }
     }
 }
